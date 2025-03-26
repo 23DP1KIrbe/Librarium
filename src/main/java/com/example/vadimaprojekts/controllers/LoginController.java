@@ -1,6 +1,7 @@
 package com.example.vadimaprojekts.controllers;
 
 
+import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.service.SwitchToRegisterService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,11 +28,13 @@ public class LoginController {
         this.loginService = new LoginService();
         this.switchToLibraryService = new SwitchToLibraryService();
         this.switchToRegisterService = new SwitchToRegisterService();
+
+
     }
 
 
     @FXML
-    protected void onLoginButtonClick(ActionEvent event) throws IOException {
+    protected void onLoginButtonClick(ActionEvent event) throws IOException, UserNotFoundException {
         String username = usernameField.getText();
         String password = passwordField.getText();
 

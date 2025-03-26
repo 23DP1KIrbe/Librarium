@@ -1,11 +1,16 @@
 package com.example.vadimaprojekts.service;
 
+import com.example.vadimaprojekts.exceptions.UserExistsException;
+import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserService {
@@ -34,20 +39,51 @@ public class UserService {
         this.password = password;
     }
 
+    public List usersFromFile(){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<UserService> users = new ArrayList();
+        try (FileReader reader = new FileReader("./users.json")) {
+            users = gson.fromJson(reader, new TypeToken<List<UserService>>() {}.getType());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public boolean checkForUsername(String username){
+        List<UserService> users = usersFromFile();
+        return users.stream().anyMatch(user -> user.getUsername().equals(username));
+    }
+
+    public UserService getUsernameData(String username) throws UserNotFoundException {
+        List<UserService> users = usersFromFile();
+        return users.stream().filter(user -> user.getUsername().equals(username))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("No such username"));
+
+    }
 
 
-    public void saveUserToJson(UserService userService){
-        Gson gson = new Gson();
-        String json = gson.toJson(userService);
+    public void saveUserToJson(UserService userService) throws UserExistsException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<UserService> users = new ArrayList<>();
 
 
-        try (FileWriter writer = new FileWriter("./users.json", true)) {
+        try (FileReader reader = new FileReader("./users.json")) {
+            users = gson.fromJson(reader, new TypeToken<List<UserService>>() {}.getType());
+            if (users == null){
+                users = new ArrayList<>();
+            }
+            if(userService.checkForUsername(userService.getUsername())){
+                throw new UserExistsException("User exists");
+            }
+            users.add(userService);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            System.out.println("Working Directory: " + System.getProperty("users.dir"));
-            writer.write(json);
-            writer.flush();
-            System.out.println("JSON written successfully.");
-            System.out.println("JSON data: " + json);
+        try (FileWriter writer = new FileWriter("./users.json", false)) {
+            gson.toJson(users, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }

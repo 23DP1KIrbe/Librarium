@@ -1,11 +1,13 @@
 package com.example.vadimaprojekts.controllers;
 
+import com.example.vadimaprojekts.exceptions.UserExistsException;
 import com.example.vadimaprojekts.service.RegisterService;
 import com.example.vadimaprojekts.service.SwitchToLoginService;
 import com.example.vadimaprojekts.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -15,6 +17,9 @@ public class RegisterController {
     private TextField registerUsername;
     @FXML
     private TextField registerPassword;
+
+    @FXML
+    private Label error;
 
 
     private RegisterService registerService;
@@ -35,7 +40,13 @@ public class RegisterController {
 
         userService = new UserService(username, password);
 
-        userService.saveUserToJson(userService);
+        try {
+            userService.saveUserToJson(userService);
+        } catch (UserExistsException e) {
+            error.setText(e.getMessage());
+        }
+
+
     }
 
     @FXML
