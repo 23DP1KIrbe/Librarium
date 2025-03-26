@@ -2,6 +2,7 @@ package com.example.vadimaprojekts.controllers;
 
 
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
+import com.example.vadimaprojekts.exceptions.WrongUsernameOrPasswordException;
 import com.example.vadimaprojekts.service.SwitchToRegisterService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +35,7 @@ public class LoginController {
 
 
     @FXML
-    protected void onLoginButtonClick(ActionEvent event) throws IOException, UserNotFoundException {
+    protected void onLoginButtonClick(ActionEvent event) throws IOException, UserNotFoundException, WrongUsernameOrPasswordException {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
