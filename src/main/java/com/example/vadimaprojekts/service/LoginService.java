@@ -1,17 +1,10 @@
 package com.example.vadimaprojekts.service;
 
-<<<<<<< HEAD
-public class LoginService {
-
-    public boolean authenticate(String username, String password) {
-        if (username.equals("admin") && password.equals("admin")) {
-            return true;
-        }else return false;
-=======
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.exceptions.WrongUsernameOrPasswordException;
 
 public class LoginService {
+
     private UserService userService;
 
 
@@ -24,6 +17,5 @@ public class LoginService {
 
         }
     throw new WrongUsernameOrPasswordException("Wrong username or password!");
->>>>>>> master
     }
 }

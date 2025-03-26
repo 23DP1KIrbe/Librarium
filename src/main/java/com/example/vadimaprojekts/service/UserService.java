@@ -1,24 +1,17 @@
 package com.example.vadimaprojekts.service;
 
-<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-=======
 import com.example.vadimaprojekts.exceptions.UserExistsException;
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
->>>>>>> master
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> master
+
 
 
 public class UserService {
@@ -47,22 +40,7 @@ public class UserService {
         this.password = password;
     }
 
-<<<<<<< HEAD
 
-
-    public void saveUserToJson(UserService userService){
-        Gson gson = new Gson();
-        String json = gson.toJson(userService);
-
-
-        try (FileWriter writer = new FileWriter("./users.json", true)) {
-
-            System.out.println("Working Directory: " + System.getProperty("users.dir"));
-            writer.write(json);
-            writer.flush();
-            System.out.println("JSON written successfully.");
-            System.out.println("JSON data: " + json);
-=======
     public List usersFromFile(){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<UserService> users = new ArrayList();
@@ -108,7 +86,7 @@ public class UserService {
 
         try (FileWriter writer = new FileWriter("./users.json", false)) {
             gson.toJson(users, writer);
->>>>>>> master
+
         } catch (IOException e) {
             e.printStackTrace();
         }
