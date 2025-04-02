@@ -1,6 +1,7 @@
 package com.example.vadimaprojekts.service;
 
 
+import com.example.vadimaprojekts.module.Book;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -9,37 +10,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class APIService {
-    private String title;
-    private String description;
-    private List<String> authors;
-    private List<JsonElement> industryIdentifiers;
-    private List<String> categories;
-    private JsonObject imageLinks;
-    private String language;
 
-
-//    public APIService(String id, String title, String description, String author, String industryIdentifiers, String categories, String imageLinks, String language, String saleInfo) {
-//        this.id = id;
-//        this.title = title;
-//        this.description = description;
-//        this.author = author;
-//        this.industryIdentifiers = industryIdentifiers;
-//        this.categories = categories;
-//        this.imageLinks = imageLinks;
-//        this.language = language;
-//        this.saleInfo = saleInfo;
-//    }
-
-
-
-
-    public void saveBook() {
+    public void saveBook(String isbn) {
 
         try {
-            String isbn = "9783732508686";
+
             URL url = new URL("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ isbn);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -67,36 +46,59 @@ public class APIService {
                 JsonObject bookInfo = (JsonObject) booksArray.get(0);
                 JsonObject volumeInfo =(JsonObject) bookInfo.get("volumeInfo");
 
+                String title = volumeInfo.get("title").getAsString();
+                String description = volumeInfo.get("description").getAsString();
+                List<String> authors = new ArrayList<>();
+                JsonArray authorsArray = volumeInfo.getAsJsonArray("authors");
+                for (JsonElement author : authorsArray) {
+                    authors.add(author.getAsString());
+                }
+                List<String> categories = new ArrayList<>();
+                JsonArray categoriesArray = volumeInfo.getAsJsonArray("categories");
+                for (JsonElement category : categoriesArray) {
+                    categories.add(category.getAsString());
+                }
 
-                JsonArray industryIdentifiersArray = volumeInfo.getAsJsonArray("industryIdentifiers");
+                String language = volumeInfo.get("language").getAsString();
 
-                if (industryIdentifiersArray != null && industryIdentifiersArray.size() > 0) {
-                    JsonObject firstIndustryObj = industryIdentifiersArray.get(0).getAsJsonObject();
-                    String firstIdentifier = firstIndustryObj.get("identifier").getAsString();
-
-                    // Replace the original array with a new array containing only the first identifier
-                    JsonArray newIdentifiersArray = new JsonArray();
-                    newIdentifiersArray.add(firstIdentifier);
-                    volumeInfo.add("industryIdentifiers", newIdentifiersArray);
+                JsonObject imageLink = volumeInfo.getAsJsonObject("imageLinks");
+                String selectedImageLink = null;
+                if (imageLink != null) {
+                    if (imageLink.has("smallThumbnail")) {
+                        selectedImageLink = imageLink.get("smallThumbnail").getAsString(); // first image
+                    } else if (imageLink.has("thumbnail")) {
+                        selectedImageLink = imageLink.get("thumbnail").getAsString(); // second image
+                    }
                 }
 
 
+                List<String> industryIdentifiers = new ArrayList<>();
+                if (volumeInfo.has("industryIdentifiers")) {
+                    JsonArray industryArray = volumeInfo.getAsJsonArray("industryIdentifiers");
+                    if (!industryArray.isEmpty()) {
+                        JsonObject identifierObj = industryArray.get(0).getAsJsonObject();
+                        if (identifierObj.has("identifier")) {
+                            industryIdentifiers.add(identifierObj.get("identifier").getAsString());
+                        }
+                    }
+                }
+
+                Book book = new Book(title, description, authors, industryIdentifiers, categories, selectedImageLink, language);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                List<APIService> book = new ArrayList<>();
-                Gson gsonu = new Gson();
-                APIService apiServis = gsonu.fromJson(volumeInfo, APIService.class);
+                List<Book> bookList = new ArrayList<>();
+
 
                 try (FileReader readers = new FileReader("./books.json")) {
-                    book = gson.fromJson(readers, new TypeToken<List<APIService>>() {}.getType());
-                    if (book == null){
-                        book = new ArrayList<>();
+                    bookList = gson.fromJson(readers, new TypeToken<List<Book>>() {}.getType());
+                    if (bookList == null){
+                        bookList = new ArrayList<>();
                     }
-                    book.add(apiServis);
+                    bookList.add(book);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 try (FileWriter writer = new FileWriter("./books.json", false)) {
-                    gson.toJson(book, writer);
+                    gson.toJson(bookList, writer);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

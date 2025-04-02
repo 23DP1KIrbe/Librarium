@@ -8,4 +8,6 @@ module com.example.vadimaprojekts {
     exports com.example.vadimaprojekts.controllers;
     opens com.example.vadimaprojekts.controllers to javafx.fxml;
     opens com.example.vadimaprojekts.service to com.google.gson;
+    opens com.example.vadimaprojekts.module to com.google.gson;
+
 }
