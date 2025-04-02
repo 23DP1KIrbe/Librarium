@@ -77,7 +77,7 @@ public class UserService {
                 users = new ArrayList<>();
             }
             if(userService.checkForUsername(userService.getUsername())){
-                throw new UserExistsException("User exists");
+                throw new UserExistsException("Username is already taken!");
             }
             users.add(userService);
         } catch (IOException e) {
@@ -89,18 +89,6 @@ public class UserService {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public UserService loadUserFromJson(){
-        Gson gson = new Gson();
-        try (FileReader reader = new FileReader("users.json")) {
-            // Deserialize the JSON back into a User object
-            UserService user = gson.fromJson(reader, UserService.class);
-            return user;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 }

@@ -8,6 +8,7 @@ import com.example.vadimaprojekts.service.SwitchToRegisterService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import com.example.vadimaprojekts.service.LoginService;
 import com.example.vadimaprojekts.service.SwitchToLibraryService;
@@ -20,6 +21,8 @@ public class LoginController {
     private TextField usernameField;
     @FXML
     private TextField passwordField;
+    @FXML
+    private Label wrongInfo;
 
     private LoginService loginService;
     private SwitchToLibraryService switchToLibraryService;
@@ -39,10 +42,14 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        boolean isAuthenticated = loginService.authenticate(username, password);
+        try {
+            boolean isAuthenticated = loginService.authenticate(username, password);
 
-        if (isAuthenticated) {
-            switchToLibraryService.switchToLibrary();
+            if (isAuthenticated) {
+                switchToLibraryService.switchToLibrary();
+            }
+        }catch (WrongUsernameOrPasswordException e){
+            wrongInfo.setText(e.getMessage());
         }
     }
 

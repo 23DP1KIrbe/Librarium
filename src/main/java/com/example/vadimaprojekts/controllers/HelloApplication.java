@@ -1,6 +1,7 @@
 package com.example.vadimaprojekts.controllers;
 
 
+import com.example.vadimaprojekts.service.APIService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,8 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/vadimaprojekts/login.fxml"));
         Parent root = fxmlLoader.load();
-
+        APIService apiService = new APIService();
+        apiService.saveBook();
         StageService.setStage(stage);
         stage.setScene(new Scene(root));
         stage.show();
