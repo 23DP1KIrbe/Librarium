@@ -1,22 +1,8 @@
 [
   {
-    "username": "K",
-    "password": "1"
-  },
-  {
     "username": "a",
-    "password": "a"
-  },
-  {
-    "username": "fsdf",
-    "password": "fsdf"
-  },
-  {
-    "username": "Lxss",
-    "password": "NilsGejs"
-  },
-  {
-    "username": "kristaps",
-    "password": "1"
+    "password": "a",
+    "ReadList": [],
+    "BuyList": []
   }
 ]

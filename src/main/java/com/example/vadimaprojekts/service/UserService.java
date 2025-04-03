@@ -1,5 +1,6 @@
 package com.example.vadimaprojekts.service;
 
+import com.example.vadimaprojekts.module.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.example.vadimaprojekts.exceptions.UserExistsException;
@@ -15,37 +16,14 @@ import java.util.List;
 
 
 public class UserService {
+    private static final String File = "./users.json";
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    private String username;
-    private String password;
-
-    public UserService(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-    public List usersFromFile(){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        List<UserService> users = new ArrayList();
-        try (FileReader reader = new FileReader("./users.json")) {
-            users = gson.fromJson(reader, new TypeToken<List<UserService>>() {}.getType());
+    public List<User> usersFromFile(){
+        List<User> users = new ArrayList();
+        try (FileReader reader = new FileReader(File)) {
+            users = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
+            return (users != null) ? users : new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,33 +31,30 @@ public class UserService {
     }
 
     public boolean checkForUsername(String username){
-        List<UserService> users = usersFromFile();
+        List<User> users = usersFromFile();
         return users.stream().anyMatch(user -> user.getUsername().equals(username));
     }
 
-    public UserService getUsernameData(String username) throws UserNotFoundException {
-        List<UserService> users = usersFromFile();
-        return users.stream().filter(user -> user.getUsername().equals(username))
+    public User getUsernameData(String username) throws UserNotFoundException {
+        return usersFromFile().stream()
+                .filter(user -> user.getUsername().equals(username))
                 .findFirst()
                 .orElseThrow(() -> new UserNotFoundException("No such username"));
 
     }
 
 
-    public void saveUserToJson(UserService userService) throws UserExistsException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        List<UserService> users = new ArrayList<>();
-
-
+    public void saveUserToJson(User user) throws UserExistsException {
+        List<User> users = new ArrayList<>();
         try (FileReader reader = new FileReader("./users.json")) {
-            users = gson.fromJson(reader, new TypeToken<List<UserService>>() {}.getType());
+            users = gson.fromJson(reader, new TypeToken<List<User>>() {}.getType());
             if (users == null){
                 users = new ArrayList<>();
             }
-            if(userService.checkForUsername(userService.getUsername())){
+            if(checkForUsername(user.getUsername())){
                 throw new UserExistsException("Username is already taken!");
             }
-            users.add(userService);
+            users.add(user);
         } catch (IOException e) {
             e.printStackTrace();
         }
