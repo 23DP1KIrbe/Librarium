@@ -1,32 +1,317 @@
 [
   {
-    "title": "Harry Potter",
-    "description": "Collects the complete series that relates the adventures of young Harry Potter, who attends Hogwarts School of Witchcraft and Wizardry, where he and others of his kind learn their craft.",
+    "title": "The Hunger Games",
+    "description": "By winning the Hunger Games, Katniss and Peeta have secured a life of safety and plenty for themselves and their families, but because they won by defying the rules, they unwittingly become the faces of an impending rebellion. |",
     "authors": [
-      "J. K. Rowling"
+      "Suzanne Collins"
     ],
     "industryIdentifiers": [
-      "9780439358071"
+      "9780439023528"
     ],
     "categories": [
-      "Bildungsromans"
+      "Juvenile Fiction"
     ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dhlb_sM1AN0gC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
     "id": "1"
   },
   {
-    "title": "Harry Potter",
-    "description": "Collects the complete series that relates the adventures of young Harry Potter, who attends Hogwarts School of Witchcraft and Wizardry, where he and others of his kind learn their craft.",
+    "title": "Harry Potter and the Deathly Hallows",
+    "description": "At a time when the forces of evil seem to be gaining the upper hand, Harry comes of age in the wizarding world, and must take on and defeat Voldemort--or be killed himself.",
     "authors": [
       "J. K. Rowling"
     ],
-    "industryIdentifiers": [
-      "9780439358071"
-    ],
+    "industryIdentifiers": [],
     "categories": [
-      "Bildungsromans"
+      "Juvenile Fiction"
     ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dGZAoAQAAIAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
     "language": "en",
     "id": "2"
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "description": "Harper Lee\u0027s Pulitzer Prize-winning masterwork of honor and injustice in the deep South -- and the heroism of one man in the face of blind and violent hatred One of the best-loved stories of all time, To Kill a Mockingbird has been translated into more than forty languages, sold more than thirty million copies worldwide, served as the basis of an enormously popular motion picture, and was voted one of the best novels of the twentieth century by librarians across the country. A gripping, heart-wrenching, and wholly remarkable tale of coming-of-age in a South poisoned by virulent prejudice, it views a world of great beauty and savage inequities through the eyes of a young girl, as her father -- a crusading local lawyer -- risks everything to defend a black man unjustly accused of a terrible crime.",
+    "authors": [
+      "Harper Lee"
+    ],
+    "industryIdentifiers": [
+      "9780061120084"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dncuX8p2xLIUC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "3"
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "description": "The \"brilliant, funny, meaningful novel\" (The New Yorker) that established J. D. Salinger as a leading voice in American literature--and that has instilled in millions of readers around the world a lifelong love of books. \"If you really want to hear about it, the first thing you\u0027ll probably want to know is where I was born, and what my lousy childhood was like, and how my parents were occupied and all before they had me, and all that David Copperfield kind of crap, but I don\u0027t feel like going into it, if you want to know the truth.\" The hero-narrator of The Catcher in the Rye is an ancient child of sixteen, a native New Yorker named Holden Caufield. Through circumstances that tend to preclude adult, secondhand description, he leaves his prep school in Pennsylvania and goes underground in New York City for three days.",
+    "authors": [
+      "J.D. Salinger"
+    ],
+    "industryIdentifiers": [
+      "9780316769488"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dZotvleqZomIC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "4"
+  },
+  {
+    "title": "The Lord of the Rings",
+    "description": "Presents the epic depicting the Great War of the Ring, a struggle between good and evil in Middle-earth, following the odyssey of Frodo the hobbit and his companions on a quest to destroy the Ring of Power, in a special anniversary volume containing the corrected text of all three volumes of the seminal fantasy trilogy, complemented by maps and cover art by acclaimed artist Alan Lee. Simultaneous.",
+    "authors": [
+      "John Ronald Reuel Tolkien"
+    ],
+    "industryIdentifiers": [
+      "9780618640157"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dXApOPwAACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "5"
+  },
+  {
+    "title": "The Da Vinci Code",
+    "description": "#1 WORLDWIDE BESTSELLER • While in Paris, Harvard symbologist Robert Langdon is awakened by a phone call in the dead of the night. The elderly curator of the Louvre has been murdered inside the museum, his body covered in baffling symbols. “Blockbuster perfection.... A gleefully erudite suspense novel.” —The New York Times “A pulse-quickening, brain-teasing adventure.” —People As Langdon and gifted French cryptologist Sophie Neveu sort through the bizarre riddles, they are stunned to discover a trail of clues hidden in the works of Leonardo da Vinci—clues visible for all to see and yet ingeniously disguised by the painter. Even more startling, the late curator was involved in the Priory of Sion—a secret society whose members included Sir Isaac Newton, Victor Hugo, and Da Vinci—and he guarded a breathtaking historical secret. Unless Langdon and Neveu can decipher the labyrinthine puzzle—while avoiding the faceless adversary who shadows their every move—the explosive, ancient truth will be lost forever.",
+    "authors": [
+      "Dan Brown"
+    ],
+    "industryIdentifiers": [
+      "9780307277671"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dhbZ0Yfz-NG8C\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "6"
+  },
+  {
+    "title": "Zen Speaks",
+    "description": "An illustrated adaptation of the early Zen Buddhist classics of the 13th century. Collected and popularized by the immensely popular Chinese illustrator Tsai Chih Chung, the book includes 100 Zen tales for the reader of today, bringing to life the spirit and philosophy of Zen through cartoon panels.",
+    "authors": [
+      "Zhizhong Cai"
+    ],
+    "industryIdentifiers": [
+      "9780385472579"
+    ],
+    "categories": [
+      "Zen Buddhism"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dTN4GAAAACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "7"
+  },
+  {
+    "title": "Sapiens",
+    "description": "One hundred thousand years ago, at least six human species inhabited the earth. Today there is just one. Us. Homo sapiens. How did our species succeed in the battle for dominance? Why did our foraging ancestors come together to create cities and kingdoms? How did we come to believe in gods, nations, and human rights; to trust money, books, and laws; and to be enslaved by bureaucracy, timetables, and consumerism? And what will our world be like in the millennia to come? In Sapiens, Professor Yuval Noah Harari spans the whole of human history, from the very first humans to walk the earth to the radical—and sometimes devastating—breakthroughs of the Cognitive, Agricultural, and Scientific Revolutions. Drawing on insights from biology, anthropology, paleontology, and economics, and incorporating full-color illustrations throughout the text, he explores how the currents of history have shaped our human societies, the animals and plants around us, and even our personalities. Have we become happier as history has unfolded? Can we ever free our behavior from the legacy of our ancestors? And what, if anything, can we do to influence the course of the centuries to come? Bold, wide-ranging, and provocative, Sapiens integrates history and science to challenge everything we thought we knew about being human: our thoughts, our actions, our heritage...and our future.",
+    "authors": [
+      "Yuval Noah Harari"
+    ],
+    "industryIdentifiers": [
+      "9780062316097"
+    ],
+    "categories": [
+      "Science"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dibALnwEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "8"
+  },
+  {
+    "title": "A Tale of Two Cities",
+    "description": "\u0027It was the best of times, it was the worst of times...\u0027 Charles Dickens\u0027s A Tale of Two Cities portrays a world on fire, split between Paris and London during the brutal and bloody events of the French Revolution. After eighteen years as a political prisoner in the Bastille the aging Dr Manette is finally released and reunited with his daughter in England. There, two very different men, Charles Darnay, an exiled French aristocrat, and Sydney Carton, a disreputable but brilliant English lawyer, become enmeshed through their love for Lucie Manette. From the tranquil lanes of London, they are all drawn against their will to the vengeful, bloodstained streets of Paris at the height of the Reign of Terror and soon fall under the lethal shadow of La Guillotine. This edition uses the text as it appeared in its first serial publication in 1859 to convey the full scope of Dickens\u0027s vision, and includes the original illustrations by H.K. Browne (\u0027Phiz\u0027). Richard Maxwell\u0027s introduction discusses the intricate interweaving of epic drama with personal tragedy. For more than seventy years, Penguin has been the leading publisher of classic literature in the English-speaking world. With more than 1,700 titles, Penguin Classics represents a global bookshelf of the best works throughout history and across genres and disciplines. Readers trust the series to provide authoritative texts enhanced by introductions and notes by distinguished scholars and contemporary authors, as well as up-to-date translations by award-winning translators.",
+    "authors": [
+      "Charles Dickens"
+    ],
+    "industryIdentifiers": [
+      "9780141439600"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dFcOsBmJCJXsC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "9"
+  },
+  {
+    "title": "Nineteen Eighty-four",
+    "description": "Eternal warfare is the price of bleak prosperity in this satire of totalitarian barbarism.",
+    "authors": [
+      "George Orwell"
+    ],
+    "industryIdentifiers": [],
+    "categories": [
+      "London (England)"
+    ],
+    "language": "en",
+    "id": "10"
+  },
+  {
+    "title": "Lord of the Flies",
+    "description": "Lord of the Flies remains as provocative today as when it was first published in 1954, igniting passionate debate with its startling, brutal portrait of human nature. Though critically acclaimed, it was largely ignored upon its initial publication. Yet soon it became a cult favorite among both students and literary critics who compared it to J.D. Salinger\u0027s The Catcher in the Rye in its influence on modern thought and literature. William Golding\u0027s compelling story about a group of very ordinary small boys marooned on a coral island has become a modern classic. At first it seems as though it is all going to be great fun; but the fun before long becomes furious and life on the island turns into a nightmare of panic and death. As ordinary standards of behaviour collapse, the whole world the boys know collapses with them—the world of cricket and homework and adventure stories—and another world is revealed beneath, primitive and terrible. Labeled a parable, an allegory, a myth, a morality tale, a parody, a political treatise, even a vision of the apocalypse, Lord of the Flies has established itself as a true classic. \"Lord of the Flies is one of my favorite books. That was a big influence on me as a teenager, I still read it every couple of years.\" —Suzanne Collins, author of The Hunger Games \"As exciting, relevant, and thought-provoking now as it was when Golding published it in 1954.\" —Stephen King",
+    "authors": [
+      "William Golding"
+    ],
+    "industryIdentifiers": [
+      "9780140283334"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003d4uWPEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "11"
+  },
+  {
+    "title": "The Great Gatsby",
+    "description": "A mysterious American millionaire tries to recapture the sweetheart of his youth, which results in tragedy.",
+    "authors": [
+      "F. Scott Fitzgerald"
+    ],
+    "industryIdentifiers": [
+      "9780743273565"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dfIlQDwAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026edge\u003dcurl\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "12"
+  },
+  {
+    "title": "Don Quixote",
+    "description": "Nominated as one of America’s best-loved novels by PBS’s The Great American Read Don Quixote has become so entranced reading tales of chivalry that he decides to turn knight errant himself. In the company of his faithful squire, Sancho Panza, these exploits blossom in all sorts of wonderful ways. While Quixote\u0027s fancy often leads him astray—he tilts at windmills, imagining them to be giants—Sancho acquires cunning and a certain sagacity. Sane madman and wise fool, they roam the world together-and together they have haunted readers\u0027 imaginations for nearly four hundred years. With its experimental form and literary playfulness, Don Quixote has been generally recognized as the first modern novel. This Penguin Classics edition, with its beautiful new cover design, includes John Rutherford\u0027s masterly translation, which does full justice to the energy and wit of Cervantes\u0027s prose, as well as a brilliant critical introduction by Roberto Gonzalez Echevarriá.",
+    "authors": [
+      "Miguel De Cervantes Saavedra"
+    ],
+    "industryIdentifiers": [
+      "9780142437230"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dsI_UG8lLey0C\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "13"
+  },
+  {
+    "title": "Crime and Punishment",
+    "description": "This classic, begun as a novel concerned with the psychology of a crime and the process of guilt, surpasses itself to take on the tragic force of myth.",
+    "authors": [
+      "Fyodor Dostoyevsky"
+    ],
+    "industryIdentifiers": [
+      "9780140449136"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dSYu-4-oO3h8C\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "14"
+  },
+  {
+    "title": "The Count of Monte Cristo",
+    "description": "\"On what slender threads do life and fortune hang.\" Nominated as one of America’s best-loved novels by PBS’s The Great American Read Thrown in prison for a crime he has not committed, Edmond Dantes is confined to the grim fortress of If. There he learns of a great hoard of treasure hidden on the Isle of Monte Cristo and he becomes determined not only to escape, but also to unearth the treasure and use it to plot the destruction of the three men responsible for his incarceration. Dumas’ epic tale of suffering and retribution, inspired by a real-life case of wrongful imprisonment, was a huge popular success when it was first serialized in the 1840s. Robin Buss’s lively English translation is complete and unabridged, and remains faithful to the style of Dumas’s original. This edition includes an introduction, explanatory notes and suggestions for further reading. For more than seventy years, Penguin has been the leading publisher of classic literature in the English-speaking world. With more than 1,700 titles, Penguin Classics represents a global bookshelf of the best works throughout history and across genres and disciplines. Readers trust the series to provide authoritative texts enhanced by introductions and notes by distinguished scholars and contemporary authors, as well as up-to-date translations by award-winning translators.",
+    "authors": [
+      "Alexandre Dumas"
+    ],
+    "industryIdentifiers": [
+      "9780140449266"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003d5YOMEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "15"
+  },
+  {
+    "title": "Don Quixote",
+    "description": "Nominated as one of America’s best-loved novels by PBS’s The Great American Read Don Quixote has become so entranced reading tales of chivalry that he decides to turn knight errant himself. In the company of his faithful squire, Sancho Panza, these exploits blossom in all sorts of wonderful ways. While Quixote\u0027s fancy often leads him astray—he tilts at windmills, imagining them to be giants—Sancho acquires cunning and a certain sagacity. Sane madman and wise fool, they roam the world together-and together they have haunted readers\u0027 imaginations for nearly four hundred years. With its experimental form and literary playfulness, Don Quixote has been generally recognized as the first modern novel. This Penguin Classics edition, with its beautiful new cover design, includes John Rutherford\u0027s masterly translation, which does full justice to the energy and wit of Cervantes\u0027s prose, as well as a brilliant critical introduction by Roberto Gonzalez Echevarriá.",
+    "authors": [
+      "Miguel De Cervantes Saavedra"
+    ],
+    "industryIdentifiers": [
+      "9780142437230"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003dsI_UG8lLey0C\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "16"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "description": "Austen\u0027s most popular novel, the unforgettable story of Elizabeth Bennet and Mr. Darcy Few have failed to be charmed by the witty and independent spirit of Elizabeth Bennet in Austen’s beloved classic Pride and Prejudice. When Elizabeth Bennet first meets eligible bachelor Fitzwilliam Darcy, she thinks him arrogant and conceited; he is indifferent to her good looks and lively mind. When she later discovers that Darcy has involved himself in the troubled relationship between his friend Bingley and her beloved sister Jane, she is determined to dislike him more than ever. In the sparkling comedy of manners that follows, Jane Austen shows us the folly of judging by first impressions and superbly evokes the friendships, gossip and snobberies of provincial middle-class life. This Penguin Classics edition, based on Austen\u0027s first edition, contains the original Penguin Classics introduction by Tony Tanner and an updated introduction and notes by Viven Jones. For more than seventy years, Penguin has been the leading publisher of classic literature in the English-speaking world. With more than 1,700 titles, Penguin Classics represents a global bookshelf of the best works throughout history and across genres and disciplines. Readers trust the series to provide authoritative texts enhanced by introductions and notes by distinguished scholars and contemporary authors, as well as up-to-date translations by award-winning translators.",
+    "authors": [
+      "Jane Austen"
+    ],
+    "industryIdentifiers": [
+      "9780141439518"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003duY6MEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "17"
+  },
+  {
+    "title": "The Symposium",
+    "description": "A fascinating discussion on sex, gender, and human instincts, as relevant today as ever In the course of a lively drinking party, a group of Athenian intellectuals exchange views on eros, or desire. From their conversation emerges a series of subtle reflections on gender roles, sex in society and the sublimation of basic human instincts. The discussion culminates in a radical challenge to conventional views by Plato\u0027s mentor, Socrates, who advocates transcendence through spiritual love. The Symposium is a deft interweaving of different viewpoints and ideas about the nature of love—as a response to beauty, a cosmic force, a motive for social action and as a means of ethical education. For more than seventy years, Penguin has been the leading publisher of classic literature in the English-speaking world. With more than 1,700 titles, Penguin Classics represents a global bookshelf of the best works throughout history and across genres and disciplines. Readers trust the series to provide authoritative texts enhanced by introductions and notes by distinguished scholars and contemporary authors, as well as up-to-date translations by award-winning translators.",
+    "authors": [
+      "Plato"
+    ],
+    "industryIdentifiers": [
+      "9780140449273"
+    ],
+    "categories": [
+      "Philosophy"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003d6ohPEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "18"
+  },
+  {
+    "title": "House of Leaves",
+    "description": "THE MIND-BENDING CULT CLASSIC ABOUT A HOUSE THAT’S LARGER ON THE INSIDE THAN ON THE OUTSIDE • A masterpiece of horror and an astonishingly immersive, maze-like reading experience that redefines the boundaries of a novel. \u0027\u0027Simultaneously reads like a thriller and like a strange, dreamlike excursion into the subconscious.\" —Michiko Kakutani, The New York Times \"Thrillingly alive, sublimely creepy, distressingly scary, breathtakingly intelligent—it renders most other fiction meaningless.\" —Bret Easton Ellis, bestselling author of American Psycho “This demonically brilliant book is impossible to ignore.” —Jonathan Lethem, award-winning author of Motherless Brooklyn One of The Atlantic’s Great American Novels of the Past 100 Years Years ago, when House of Leaves was first being passed around, it was nothing more than a badly bundled heap of paper, parts of which would occasionally surface on the Internet. No one could have anticipated the small but devoted following this terrifying story would soon command. Starting with an odd assortment of marginalized youth—musicians, tattoo artists, programmers, strippers, environmentalists, and adrenaline junkies—the book eventually made its way into the hands of older generations, who not only found themselves in those strangely arranged pages but also discovered a way back into the lives of their estranged children. Now made available in book form, complete with the original colored words, vertical footnotes, and second and third appendices, the story remains unchanged. Similarly, the cultural fascination with House of Leaves remains as fervent and as imaginative as ever. The novel has gone on to inspire doctorate-level courses and masters theses, cultural phenomena like the online urban legend of “the backrooms,” and incredible works of art in entirely unrealted mediums from music to video games. Neither Pulitzer Prize-winning photojournalist Will Navidson nor his companion Karen Green was prepared to face the consequences of the impossibility of their new home, until the day their two little children wandered off and their voices eerily began to return another story—of creature darkness, of an ever-growing abyss behind a closet door, and of that unholy growl which soon enough would tear through their walls and consume all their dreams.",
+    "authors": [
+      "Mark Z. Danielewski"
+    ],
+    "industryIdentifiers": [
+      "9780375703768"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003do6NzGNODRjkC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "19"
+  },
+  {
+    "title": "The Grapes of Wrath",
+    "description": "The Pulitzer Prize-winning epic of the Great Depression, a book that galvanized—and sometimes outraged—millions of readers. Nominated as one of America’s best-loved novels by PBS’s The Great American Read A Penguin Classic First published in 1939, Steinbeck’s Pulitzer Prize-winning epic of the Great Depression chronicles the Dust Bowl migration of the 1930s and tells the story of one Oklahoma farm family, the Joads—driven from their homestead and forced to travel west to the promised land of California. Out of their trials and their repeated collisions against the hard realities of an America divided into Haves and Have-Nots evolves a drama that is intensely human yet majestic in its scale and moral vision, elemental yet plainspoken, tragic but ultimately stirring in its human dignity. A portrait of the conflict between the powerful and the powerless, of one man’s fierce reaction to injustice, and of one woman’s stoical strength, the novel captures the horrors of the Great Depression and probes into the very nature of equality and justice in America. At once a naturalistic epic, captivity narrative, road novel, and transcendental gospel, Steinbeck’s powerful landmark novel is perhaps the most American of American Classics. This Penguin Classics edition contains an introduction and notes by Steinbeck scholar Robert Demott. For more than seventy years, Penguin has been the leading publisher of classic literature in the English-speaking world. With more than 1,800 titles, Penguin Classics represents a global bookshelf of the best works throughout history and across genres and disciplines. Readers trust the series to provide authoritative texts enhanced by introductions and notes by distinguished scholars and contemporary authors, as well as up-to-date translations by award-winning translators.",
+    "authors": [
+      "John Steinbeck"
+    ],
+    "industryIdentifiers": [
+      "9780143039433"
+    ],
+    "categories": [
+      "Fiction"
+    ],
+    "imageLinks": "http://books.google.com/books/content?id\u003ddM_-DwAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d5\u0026source\u003dgbs_api",
+    "language": "en",
+    "id": "20"
   }
 ]
