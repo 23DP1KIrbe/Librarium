@@ -44,6 +44,7 @@ public class UserService {
     }
 
 
+
     public void saveUserToJson(User user) throws UserExistsException {
         List<User> users = new ArrayList<>();
         try (FileReader reader = new FileReader("./users.json")) {

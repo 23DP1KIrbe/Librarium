@@ -48,4 +48,5 @@ public class User {
     public void setBuyList(List<User> Buylist) {
         this.BuyList = Buylist;
     }
+
 }

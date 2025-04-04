@@ -1,7 +1,9 @@
 package com.example.vadimaprojekts.service;
 
 
+import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
+import com.example.vadimaprojekts.module.User;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -9,14 +11,45 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 
 public class APIService {
+    private static final String File = "./books.json";
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    public List<Book> booksFromFile(){
+        List<Book> books = new ArrayList();
+        try (FileReader reader = new FileReader(File)) {
+            books = gson.fromJson(reader, new TypeToken<List<Book>>() {}.getType());
+            return (books != null) ? books : new ArrayList<>();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+
+    public String getBookId() {
+        int maxId = 0;
+        for (Book book : booksFromFile()) {
+            if (book != null) {
+                try {
+                    int id = Integer.parseInt(book.getId());
+                    if (id > maxId) {
+                        maxId = id;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid book ID format: " + book.getId());
+                }
+            }
+        }
+        return String.valueOf(maxId + 1);
+    }
+
 
     public void saveBook(String isbn) {
-
         try {
 
             URL url = new URL("https://www.googleapis.com/books/v1/volumes?q=isbn:"+ isbn);
@@ -86,8 +119,7 @@ public class APIService {
                     }
                 }
 
-                String id;
-                for
+                String id = getBookId();
 
                 Book book = new Book(title, description, authors, industryIdentifiers, categories, selectedImageLink, language, id);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();

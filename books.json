@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Harry Potter",
+    "description": "Collects the complete series that relates the adventures of young Harry Potter, who attends Hogwarts School of Witchcraft and Wizardry, where he and others of his kind learn their craft.",
+    "authors": [
+      "J. K. Rowling"
+    ],
+    "industryIdentifiers": [
+      "9780439358071"
+    ],
+    "categories": [
+      "Bildungsromans"
+    ],
+    "language": "en",
+    "id": "1"
+  },
+  {
+    "title": "Harry Potter",
+    "description": "Collects the complete series that relates the adventures of young Harry Potter, who attends Hogwarts School of Witchcraft and Wizardry, where he and others of his kind learn their craft.",
+    "authors": [
+      "J. K. Rowling"
+    ],
+    "industryIdentifiers": [
+      "9780439358071"
+    ],
+    "categories": [
+      "Bildungsromans"
+    ],
+    "language": "en",
+    "id": "2"
+  }
+]

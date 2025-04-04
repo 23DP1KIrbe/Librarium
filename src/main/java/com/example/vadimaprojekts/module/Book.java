@@ -83,4 +83,11 @@ public class Book {
     public void setLanguage(String language) {
         this.language = language;
     }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
 }
