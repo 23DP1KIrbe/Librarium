@@ -15,8 +15,9 @@ public class Book {
     private List<String> categories;
     private String imageLinks;
     private String language;
+    private String id;
 
-    public Book(String title, String description, List<String> authors, List<String> industryIdentifiers, List<String> categories, String imageLinks, String language) {
+    public Book(String title, String description, List<String> authors, List<String> industryIdentifiers, List<String> categories, String imageLinks, String language, String id) {
         this.title = title;
         this.description = description;
         this.authors = authors;
@@ -24,6 +25,7 @@ public class Book {
         this.categories = categories;
         this.imageLinks = imageLinks;
         this.language = language;
+        this.id = id;
     }
 
     public String getTitle() {

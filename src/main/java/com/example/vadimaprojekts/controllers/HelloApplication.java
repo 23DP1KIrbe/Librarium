@@ -18,7 +18,10 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/vadimaprojekts/login.fxml"));
         Parent root = fxmlLoader.load();
         APIService apiService = new APIService();
-        apiService.saveBook("9783732508686");
+
+
+
+
         StageService.setStage(stage);
         stage.setScene(new Scene(root));
         stage.show();

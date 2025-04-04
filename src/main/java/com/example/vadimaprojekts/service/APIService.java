@@ -65,9 +65,9 @@ public class APIService {
                 String selectedImageLink = null;
                 if (imageLink != null) {
                     if (imageLink.has("smallThumbnail")) {
-                        selectedImageLink = imageLink.get("smallThumbnail").getAsString(); // first image
+                        selectedImageLink = imageLink.get("smallThumbnail").getAsString();
                     } else if (imageLink.has("thumbnail")) {
-                        selectedImageLink = imageLink.get("thumbnail").getAsString(); // second image
+                        selectedImageLink = imageLink.get("thumbnail").getAsString();
                     }
                 }
 
@@ -75,15 +75,21 @@ public class APIService {
                 List<String> industryIdentifiers = new ArrayList<>();
                 if (volumeInfo.has("industryIdentifiers")) {
                     JsonArray industryArray = volumeInfo.getAsJsonArray("industryIdentifiers");
-                    if (!industryArray.isEmpty()) {
-                        JsonObject identifierObj = industryArray.get(0).getAsJsonObject();
-                        if (identifierObj.has("identifier")) {
-                            industryIdentifiers.add(identifierObj.get("identifier").getAsString());
+                    for (int i = 0; i < industryArray.size(); i++) {
+                        JsonObject identifierObj = industryArray.get(i).getAsJsonObject();
+                        if (identifierObj.has("type") && identifierObj.has("identifier")) {
+                            String type = identifierObj.get("type").getAsString();
+                            if ("ISBN_13".equals(type)) {
+                                industryIdentifiers.add(identifierObj.get("identifier").getAsString());
+                            }
                         }
                     }
                 }
 
-                Book book = new Book(title, description, authors, industryIdentifiers, categories, selectedImageLink, language);
+                String id;
+                for
+
+                Book book = new Book(title, description, authors, industryIdentifiers, categories, selectedImageLink, language, id);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 List<Book> bookList = new ArrayList<>();
 
