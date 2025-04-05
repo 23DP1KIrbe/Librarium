@@ -3,6 +3,9 @@ package com.example.vadimaprojekts.service;
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
 import com.example.vadimaprojekts.module.User;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -68,8 +71,154 @@ public class BookService {
     }
 
 
-    public String loadBookInfo(String id) throws UserNotFoundException {
+    public void updateBookDisplay(List<Book> books, int index, List<Label> labellist, List<ImageView> imagelist) {
+        if(index == 1){
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(books.get(i).getTitle());
+            }
 
-        return getBookData(id).getTitle();
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = books.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(index == 2){
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(books.get(i+9).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = books.get(i+9).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(index == 3){
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(books.get(i+18).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = books.get(i+18).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }
+    }
+
+    public void page1(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c) {
+        if(a == true) {
+            List<Book> sortedBooks = sortAZ();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(b == true) {
+            List<Book> sortedBooks = sortZA();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        } else if (c == true) {
+            System.out.println("Sort Rating Clicked");
+        } else {
+            updateBookDisplay(apiService.booksFromFile(), 1, labellist, imagelist);
+        }
+    }
+
+    public void page2(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c) {
+        if(a == true) {
+            List<Book> sortedBooks = sortAZ();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+9).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(b == true) {
+            List<Book> sortedBooks = sortZA();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+9).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        } else if (c == true) {
+            System.out.println("Sort Rating Clicked");
+        } else {
+            updateBookDisplay(apiService.booksFromFile(), 2, labellist, imagelist);
+        }
+    }
+
+    public void page3(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c) {
+        if(a == true) {
+            List<Book> sortedBooks = sortAZ();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+18).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(b == true) {
+            List<Book> sortedBooks = sortZA();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+18).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        } else if (c == true) {
+            System.out.println("Sort Rating Clicked");
+        } else {
+            updateBookDisplay(apiService.booksFromFile(), 3, labellist, imagelist);
+        }
     }
 }

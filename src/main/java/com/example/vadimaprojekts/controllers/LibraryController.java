@@ -9,8 +9,8 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LibraryController implements Initializable {
@@ -111,6 +110,13 @@ public class LibraryController implements Initializable {
         imagelist.add(book8);
         imagelist.add(book9);
 
+        for (Label label : labellist) {
+            label.setCursor(Cursor.HAND);
+            label.setOnMouseClicked(event -> {
+                System.out.println(label.getText() + " clicked!");
+
+            });
+        }
         String book1Text = bookText1.getText();
         String book2Text = bookText2.getText();
         String book3Text = bookText3.getText();
@@ -124,22 +130,6 @@ public class LibraryController implements Initializable {
                 book6Text, book7Text, book8Text, book9Text);
         APIService apiService = new APIService();
         this.originalBooks = apiService.booksFromFile();
-
-//        for (int i = 0; i < labellist.size(); i++) {
-//            try {
-//                labellist.get(i).setText(bookService.getBookData(String.valueOf(i+1)).getTitle());
-//            } catch (UserNotFoundException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-//
-//        for (int i = 0; i < imagelist.size(); i++) {
-//            try {
-//                imagelist.get(i).setImage(new Image(bookService.getBookData(String.valueOf(i+1)).getImageLinks()));
-//            } catch (UserNotFoundException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
         progressIndicator.setVisible(true);
         Task<Void> loadBooksTask = new Task<>() {
             @Override
@@ -161,60 +151,16 @@ public class LibraryController implements Initializable {
                 return null;
             }
         };
-
         loadBooksTask.setOnSucceeded(e -> progressIndicator.setVisible(false));
         loadBooksTask.setOnFailed(e -> progressIndicator.setVisible(false));
         new Thread(loadBooksTask).start();
-
+        page1.setStyle("-fx-underline: true");
 
     }
 
-    private void updateBookDisplay(List<Book> books, int index) {
-        if(index == 1){
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setText(books.get(i).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = books.get(i).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(index == 2){
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setText(books.get(i+9).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = books.get(i+9).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(index == 3){
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setText(books.get(i+18).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = books.get(i+18).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }
-    }
 
     @FXML
     public void onlogoutButtonClick(ActionEvent event) throws IOException {
-
         switchToSceneService.switchToLogin();
     }
 
@@ -243,6 +189,9 @@ public class LibraryController implements Initializable {
                 imagelist.get(i).setImage(null);
             }
         }
+        page1.setStyle("-fx-underline: true");
+        page2.setStyle("-fx-underline: false");
+        page3.setStyle("-fx-underline: false");
         System.out.println("Sort AZ Clicked");
     }
 
@@ -261,6 +210,9 @@ public class LibraryController implements Initializable {
                 imagelist.get(i).setImage(null);
             }
         }
+        page1.setStyle("-fx-underline: true");
+        page2.setStyle("-fx-underline: false");
+        page3.setStyle("-fx-underline: false");
         System.out.println("Sort ZA Clicked");
     }
 
@@ -271,112 +223,25 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onPage1Click(ActionEvent event) throws IOException {
-        if(sortAZ.isSelected()) {
-            List<Book> sortedBooks = bookService.sortAZ();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setText(sortedBooks.get(i).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(sortZA.isSelected()) {
-            List<Book> sortedBooks = bookService.sortZA();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setText(sortedBooks.get(i).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        } else if (sortRating.isSelected()) {
-            System.out.println("Sort Rating Clicked");
-        } else {
-            updateBookDisplay(originalBooks, 1);
-        }
+        bookService.page1(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected());
+        page1.setStyle("-fx-underline: true");
+        page2.setStyle("-fx-underline: false");
+        page3.setStyle("-fx-underline: false");
     }
 
     @FXML
     public void onPage2Click(ActionEvent event) throws IOException {
-        if(sortAZ.isSelected()) {
-            List<Book> sortedBooks = bookService.sortAZ();
-            for (int i = 0; i < imagelist.size(); i++) {
-                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
-            }
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+9).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(sortZA.isSelected()) {
-            List<Book> sortedBooks = bookService.sortZA();
-            for (int i = 8; i < labellist.size(); i++) {
-                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
-            }
-
-            for (int i = 8; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+9).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        } else if (sortRating.isSelected()) {
-            System.out.println("Sort Rating Clicked");
-        } else {
-            updateBookDisplay(originalBooks, 2);
-        }
+        bookService.page2(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected());
+        page1.setStyle("-fx-underline: false");
+        page2.setStyle("-fx-underline: true");
+        page3.setStyle("-fx-underline: false");
     }
 
     @FXML
     public void onPage3Click(ActionEvent event) throws IOException {
-        if(sortAZ.isSelected()) {
-            List<Book> sortedBooks = bookService.sortAZ();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+18).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(sortZA.isSelected()) {
-            List<Book> sortedBooks = bookService.sortZA();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+18).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        } else if (sortRating.isSelected()) {
-            System.out.println("Sort Rating Clicked");
-        } else {
-            updateBookDisplay(originalBooks, 3);
-        }
+        bookService.page3(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected());
+        page1.setStyle("-fx-underline: false");
+        page2.setStyle("-fx-underline: false");
+        page3.setStyle("-fx-underline: true");
     }
-
 }
