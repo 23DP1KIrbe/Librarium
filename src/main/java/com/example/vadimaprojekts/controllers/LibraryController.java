@@ -3,6 +3,7 @@ package com.example.vadimaprojekts.controllers;
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
 import com.example.vadimaprojekts.service.BookService;
+import com.example.vadimaprojekts.service.SwitchToSceneService;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -66,9 +67,11 @@ public class LibraryController implements Initializable {
     @FXML
     private Label bookText9;
 
+    SwitchToSceneService switchToSceneService = new SwitchToSceneService();
     @FXML
     public void onlogoutButtonClick(ActionEvent event) throws IOException {
-        System.out.println("Logging out");
+
+        switchToSceneService.switchToLogin();
     }
 
     @FXML

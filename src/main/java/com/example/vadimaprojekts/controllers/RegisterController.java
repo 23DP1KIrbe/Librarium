@@ -4,11 +4,10 @@ package com.example.vadimaprojekts.controllers;
 import com.example.vadimaprojekts.exceptions.UserExistsException;
 import com.example.vadimaprojekts.module.User;
 import com.example.vadimaprojekts.service.RegisterService;
-import com.example.vadimaprojekts.service.SwitchToLoginService;
+import com.example.vadimaprojekts.service.SwitchToSceneService;
 import com.example.vadimaprojekts.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -29,11 +28,10 @@ public class RegisterController {
 
     private RegisterService registerService;
     private UserService userService = new UserService();
-    private SwitchToLoginService switchToLoginService;
+    private SwitchToSceneService switchToSceneService;
 
     public RegisterController() {
-        this.registerService = new RegisterService();
-        this.switchToLoginService = new SwitchToLoginService();
+        switchToSceneService = new SwitchToSceneService();
     }
 
 
@@ -58,6 +56,6 @@ public class RegisterController {
 
     @FXML
     protected void onHaveAnAccountClick(ActionEvent event) throws IOException {
-        switchToLoginService.switchToLogin();
+        switchToSceneService.switchToLogin();
     }
 }

@@ -4,15 +4,12 @@ package com.example.vadimaprojekts.controllers;
 
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.exceptions.WrongUsernameOrPasswordException;
-import com.example.vadimaprojekts.service.SwitchToRegisterService;
+import com.example.vadimaprojekts.service.SwitchToSceneService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import com.example.vadimaprojekts.service.LoginService;
-import com.example.vadimaprojekts.service.SwitchToLibraryService;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -25,14 +22,12 @@ public class LoginController {
     private Label wrongInfo;
 
     private LoginService loginService;
-    private SwitchToLibraryService switchToLibraryService;
-    private SwitchToRegisterService switchToRegisterService;
+    private SwitchToSceneService switchToSceneService;
 
 
     public LoginController() {
         this.loginService = new LoginService();
-        this.switchToLibraryService = new SwitchToLibraryService();
-        this.switchToRegisterService = new SwitchToRegisterService();
+        this.switchToSceneService = new SwitchToSceneService();
     }
 
 
@@ -46,7 +41,7 @@ public class LoginController {
             boolean isAuthenticated = loginService.authenticate(username, password);
 
             if (isAuthenticated) {
-                switchToLibraryService.switchToLibrary();
+                switchToSceneService.switchToLibrary();
             }
         }catch (WrongUsernameOrPasswordException e){
             wrongInfo.setText(e.getMessage());
@@ -55,6 +50,6 @@ public class LoginController {
 
     @FXML
     protected void onNoAccountButtonClick(ActionEvent event) throws IOException {
-        switchToRegisterService.switchToRegister();
+        switchToSceneService.switchToRegister();
     }
 }
