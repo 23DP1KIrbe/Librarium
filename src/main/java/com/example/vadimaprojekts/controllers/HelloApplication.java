@@ -37,7 +37,6 @@ public class HelloApplication extends Application {
         Parent root = fxmlLoader.load();
         APIService apiService = new APIService();
 
-
         loadBookInfo();
 
         StageService.setStage(stage);

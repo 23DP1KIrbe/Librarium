@@ -69,6 +69,12 @@ public class LibraryController implements Initializable {
     private Label bookText8;
     @FXML
     private Label bookText9;
+    @FXML
+    private Button page1;
+    @FXML
+    private Button page2;
+    @FXML
+    private Button page3;
 
     private BookService bookService;
     private List<Label> labellist;
@@ -163,17 +169,45 @@ public class LibraryController implements Initializable {
 
     }
 
-    private void updateBookDisplay(List<Book> books) {
-        for (int i = 0; i < labellist.size(); i++) {
-            labellist.get(i).setText(books.get(i).getTitle());
-        }
+    private void updateBookDisplay(List<Book> books, int index) {
+        if(index == 1){
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(books.get(i).getTitle());
+            }
 
-        for (int i = 0; i < imagelist.size(); i++) {
-            String url = books.get(i).getImageLinks();
-            if (url != null && !url.isEmpty()) {
-                imagelist.get(i).setImage(new Image(url));
-            } else {
-                imagelist.get(i).setImage(null);
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = books.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(index == 2){
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(books.get(i+9).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = books.get(i+9).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(index == 3){
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(books.get(i+18).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = books.get(i+18).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
             }
         }
     }
@@ -235,5 +269,114 @@ public class LibraryController implements Initializable {
         System.out.println("Sort Rating Clicked");
     }
 
+    @FXML
+    public void onPage1Click(ActionEvent event) throws IOException {
+        if(sortAZ.isSelected()) {
+            List<Book> sortedBooks = bookService.sortAZ();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(sortZA.isSelected()) {
+            List<Book> sortedBooks = bookService.sortZA();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        } else if (sortRating.isSelected()) {
+            System.out.println("Sort Rating Clicked");
+        } else {
+            updateBookDisplay(originalBooks, 1);
+        }
+    }
+
+    @FXML
+    public void onPage2Click(ActionEvent event) throws IOException {
+        if(sortAZ.isSelected()) {
+            List<Book> sortedBooks = bookService.sortAZ();
+            for (int i = 0; i < imagelist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
+            }
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+9).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(sortZA.isSelected()) {
+            List<Book> sortedBooks = bookService.sortZA();
+            for (int i = 8; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
+            }
+
+            for (int i = 8; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+9).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        } else if (sortRating.isSelected()) {
+            System.out.println("Sort Rating Clicked");
+        } else {
+            updateBookDisplay(originalBooks, 2);
+        }
+    }
+
+    @FXML
+    public void onPage3Click(ActionEvent event) throws IOException {
+        if(sortAZ.isSelected()) {
+            List<Book> sortedBooks = bookService.sortAZ();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+18).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(sortZA.isSelected()) {
+            List<Book> sortedBooks = bookService.sortZA();
+            for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i+18).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(new Image(url));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        } else if (sortRating.isSelected()) {
+            System.out.println("Sort Rating Clicked");
+        } else {
+            updateBookDisplay(originalBooks, 3);
+        }
+    }
 
 }
