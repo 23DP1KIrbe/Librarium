@@ -4,6 +4,10 @@ import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
 import com.example.vadimaprojekts.module.User;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class BookService {
     private String book1Text;
     private String bookText2;
@@ -27,9 +31,7 @@ public class BookService {
 
 
     public BookService(String book1Text, String bookText2, String bookText3, String bookText4, String bookText5,
-                       String bookText6, String bookText7, String bookText8, String bookText9, String bookImage1,
-                       String bookImage2, String bookImage3, String bookImage4, String bookImage5, String bookImage6,
-                       String bookImage7, String bookImage8, String bookImage9) {
+                       String bookText6, String bookText7, String bookText8, String bookText9) {
         this.book1Text = book1Text;
         this.bookText2 = bookText2;
         this.bookText3 = bookText3;
@@ -39,16 +41,23 @@ public class BookService {
         this.bookText7 = bookText7;
         this.bookText8 = bookText8;
         this.bookText9 = bookText9;
-        this.bookImage1 = bookImage1;
-        this.bookImage2 = bookImage2;
-        this.bookImage3 = bookImage3;
-        this.bookImage4 = bookImage4;
-        this.bookImage5 = bookImage5;
-        this.bookImage6 = bookImage6;
-        this.bookImage7 = bookImage7;
-        this.bookImage8 = bookImage8;
-        this.bookImage9 = bookImage9;
     }
+    public List<Book> sortAZ(){
+        List<Book> books = apiService.booksFromFile();
+
+        List<Book> sorted = new ArrayList<>(books);
+        sorted.sort(Comparator.comparing(Book::getTitle));
+        return sorted;
+    }
+
+    public List<Book> sortZA(){
+        List<Book> books = apiService.booksFromFile();
+
+        List<Book> sorted = new ArrayList<>(books);
+        sorted.sort(Comparator.comparing(Book::getTitle).reversed());
+        return sorted;
+    }
+
     APIService apiService = new APIService();
     public Book getBookData(String id) throws UserNotFoundException {
         return apiService.booksFromFile().stream()
@@ -57,6 +66,8 @@ public class BookService {
                 .orElseThrow(() -> new UserNotFoundException("i guess didnt find the book"));
 
     }
+
+
     public String loadBookInfo(String id) throws UserNotFoundException {
 
         return getBookData(id).getTitle();

@@ -2,6 +2,7 @@ package com.example.vadimaprojekts.controllers;
 
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
+import com.example.vadimaprojekts.service.APIService;
 import com.example.vadimaprojekts.service.BookService;
 import com.example.vadimaprojekts.service.SwitchToSceneService;
 import javafx.application.Platform;
@@ -22,6 +23,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LibraryController implements Initializable {
+    @FXML
+    private ProgressIndicator progressIndicator;
     @FXML
     private ToggleGroup group1;
     @FXML
@@ -67,43 +70,20 @@ public class LibraryController implements Initializable {
     @FXML
     private Label bookText9;
 
-    SwitchToSceneService switchToSceneService = new SwitchToSceneService();
-    @FXML
-    public void onlogoutButtonClick(ActionEvent event) throws IOException {
-
-        switchToSceneService.switchToLogin();
-    }
-
-    @FXML
-    public void ongoToProfileClick(ActionEvent event) throws IOException {
-        System.out.println("Profile Clicked");
-    }
-
-    @FXML
-    public void onsearchButtonClick(ActionEvent event) throws IOException {
-        System.out.println("Search Clicked");
-    }
-
-    @FXML
-    public void onsortAZClick(ActionEvent event) throws IOException {
-        System.out.println("Sort AZ Clicked");
-    }
-
-    @FXML
-    public void onsortZAClick(ActionEvent event) throws IOException {
-        System.out.println("Sort ZA Clicked");
-    }
-
-    @FXML
-    public void onsortRatingClick(ActionEvent event) throws IOException {
-        System.out.println("Sort Rating Clicked");
-    }
-
+    private BookService bookService;
     private List<Label> labellist;
     private List<ImageView> imagelist;
+    private List<Book> originalBooks;
+
+    SwitchToSceneService switchToSceneService = new SwitchToSceneService();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        labellist = new ArrayList<>();
+        ToggleGroup group1 = new ToggleGroup();
+        sortAZ.setToggleGroup(group1);
+        sortZA.setToggleGroup(group1);
+        sortRating.setToggleGroup(group1);
+
+        this.labellist = new ArrayList<>();
         labellist.add(bookText1);
         labellist.add(bookText2);
         labellist.add(bookText3);
@@ -114,8 +94,7 @@ public class LibraryController implements Initializable {
         labellist.add(bookText8);
         labellist.add(bookText9);
 
-
-        imagelist = new ArrayList<>();
+        this.imagelist = new ArrayList<>();
         imagelist.add(book1);
         imagelist.add(book2);
         imagelist.add(book3);
@@ -126,7 +105,6 @@ public class LibraryController implements Initializable {
         imagelist.add(book8);
         imagelist.add(book9);
 
-
         String book1Text = bookText1.getText();
         String book2Text = bookText2.getText();
         String book3Text = bookText3.getText();
@@ -136,19 +114,10 @@ public class LibraryController implements Initializable {
         String book7Text = bookText7.getText();
         String book8Text = bookText8.getText();
         String book9Text = bookText9.getText();
-        String bookImage1 = book1.getImage().getUrl();
-        String bookImage2 = book2.getImage().getUrl();
-        String bookImage3 = book3.getImage().getUrl();
-        String bookImage4 = book4.getImage().getUrl();
-        String bookImage5 = book5.getImage().getUrl();
-        String bookImage6 = book6.getImage().getUrl();
-        String bookImage7 = book7.getImage().getUrl();
-        String bookImage8 = book8.getImage().getUrl();
-        String bookImage9 = book9.getImage().getUrl();
-        BookService bookService = new BookService(book1Text, book2Text, book3Text, book4Text, book5Text,
-                book6Text, book7Text, book8Text, book9Text, bookImage1,
-                bookImage2, bookImage3, bookImage4, bookImage5, bookImage6,
-                bookImage7, bookImage8, bookImage9);
+        this.bookService = new BookService(book1Text, book2Text, book3Text, book4Text, book5Text,
+                book6Text, book7Text, book8Text, book9Text);
+        APIService apiService = new APIService();
+        this.originalBooks = apiService.booksFromFile();
 
 //        for (int i = 0; i < labellist.size(); i++) {
 //            try {
@@ -165,6 +134,7 @@ public class LibraryController implements Initializable {
 //                System.out.println(e.getMessage());
 //            }
 //        }
+        progressIndicator.setVisible(true);
         Task<Void> loadBooksTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -186,9 +156,84 @@ public class LibraryController implements Initializable {
             }
         };
 
-        new Thread(loadBooksTask).start(); // starts loading after the scene appears
-
+        loadBooksTask.setOnSucceeded(e -> progressIndicator.setVisible(false));
+        loadBooksTask.setOnFailed(e -> progressIndicator.setVisible(false));
+        new Thread(loadBooksTask).start();
 
 
     }
+
+    private void updateBookDisplay(List<Book> books) {
+        for (int i = 0; i < labellist.size(); i++) {
+            labellist.get(i).setText(books.get(i).getTitle());
+        }
+
+        for (int i = 0; i < imagelist.size(); i++) {
+            String url = books.get(i).getImageLinks();
+            if (url != null && !url.isEmpty()) {
+                imagelist.get(i).setImage(new Image(url));
+            } else {
+                imagelist.get(i).setImage(null);
+            }
+        }
+    }
+
+    @FXML
+    public void onlogoutButtonClick(ActionEvent event) throws IOException {
+
+        switchToSceneService.switchToLogin();
+    }
+
+    @FXML
+    public void ongoToProfileClick(ActionEvent event) throws IOException {
+        System.out.println("Profile Clicked");
+    }
+
+    @FXML
+    public void onsearchButtonClick(ActionEvent event) throws IOException {
+        System.out.println("Search Clicked");
+    }
+
+    @FXML
+    public void onsortAZClick(ActionEvent event) throws IOException {
+        List<Book> sortedBooks = bookService.sortAZ();
+        for (int i = 0; i < labellist.size(); i++) {
+            labellist.get(i).setText(sortedBooks.get(i).getTitle());
+        }
+
+        for (int i = 0; i < imagelist.size(); i++) {
+            String url = sortedBooks.get(i).getImageLinks();
+            if (url != null && !url.isEmpty()) {
+                imagelist.get(i).setImage(new Image(url));
+            } else {
+                imagelist.get(i).setImage(null);
+            }
+        }
+        System.out.println("Sort AZ Clicked");
+    }
+
+    @FXML
+    public void onsortZAClick(ActionEvent event) throws IOException {
+        List<Book> sortedBooks = bookService.sortZA();
+        for (int i = 0; i < labellist.size(); i++) {
+            labellist.get(i).setText(sortedBooks.get(i).getTitle());
+        }
+
+        for (int i = 0; i < imagelist.size(); i++) {
+            String url = sortedBooks.get(i).getImageLinks();
+            if (url != null && !url.isEmpty()) {
+                imagelist.get(i).setImage(new Image(url));
+            } else {
+                imagelist.get(i).setImage(null);
+            }
+        }
+        System.out.println("Sort ZA Clicked");
+    }
+
+    @FXML
+    public void onsortRatingClick(ActionEvent event) throws IOException {
+        System.out.println("Sort Rating Clicked");
+    }
+
+
 }
