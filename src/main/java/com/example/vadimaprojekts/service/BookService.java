@@ -2,9 +2,7 @@ package com.example.vadimaprojekts.service;
 
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
-import com.example.vadimaprojekts.module.User;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -31,6 +29,8 @@ public class BookService {
     private String bookImage7;
     private String bookImage8;
     private String bookImage9;
+    private ImageCacheService imageCache;
+
 
 
     public BookService(String book1Text, String bookText2, String bookText3, String bookText4, String bookText5,
@@ -44,7 +44,13 @@ public class BookService {
         this.bookText7 = bookText7;
         this.bookText8 = bookText8;
         this.bookText9 = bookText9;
+
     }
+
+    public void setImageCache(ImageCacheService imageCache) {
+        this.imageCache = imageCache;
+    }
+
     public List<Book> sortAZ(){
         List<Book> books = apiService.booksFromFile();
 
@@ -80,7 +86,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = books.get(i).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(books.get(i).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -93,7 +99,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = books.get(i+9).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(books.get(i+9).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -106,7 +112,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = books.get(i+18).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(books.get(i+18).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -114,7 +120,7 @@ public class BookService {
         }
     }
 
-    public void page1(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c) {
+    public void page1(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c, ImageCacheService imageCache) {
         if(a == true) {
             List<Book> sortedBooks = sortAZ();
             for (int i = 0; i < labellist.size(); i++) {
@@ -124,7 +130,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = sortedBooks.get(i).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -138,7 +144,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = sortedBooks.get(i).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -150,7 +156,7 @@ public class BookService {
         }
     }
 
-    public void page2(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c) {
+    public void page2(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c, ImageCacheService imageCache) {
         if(a == true) {
             List<Book> sortedBooks = sortAZ();
             for (int i = 0; i < labellist.size(); i++) {
@@ -160,7 +166,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = sortedBooks.get(i+9).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+9).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -174,7 +180,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = sortedBooks.get(i+9).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+9).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -186,7 +192,7 @@ public class BookService {
         }
     }
 
-    public void page3(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c) {
+    public void page3(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c, ImageCacheService imageCache) {
         if(a == true) {
             List<Book> sortedBooks = sortAZ();
             for (int i = 0; i < labellist.size(); i++) {
@@ -196,7 +202,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = sortedBooks.get(i+18).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+18).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
@@ -210,7 +216,7 @@ public class BookService {
             for (int i = 0; i < imagelist.size(); i++) {
                 String url = sortedBooks.get(i+18).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(new Image(url));
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+18).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }

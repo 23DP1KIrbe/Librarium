@@ -4,6 +4,7 @@ import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
 import com.example.vadimaprojekts.service.APIService;
 import com.example.vadimaprojekts.service.BookService;
+import com.example.vadimaprojekts.service.ImageCacheService;
 import com.example.vadimaprojekts.service.SwitchToSceneService;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -17,7 +18,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -79,6 +80,11 @@ public class LibraryController implements Initializable {
     private List<Label> labellist;
     private List<ImageView> imagelist;
     private List<Book> originalBooks;
+    private ImageCacheService imageCache = new ImageCacheService();
+    private List<String> imageUrls = Arrays.asList(
+            "image_url1", "image_url2", "image_url3", "image_url4",
+            "image_url5", "image_url6", "image_url7", "image_url8", "image_url9"
+    );
 
     SwitchToSceneService switchToSceneService = new SwitchToSceneService();
 
@@ -88,27 +94,13 @@ public class LibraryController implements Initializable {
         sortZA.setToggleGroup(group1);
         sortRating.setToggleGroup(group1);
 
-        this.labellist = new ArrayList<>();
-        labellist.add(bookText1);
-        labellist.add(bookText2);
-        labellist.add(bookText3);
-        labellist.add(bookText4);
-        labellist.add(bookText5);
-        labellist.add(bookText6);
-        labellist.add(bookText7);
-        labellist.add(bookText8);
-        labellist.add(bookText9);
+        this.labellist = List.of(
+                bookText1, bookText2, bookText3, bookText4, bookText5, bookText6, bookText7, bookText8, bookText9
+        );
 
-        this.imagelist = new ArrayList<>();
-        imagelist.add(book1);
-        imagelist.add(book2);
-        imagelist.add(book3);
-        imagelist.add(book4);
-        imagelist.add(book5);
-        imagelist.add(book6);
-        imagelist.add(book7);
-        imagelist.add(book8);
-        imagelist.add(book9);
+        this.imagelist = List.of(
+                book1, book2, book3, book4, book5, book6, book7, book8, book9
+        );
 
         for (Label label : labellist) {
             label.setCursor(Cursor.HAND);
@@ -131,9 +123,24 @@ public class LibraryController implements Initializable {
         APIService apiService = new APIService();
         this.originalBooks = apiService.booksFromFile();
         progressIndicator.setVisible(true);
+
+
+
+
+
+
+
+
+
         Task<Void> loadBooksTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
+                for (Book book : originalBooks) {
+                    String imageUrl = book.getImageLinks();
+                    imageCache.preloadImage(imageUrl);
+                }
+                bookService.setImageCache(imageCache);
+
                 for (int i = 0; i < labellist.size(); i++) {
                     try {
                         int index = i;
@@ -180,11 +187,10 @@ public class LibraryController implements Initializable {
         for (int i = 0; i < labellist.size(); i++) {
             labellist.get(i).setText(sortedBooks.get(i).getTitle());
         }
-
         for (int i = 0; i < imagelist.size(); i++) {
             String url = sortedBooks.get(i).getImageLinks();
             if (url != null && !url.isEmpty()) {
-                imagelist.get(i).setImage(new Image(url));
+                imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i).getImageLinks()));
             } else {
                 imagelist.get(i).setImage(null);
             }
@@ -205,7 +211,7 @@ public class LibraryController implements Initializable {
         for (int i = 0; i < imagelist.size(); i++) {
             String url = sortedBooks.get(i).getImageLinks();
             if (url != null && !url.isEmpty()) {
-                imagelist.get(i).setImage(new Image(url));
+                imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i).getImageLinks()));
             } else {
                 imagelist.get(i).setImage(null);
             }
@@ -223,7 +229,7 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onPage1Click(ActionEvent event) throws IOException {
-        bookService.page1(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected());
+        bookService.page1(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected(), imageCache);
         page1.setStyle("-fx-underline: true");
         page2.setStyle("-fx-underline: false");
         page3.setStyle("-fx-underline: false");
@@ -231,7 +237,7 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onPage2Click(ActionEvent event) throws IOException {
-        bookService.page2(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected());
+        bookService.page2(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected(), imageCache);
         page1.setStyle("-fx-underline: false");
         page2.setStyle("-fx-underline: true");
         page3.setStyle("-fx-underline: false");
@@ -239,7 +245,7 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onPage3Click(ActionEvent event) throws IOException {
-        bookService.page3(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected());
+        bookService.page3(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected(), imageCache);
         page1.setStyle("-fx-underline: false");
         page2.setStyle("-fx-underline: false");
         page3.setStyle("-fx-underline: true");
