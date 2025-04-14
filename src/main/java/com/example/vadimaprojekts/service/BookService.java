@@ -32,21 +32,6 @@ public class BookService {
     private ImageCacheService imageCache;
 
 
-
-    public BookService(String book1Text, String bookText2, String bookText3, String bookText4, String bookText5,
-                       String bookText6, String bookText7, String bookText8, String bookText9) {
-        this.book1Text = book1Text;
-        this.bookText2 = bookText2;
-        this.bookText3 = bookText3;
-        this.bookText4 = bookText4;
-        this.bookText5 = bookText5;
-        this.bookText6 = bookText6;
-        this.bookText7 = bookText7;
-        this.bookText8 = bookText8;
-        this.bookText9 = bookText9;
-
-    }
-
     public void setImageCache(ImageCacheService imageCache) {
         this.imageCache = imageCache;
     }
@@ -68,18 +53,26 @@ public class BookService {
     }
 
     APIService apiService = new APIService();
-    public Book getBookData(String id) throws UserNotFoundException {
+    public Book getBookData(String id) {
         return apiService.booksFromFile().stream()
                 .filter(book -> book.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new UserNotFoundException("i guess didnt find the book"));
+                .orElse(null);
 
+    }
+
+    public Book getBookDataByTitle(String title) {
+        return apiService.booksFromFile().stream()
+                .filter(book -> book.getTitle().equals(title))
+                .findFirst()
+                .orElse(null);
     }
 
 
     public void updateBookDisplay(List<Book> books, int index, List<Label> labellist, List<ImageView> imagelist) {
         if(index == 1){
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(books.get(i).getTitle());
             }
 
@@ -93,6 +86,7 @@ public class BookService {
             }
         }else if(index == 2){
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(books.get(i+9).getTitle());
             }
 
@@ -106,11 +100,12 @@ public class BookService {
             }
         }else if(index == 3){
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(books.get(i+18).getTitle());
             }
 
             for (int i = 0; i < imagelist.size(); i++) {
-                String url = books.get(i+18).getImageLinks();
+                String url = books.get(i).getImageLinks();
                 if (url != null && !url.isEmpty()) {
                     imagelist.get(i).setImage(imageCache.getImage(books.get(i+18).getImageLinks()));
                 } else {
@@ -124,6 +119,7 @@ public class BookService {
         if(a == true) {
             List<Book> sortedBooks = sortAZ();
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(sortedBooks.get(i).getTitle());
             }
 
@@ -138,6 +134,7 @@ public class BookService {
         }else if(b == true) {
             List<Book> sortedBooks = sortZA();
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(sortedBooks.get(i).getTitle());
             }
 
@@ -160,6 +157,7 @@ public class BookService {
         if(a == true) {
             List<Book> sortedBooks = sortAZ();
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
             }
 
@@ -174,6 +172,7 @@ public class BookService {
         }else if(b == true) {
             List<Book> sortedBooks = sortZA();
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
             }
 
@@ -196,6 +195,7 @@ public class BookService {
         if(a == true) {
             List<Book> sortedBooks = sortAZ();
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
             }
 
@@ -210,6 +210,7 @@ public class BookService {
         }else if(b == true) {
             List<Book> sortedBooks = sortZA();
             for (int i = 0; i < labellist.size(); i++) {
+                labellist.get(i).setWrapText(true);
                 labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
             }
 

@@ -97,10 +97,10 @@ public class APIService {
                 JsonObject imageLink = volumeInfo.getAsJsonObject("imageLinks");
                 String selectedImageLink = null;
                 if (imageLink != null) {
-                    if (imageLink.has("smallThumbnail")) {
-                        selectedImageLink = imageLink.get("smallThumbnail").getAsString();
-                    } else if (imageLink.has("thumbnail")) {
+                    if (imageLink.has("thumbnail")) {
                         selectedImageLink = imageLink.get("thumbnail").getAsString();
+                    } else if (imageLink.has("smallThumbnail")) {
+                        selectedImageLink = imageLink.get("smallThumbnail").getAsString();
                     }
                 }
 

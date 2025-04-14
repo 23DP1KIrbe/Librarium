@@ -25,9 +25,9 @@ public class HelloApplication extends Application {
 
     }
     public void loadBookInfo() throws UserNotFoundException {
-
-//        getBookData("1");
-        System.out.println(getBookData("1").getTitle());
+        for(int i = 1; i<22; i++){
+            System.out.println(getBookData(String.valueOf(i)).getIndustryIdentifiers());
+        }
 
 
     }
@@ -36,8 +36,6 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/vadimaprojekts/login.fxml"));
         Parent root = fxmlLoader.load();
         APIService apiService = new APIService();
-
-        loadBookInfo();
 
         StageService.setStage(stage);
         stage.setScene(new Scene(root));

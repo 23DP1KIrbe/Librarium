@@ -101,36 +101,24 @@ public class LibraryController implements Initializable {
         this.imagelist = List.of(
                 book1, book2, book3, book4, book5, book6, book7, book8, book9
         );
+        BookPageController bookPageController = new BookPageController();
 
         for (Label label : labellist) {
             label.setCursor(Cursor.HAND);
             label.setOnMouseClicked(event -> {
+                bookPageController.setImageCache(imageCache);
                 System.out.println(label.getText() + " clicked!");
-
+                try {
+                    switchToSceneService.switchToBookPage(label.getText());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
         }
-        String book1Text = bookText1.getText();
-        String book2Text = bookText2.getText();
-        String book3Text = bookText3.getText();
-        String book4Text = bookText4.getText();
-        String book5Text = bookText5.getText();
-        String book6Text = bookText6.getText();
-        String book7Text = bookText7.getText();
-        String book8Text = bookText8.getText();
-        String book9Text = bookText9.getText();
-        this.bookService = new BookService(book1Text, book2Text, book3Text, book4Text, book5Text,
-                book6Text, book7Text, book8Text, book9Text);
+        this.bookService = new BookService();
         APIService apiService = new APIService();
         this.originalBooks = apiService.booksFromFile();
         progressIndicator.setVisible(true);
-
-
-
-
-
-
-
-
 
         Task<Void> loadBooksTask = new Task<>() {
             @Override
@@ -142,18 +130,14 @@ public class LibraryController implements Initializable {
                 bookService.setImageCache(imageCache);
 
                 for (int i = 0; i < labellist.size(); i++) {
-                    try {
-                        int index = i;
-                        Book book = bookService.getBookData(String.valueOf(index + 1));
+                    int index = i;
+                    Book book = bookService.getBookData(String.valueOf(index + 1));
 
-                        Platform.runLater(() -> {
-                            labellist.get(index).setText(book.getTitle());
-                            imagelist.get(index).setImage(new Image(book.getImageLinks()));
-                        });
-
-                    } catch (UserNotFoundException e) {
-                        System.out.println("Book not found: " + e.getMessage());
-                    }
+                    Platform.runLater(() -> {
+                        labellist.get(index).setWrapText(true);
+                        labellist.get(index).setText(book.getTitle());
+                        imagelist.get(index).setImage(new Image(book.getImageLinks()));
+                    });
                 }
                 return null;
             }
@@ -162,7 +146,6 @@ public class LibraryController implements Initializable {
         loadBooksTask.setOnFailed(e -> progressIndicator.setVisible(false));
         new Thread(loadBooksTask).start();
         page1.setStyle("-fx-underline: true");
-
     }
 
 
@@ -185,6 +168,7 @@ public class LibraryController implements Initializable {
     public void onsortAZClick(ActionEvent event) throws IOException {
         List<Book> sortedBooks = bookService.sortAZ();
         for (int i = 0; i < labellist.size(); i++) {
+            labellist.get(i).setWrapText(true);
             labellist.get(i).setText(sortedBooks.get(i).getTitle());
         }
         for (int i = 0; i < imagelist.size(); i++) {
@@ -205,6 +189,7 @@ public class LibraryController implements Initializable {
     public void onsortZAClick(ActionEvent event) throws IOException {
         List<Book> sortedBooks = bookService.sortZA();
         for (int i = 0; i < labellist.size(); i++) {
+            labellist.get(i).setWrapText(true);
             labellist.get(i).setText(sortedBooks.get(i).getTitle());
         }
 
