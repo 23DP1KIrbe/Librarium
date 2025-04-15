@@ -9,11 +9,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import com.example.vadimaprojekts.service.StageService;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
     APIService apiService = new APIService();
@@ -37,6 +39,9 @@ public class HelloApplication extends Application {
         Parent root = fxmlLoader.load();
         APIService apiService = new APIService();
 
+        Image icon = new Image(Objects.requireNonNull(getClass().getResource("/logo.png")).toExternalForm());
+        stage.getIcons().add(icon);
+        stage.setTitle("Librarium");
         StageService.setStage(stage);
         stage.setScene(new Scene(root));
         stage.show();
