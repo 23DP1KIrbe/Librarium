@@ -18,6 +18,7 @@ public class LoginService {
     public boolean authenticate(String username, String password) throws UserNotFoundException, WrongUsernameOrPasswordException {
         if (userService.checkForUsername(username)) {
             if(password.equals(userService.getUsernameData(username).getPassword())){
+
                 return true;
             }
 

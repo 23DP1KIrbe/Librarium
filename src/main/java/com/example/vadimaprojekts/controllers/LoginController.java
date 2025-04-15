@@ -4,7 +4,10 @@ package com.example.vadimaprojekts.controllers;
 
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.exceptions.WrongUsernameOrPasswordException;
+import com.example.vadimaprojekts.module.User;
+import com.example.vadimaprojekts.service.Session;
 import com.example.vadimaprojekts.service.SwitchToSceneService;
+import com.example.vadimaprojekts.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,11 +26,14 @@ public class LoginController {
 
     private LoginService loginService;
     private SwitchToSceneService switchToSceneService;
+    private Session session = Session.getInstance();
+    private UserService userService;
 
 
     public LoginController() {
         this.loginService = new LoginService();
         this.switchToSceneService = new SwitchToSceneService();
+        this.userService = new UserService();
     }
 
 
@@ -46,6 +52,7 @@ public class LoginController {
         }catch (WrongUsernameOrPasswordException e){
             wrongInfo.setText(e.getMessage());
         }
+        session.setUser(userService.getUsernameData(username));
     }
 
     @FXML

@@ -2,10 +2,7 @@ package com.example.vadimaprojekts.controllers;
 
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
-import com.example.vadimaprojekts.service.APIService;
-import com.example.vadimaprojekts.service.BookService;
-import com.example.vadimaprojekts.service.ImageCacheService;
-import com.example.vadimaprojekts.service.SwitchToSceneService;
+import com.example.vadimaprojekts.service.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,10 +31,12 @@ public class BookPageController implements Initializable {
     @FXML
     private Button backToLibrary;
     private String bookVar;
+    private Session session = Session.getInstance();
     APIService apiService = new APIService();
     BookService bookService = new BookService();
     ImageCacheService imageCache = new ImageCacheService();
     SwitchToSceneService switchToSceneService = new SwitchToSceneService();
+
 
     public void setImageCache(ImageCacheService imageCache) {
         this.imageCache = imageCache;
@@ -61,6 +60,7 @@ public class BookPageController implements Initializable {
     @FXML
     public void onlogoutButtonClick(ActionEvent event) throws IOException {
         switchToSceneService.switchToLogin();
+        session.setUser(null);
     }
     @FXML
     public void ongoToProfileClick(ActionEvent event) throws IOException {
