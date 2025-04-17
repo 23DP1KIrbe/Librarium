@@ -18,6 +18,7 @@ import java.util.List;
 public class UserService {
     private static final String File = "./users.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Session session = Session.getInstance();
 
     public List<User> usersFromFile(){
         List<User> users = new ArrayList();
@@ -74,8 +75,12 @@ public class UserService {
 
         for (User user : users) {
             if (user.getUsername().equals(sessionUser.getUsername())) {
-                if (!user.getReadList().contains(bookId)) {
+                if(user.getReadList().contains(bookId)){
+                    user.getReadList().remove(bookId);
+                    session.setUser(user);
+                }else if (!user.getReadList().contains(bookId)) {
                     user.getReadList().add(bookId);
+                    session.setUser(user);
                 }
                 break;
             }
@@ -96,13 +101,16 @@ public class UserService {
 
         for (User user : users) {
             if (user.getUsername().equals(sessionUser.getUsername())) {
-                if (!user.getBuyList().contains(bookId)) {
+                if(user.getBuyList().contains(bookId)){
+                    user.getBuyList().remove(bookId);
+                    session.setUser(user);
+                }else if (!user.getBuyList().contains(bookId)) {
                     user.getBuyList().add(bookId);
+                    session.setUser(user);
                 }
                 break;
             }
         }
-
         try (FileWriter writer = new FileWriter(File)) {
             gson.toJson(users, writer);
         } catch (IOException e) {

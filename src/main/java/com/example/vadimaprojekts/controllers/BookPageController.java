@@ -55,7 +55,13 @@ public class BookPageController implements Initializable {
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        Book book = session.getBook();
+        if (session.getUser().getReadList().contains(book.getId())) {
+            readListBtn.setText("Remove book from read list");
+        }
+        if(session.getUser().getBuyList().contains(book.getId())){
+            buyListBtn.setText("Remove book from buy list");
+        }
     }
 
     @FXML
@@ -76,10 +82,20 @@ public class BookPageController implements Initializable {
     public void onreadListBtnClick(ActionEvent event) throws IOException {
         Book book = session.getBook();
         userService.addBookToReadList(book.getId());
+        if(session.getUser().getReadList().contains(book.getId())){
+            readListBtn.setText("Remove book from read list");
+        }else if(!session.getUser().getReadList().contains(book.getId())){
+            readListBtn.setText("Add to read list");
+        }
     }
     @FXML
     public void onbuyListBtnClick(ActionEvent event) throws IOException {
         Book book = session.getBook();
         userService.addBookToBuyList(book.getId());
+        if(session.getUser().getBuyList().contains(book.getId())){
+            buyListBtn.setText("Remove book from buy list");
+        }else if(!session.getUser().getBuyList().contains(book.getId())){
+            buyListBtn.setText("Add to buy list");
+        }
     }
 }

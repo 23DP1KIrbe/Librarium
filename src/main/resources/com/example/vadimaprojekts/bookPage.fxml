@@ -30,19 +30,19 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="bookDescription" alignment="TOP_CENTER" layoutX="572.0" layoutY="246.0" prefHeight="325.0" prefWidth="698.0" text="Description: Long ass description dsgffffffffffffffffffffffffffffffffffjkdghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh">
+      <Label fx:id="bookDescription" alignment="TOP_CENTER" layoutX="572.0" layoutY="246.0" prefHeight="345.0" prefWidth="619.0" text="Description: Long ass description dsgffffffffffffffffffffffffffffffffffjkdghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="readListBtn" layoutX="570.0" layoutY="576.0" mnemonicParsing="false" onAction="#onreadListBtnClick" text="Add to read list" />
-      <Button fx:id="buyListBtn" layoutX="710.0" layoutY="576.0" mnemonicParsing="false" onAction="#onbuyListBtnClick" text="Add to buy list" />
+      <Button fx:id="readListBtn" layoutX="570.0" layoutY="601.0" mnemonicParsing="false" onAction="#onreadListBtnClick" text="Add to read list" />
+      <Button fx:id="buyListBtn" layoutX="757.0" layoutY="601.0" mnemonicParsing="false" onAction="#onbuyListBtnClick" text="Add to buy list" />
       <Label fx:id="bookAuthor" layoutX="570.0" layoutY="216.0" prefHeight="25.0" prefWidth="468.0" text="Authors: SIGMA GRINDSET">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="backToLibrary" layoutX="853.0" layoutY="576.0" mnemonicParsing="false" onAction="#onbackToLibraryClick" text="Back to library" />
+      <Button fx:id="backToLibrary" layoutX="946.0" layoutY="601.0" mnemonicParsing="false" onAction="#onbackToLibraryClick" text="Back to library" />
       <ImageView fitHeight="110.0" fitWidth="103.0" layoutX="30.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../loggo.png" />
