@@ -25,53 +25,14 @@ public class LibraryController implements Initializable {
     @FXML
     private ToggleGroup group1;
     @FXML
-    private RadioButton sortAZ;
+    private RadioButton sortAZ, sortZA, sortRating;
     @FXML
-    private RadioButton sortZA;
+    private ImageView book1, book2, book3, book4, book5, book6, book7, book8, book9;
     @FXML
-    private RadioButton sortRating;
+    private Label bookText1, bookText2, bookText3, bookText4, bookText5, bookText6, bookText7, bookText8, bookText9, totalBooks;
     @FXML
-    private ImageView book1;
-    @FXML
-    private ImageView book2;
-    @FXML
-    private ImageView book3;
-    @FXML
-    private ImageView book4;
-    @FXML
-    private ImageView book5;
-    @FXML
-    private ImageView book6;
-    @FXML
-    private ImageView book7;
-    @FXML
-    private ImageView book8;
-    @FXML
-    private ImageView book9;
-    @FXML
-    private Label bookText1;
-    @FXML
-    private Label bookText2;
-    @FXML
-    private Label bookText3;
-    @FXML
-    private Label bookText4;
-    @FXML
-    private Label bookText5;
-    @FXML
-    private Label bookText6;
-    @FXML
-    private Label bookText7;
-    @FXML
-    private Label bookText8;
-    @FXML
-    private Label bookText9;
-    @FXML
-    private Button page1;
-    @FXML
-    private Button page2;
-    @FXML
-    private Button page3;
+    private Button page1, page2, page3;
+
 
     private Session session = Session.getInstance();
     private BookService bookService;
@@ -137,6 +98,7 @@ public class LibraryController implements Initializable {
                         imagelist.get(index).setImage(new Image(book.getImageLinks()));
                     });
                 }
+                totalBooks.setText("Total available books: " + apiService.booksFromFile().size());
                 return null;
             }
         };
