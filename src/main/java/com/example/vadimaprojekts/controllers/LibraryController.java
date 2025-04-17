@@ -105,8 +105,8 @@ public class LibraryController implements Initializable {
             label.setCursor(Cursor.HAND);
             label.setOnMouseClicked(event -> {
                 bookPageController.setImageCache(imageCache);
-                System.out.println(label.getText() + " clicked!");
                 try {
+                    session.setBook(bookService.getBookDataByTitle(label.getText()));
                     switchToSceneService.switchToBookPage(label.getText());
                 } catch (IOException e) {
                     throw new RuntimeException(e);

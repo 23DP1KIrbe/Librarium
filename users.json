@@ -2,25 +2,18 @@
   {
     "username": "a",
     "password": "a",
-    "ReadList": [],
+    "ReadList": [
+      "2",
+      "1"
+    ],
     "BuyList": []
   },
   {
-    "username": "sad",
-    "password": "fsdg",
-    "ReadList": [],
-    "BuyList": []
-  },
-  {
-    "username": "sigma",
-    "password": "gatis",
-    "ReadList": [],
-    "BuyList": []
-  },
-  {
-    "username": "stave",
-    "password": "1",
-    "ReadList": [],
+    "username": "b",
+    "password": "b",
+    "ReadList": [
+      "2"
+    ],
     "BuyList": []
   }
 ]

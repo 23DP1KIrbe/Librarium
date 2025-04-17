@@ -40,8 +40,8 @@ public class RegisterController {
 
         String username = registerUsername.getText();
         String password = registerPassword.getText();
-        List<User> ReadList = new ArrayList();
-        List<User> BuyList = new ArrayList<>();
+        List<String> ReadList = new ArrayList();
+        List<String> BuyList = new ArrayList<>();
         User user = new User(username, password, ReadList, BuyList);
 
         try {

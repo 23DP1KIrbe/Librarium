@@ -33,6 +33,7 @@ public class BookPageController implements Initializable {
     private String bookVar;
     private Session session = Session.getInstance();
     APIService apiService = new APIService();
+    UserService userService = new UserService();
     BookService bookService = new BookService();
     ImageCacheService imageCache = new ImageCacheService();
     SwitchToSceneService switchToSceneService = new SwitchToSceneService();
@@ -68,6 +69,16 @@ public class BookPageController implements Initializable {
     }
     @FXML
     public void onbackToLibraryClick(ActionEvent event) throws IOException {
+        session.setBook(null);
         switchToSceneService.switchToLibrary();
+    }
+    @FXML
+    public void onreadListBtnClick(ActionEvent event) throws IOException {
+        Book book = session.getBook();
+        userService.addBookToReadList(book.getId());
+    }
+    @FXML
+    public void onbuyListBtnClick(ActionEvent event) throws IOException {
+
     }
 }

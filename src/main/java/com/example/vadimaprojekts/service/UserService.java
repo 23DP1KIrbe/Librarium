@@ -43,8 +43,6 @@ public class UserService {
 
     }
 
-
-
     public void saveUserToJson(User user) throws UserExistsException {
         List<User> users = new ArrayList<>();
         try (FileReader reader = new FileReader("./users.json")) {
@@ -67,4 +65,28 @@ public class UserService {
             e.printStackTrace();
         }
     }
+
+    public void addBookToReadList(String bookId) {
+        User sessionUser = Session.getInstance().getUser();
+        if (sessionUser == null) return;
+
+        List<User> users = usersFromFile();
+
+        for (User user : users) {
+            if (user.getUsername().equals(sessionUser.getUsername())) {
+                if (!user.getReadList().contains(bookId)) {
+                    user.getReadList().add(bookId);
+                }
+                break;
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(File)) {
+            gson.toJson(users, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

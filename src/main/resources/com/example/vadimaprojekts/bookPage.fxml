@@ -35,8 +35,8 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="readListBtn" layoutX="570.0" layoutY="576.0" mnemonicParsing="false" text="Add to read list" />
-      <Button fx:id="buyListBtn" layoutX="710.0" layoutY="576.0" mnemonicParsing="false" text="Add to buy list" />
+      <Button fx:id="readListBtn" layoutX="570.0" layoutY="576.0" mnemonicParsing="false" onAction="#onreadListBtnClick" text="Add to read list" />
+      <Button fx:id="buyListBtn" layoutX="710.0" layoutY="576.0" mnemonicParsing="false" onAction="#onbuyListBtnClick" text="Add to buy list" />
       <Label fx:id="bookAuthor" layoutX="570.0" layoutY="216.0" prefHeight="25.0" prefWidth="468.0" text="Authors: SIGMA GRINDSET">
          <font>
             <Font size="16.0" />

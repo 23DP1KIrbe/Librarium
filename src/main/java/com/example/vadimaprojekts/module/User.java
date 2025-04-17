@@ -2,15 +2,16 @@ package com.example.vadimaprojekts.module;
 
 import com.example.vadimaprojekts.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     private String username;
     private String password;
-    private List<User> ReadList;
-    private List<User> BuyList;
+    private List<String> ReadList;
+    private List<String> BuyList;
 
-    public User(String username, String password, List<User> Readlist, List<User> Buylist) {
+    public User(String username, String password, List<String> Readlist, List<String> Buylist) {
         this.username = username;
         this.password = password;
         this.ReadList = Readlist;
@@ -33,19 +34,21 @@ public class User {
         this.password = password;
     }
 
-    public List<User> getReadList() {
+    public List<String> getReadList() {
+        if (ReadList == null) ReadList = new ArrayList<>();
         return ReadList;
     }
 
-    public void setReadList(List<User> Readlist) {
+    public void setReadList(List<String> Readlist) {
         this.ReadList = Readlist;
     }
 
-    public List<User> getBuyList() {
+    public List<String> getBuyList() {
+        if (BuyList == null) BuyList = new ArrayList<>();
         return BuyList;
     }
 
-    public void setBuyList(List<User> Buylist) {
+    public void setBuyList(List<String> Buylist) {
         this.BuyList = Buylist;
     }
 
