@@ -79,6 +79,7 @@ public class BookPageController implements Initializable {
     }
     @FXML
     public void onbuyListBtnClick(ActionEvent event) throws IOException {
-
+        Book book = session.getBook();
+        userService.addBookToBuyList(book.getId());
     }
 }

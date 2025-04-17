@@ -88,5 +88,27 @@ public class UserService {
         }
     }
 
+    public void addBookToBuyList(String bookId) {
+        User sessionUser = Session.getInstance().getUser();
+        if (sessionUser == null) return;
+
+        List<User> users = usersFromFile();
+
+        for (User user : users) {
+            if (user.getUsername().equals(sessionUser.getUsername())) {
+                if (!user.getBuyList().contains(bookId)) {
+                    user.getBuyList().add(bookId);
+                }
+                break;
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(File)) {
+            gson.toJson(users, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
