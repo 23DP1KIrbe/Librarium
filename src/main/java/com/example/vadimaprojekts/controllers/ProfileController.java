@@ -24,6 +24,8 @@ public class ProfileController implements Initializable {
     private Button logoutBtn, profileBtn, buyListBtn, readListBtn;
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private Label userWelcoming;
     private SwitchToSceneService switchToSceneService = new SwitchToSceneService();
     private Session session = Session.getInstance();
     private User user = session.getUser();
@@ -40,7 +42,8 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        userWelcoming.setText("Hello, " + user.getUsername());
+        profileBtn.setStyle("-fx-underline: true; -fx-background-color: transparent");
     }
 
     @FXML
@@ -48,54 +51,66 @@ public class ProfileController implements Initializable {
         int bookCount = user.getReadList().size();
         List<String> bookId = new ArrayList<>(user.getReadList());
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
+        anchorPane.getChildren().removeIf(node -> node instanceof Label);
         int rows = (int) Math.ceil(bookCount / 3.0);
         anchorPane.setPrefHeight(608 + (rows - 1) * 400);
-
-        books = new ImageView[bookCount];
-        labels = new Label[bookCount];
-        for (int i = 0; i < bookCount; i++) {
-            ImageView imageView = new ImageView();
-            Label label = new Label(bookService.getBookData(bookId.get(i)).getTitle());
-            imageView.setFitWidth(180);
-            imageView.setFitHeight(255);
-            label.setWrapText(true);
-            label.setStyle("-fx-font-size: 16; -fx-text-alignment: center;");
-            label.setAlignment(Pos.CENTER);
-            label.setPrefWidth(180);
-            label.setPrefHeight(50);
-
-            int row = i / 3;
-            int col = i % 3;
-
-            double x = 85 + col * 350;
-            double y = 70 + row * 400;
-
-            imageView.setX(x);
-            imageView.setY(y);
-            label.setLayoutX(x);
-            label.setLayoutY(y + 270);
-
-            try {
-                imageView.setImage(imageCache.getImage(bookService.getBookData(bookId.get(i)).getImageLinks()));
-            } catch (Exception e) {
-                System.out.println("Nesanaca");
-            }
-
-            label.setCursor(Cursor.HAND);
-            label.setOnMouseClicked(events -> {
-                try {
-                    session.setBook(bookService.getBookDataByTitle(label.getText()));
-                    switchToSceneService.switchToBookPage(label.getText());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            books[i] = imageView;
-            labels[i] = label;
-            anchorPane.getChildren().add(imageView);
+        if(bookCount == 0) {
+            Label label = new Label();
+            label.setText("No added books to read list!");
+            label.setLayoutX(60);
+            label.setLayoutY(60);
+            label.setStyle("-fx-font-size: 24");
             anchorPane.getChildren().add(label);
+        }else{
+            books = new ImageView[bookCount];
+            labels = new Label[bookCount];
+            for (int i = 0; i < bookCount; i++) {
+                ImageView imageView = new ImageView();
+                Label label = new Label(bookService.getBookData(bookId.get(i)).getTitle());
+                imageView.setFitWidth(180);
+                imageView.setFitHeight(255);
+                label.setWrapText(true);
+                label.setStyle("-fx-font-size: 16; -fx-text-alignment: center;");
+                label.setAlignment(Pos.CENTER);
+                label.setPrefWidth(180);
+                label.setPrefHeight(50);
+
+                int row = i / 3;
+                int col = i % 3;
+
+                double x = 85 + col * 350;
+                double y = 70 + row * 400;
+
+                imageView.setX(x);
+                imageView.setY(y);
+                label.setLayoutX(x);
+                label.setLayoutY(y + 270);
+
+                try {
+                    imageView.setImage(imageCache.getImage(bookService.getBookData(bookId.get(i)).getImageLinks()));
+                } catch (Exception e) {
+                    System.out.println("Nesanaca");
+                }
+
+                label.setCursor(Cursor.HAND);
+                label.setOnMouseClicked(events -> {
+                    try {
+                        session.setBook(bookService.getBookDataByTitle(label.getText()));
+                        switchToSceneService.switchToBookPage(label.getText());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                books[i] = imageView;
+                labels[i] = label;
+                anchorPane.getChildren().add(imageView);
+                anchorPane.getChildren().add(label);
+            }
         }
+        buyListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
+        readListBtn.setStyle("-fx-underline:  true; -fx-background-color: transparent");
+        profileBtn.setStyle("-fx-underline: false; -fx-background-color: transparent");
     }
 
 
@@ -108,52 +123,78 @@ public class ProfileController implements Initializable {
         anchorPane.getChildren().removeIf(node -> node instanceof Label);
         int rows = (int) Math.ceil(bookCount / 3.0);
         anchorPane.setPrefHeight(608 + (rows - 1) * 400);
-
-        books = new ImageView[bookCount];
-        labels = new Label[bookCount];
-        for (int i = 0; i < bookCount; i++) {
-            ImageView imageView = new ImageView();
-            Label label = new Label(bookService.getBookData(bookId.get(i)).getTitle());
-            imageView.setFitWidth(180);
-            imageView.setFitHeight(255);
-            label.setWrapText(true);
-            label.setStyle("-fx-font-size: 16; -fx-text-alignment: center;");
-            label.setAlignment(Pos.CENTER);
-            label.setPrefWidth(180);
-            label.setPrefHeight(50);
-
-            int row = i / 3;
-            int col = i % 3;
-
-            double x = 85 + col * 350;
-            double y = 70 + row * 400;
-
-            imageView.setX(x);
-            imageView.setY(y);
-            label.setLayoutX(x);
-            label.setLayoutY(y + 270);
-
-            try {
-                imageView.setImage(imageCache.getImage(bookService.getBookData(bookId.get(i)).getImageLinks()));
-            } catch (Exception e) {
-                System.out.println("Nesanaca");
-            }
-
-            label.setCursor(Cursor.HAND);
-            label.setOnMouseClicked(events -> {
-                try {
-                    session.setBook(bookService.getBookDataByTitle(label.getText()));
-                    switchToSceneService.switchToBookPage(label.getText());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            books[i] = imageView;
-            labels[i] = label;
-            anchorPane.getChildren().add(imageView);
+        if(bookCount == 0) {
+            Label label = new Label();
+            label.setText("No added books to buy list!");
+            label.setLayoutX(60);
+            label.setLayoutY(60);
+            label.setStyle("-fx-font-size: 24");
             anchorPane.getChildren().add(label);
+        }else{
+            books = new ImageView[bookCount];
+            labels = new Label[bookCount];
+            for (int i = 0; i < bookCount; i++) {
+                ImageView imageView = new ImageView();
+                Label label = new Label(bookService.getBookData(bookId.get(i)).getTitle());
+                imageView.setFitWidth(180);
+                imageView.setFitHeight(255);
+                label.setWrapText(true);
+                label.setStyle("-fx-font-size: 16; -fx-text-alignment: center;");
+                label.setAlignment(Pos.CENTER);
+                label.setPrefWidth(180);
+                label.setPrefHeight(50);
+
+                int row = i / 3;
+                int col = i % 3;
+
+                double x = 85 + col * 350;
+                double y = 70 + row * 400;
+
+                imageView.setX(x);
+                imageView.setY(y);
+                label.setLayoutX(x);
+                label.setLayoutY(y + 270);
+
+                try {
+                    imageView.setImage(imageCache.getImage(bookService.getBookData(bookId.get(i)).getImageLinks()));
+                } catch (Exception e) {
+                    System.out.println("Nesanaca");
+                }
+
+                label.setCursor(Cursor.HAND);
+                label.setOnMouseClicked(events -> {
+                    try {
+                        session.setBook(bookService.getBookDataByTitle(label.getText()));
+                        switchToSceneService.switchToBookPage(label.getText());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                books[i] = imageView;
+                labels[i] = label;
+                anchorPane.getChildren().add(imageView);
+                anchorPane.getChildren().add(label);
+            }
         }
+        buyListBtn.setStyle("-fx-underline:  true; -fx-background-color: transparent");
+        readListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
+        profileBtn.setStyle("-fx-underline: false; -fx-background-color: transparent");
+    }
+
+    @FXML
+    private void onprofileBtnClick(ActionEvent event) {
+        anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
+        anchorPane.getChildren().removeIf(node -> node instanceof Label);
+        Label label = new Label();
+        label.setText("Hello, " + user.getUsername());
+        label.setLayoutX(60);
+        label.setLayoutY(60);
+        label.setStyle("-fx-font-size: 24");
+        anchorPane.getChildren().add(label);
+        buyListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
+        readListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
+        profileBtn.setStyle("-fx-underline: true; -fx-background-color: transparent");
     }
 
     @FXML
