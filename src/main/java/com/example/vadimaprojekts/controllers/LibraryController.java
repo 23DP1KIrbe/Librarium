@@ -82,34 +82,15 @@ public class LibraryController implements Initializable {
         this.bookService = new BookService();
         APIService apiService = new APIService();
         this.originalBooks = apiService.booksFromFile();
-        progressIndicator.setVisible(true);
 
-        Task<Void> loadBooksTask = new Task<>() {
-            @Override
-            protected Void call() throws Exception {
-                for (Book book : originalBooks) {
-                    String imageUrl = book.getImageLinks();
-                    imageCache.preloadImage(imageUrl);
-                }
-                bookService.setImageCache(imageCache);
+        progressIndicator.setVisible(false);
+        for (Book book : originalBooks) {
+            String imageUrl = book.getImageLinks();
+            imageCache.preloadImage(imageUrl);
+        }
+        bookService.setImageCache(imageCache);
+        bookService.updateBookDisplay(apiService.booksFromFile(), 1, labellist, imagelist);
 
-                for (int i = 0; i < labellist.size(); i++) {
-                    int index = i;
-                    Book book = bookService.getBookData(String.valueOf(index + 1));
-
-                    Platform.runLater(() -> {
-                        labellist.get(index).setWrapText(true);
-                        labellist.get(index).setText(book.getTitle());
-                        imagelist.get(index).setImage(new Image(book.getImageLinks()));
-                    });
-                }
-                totalBooks.setText("Total available books: " + apiService.booksFromFile().size());
-                return null;
-            }
-        };
-        loadBooksTask.setOnSucceeded(e -> progressIndicator.setVisible(false));
-        loadBooksTask.setOnFailed(e -> progressIndicator.setVisible(false));
-        new Thread(loadBooksTask).start();
         page1.setStyle("-fx-underline: true");
 
     }

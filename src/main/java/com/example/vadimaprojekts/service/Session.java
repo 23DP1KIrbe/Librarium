@@ -6,10 +6,13 @@ import com.example.vadimaprojekts.module.User;
 public class Session {
     private User user;
     private Book book;
+    private boolean loaded;
     private static Session session;
 
     public Session() {
         user = null;
+        book = null;
+        loaded = false;
     }
 
     public static Session getInstance() {
@@ -33,5 +36,12 @@ public class Session {
 
     public User getUser() {
         return user;
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
+    public boolean isLoaded() {
+        return loaded;
     }
 }
