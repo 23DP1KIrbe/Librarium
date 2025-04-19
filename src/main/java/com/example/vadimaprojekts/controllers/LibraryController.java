@@ -82,7 +82,7 @@ public class LibraryController implements Initializable {
         this.bookService = new BookService();
         APIService apiService = new APIService();
         this.originalBooks = apiService.booksFromFile();
-
+        totalBooks.setText("Total available books: " + originalBooks.size());
         progressIndicator.setVisible(false);
         for (Book book : originalBooks) {
             String imageUrl = book.getImageLinks();
