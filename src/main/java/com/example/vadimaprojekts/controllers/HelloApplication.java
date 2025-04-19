@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
         Parent root = fxmlLoader.load();
         APIService apiService = new APIService();
 
-        Image icon = new Image(Objects.requireNonNull(getClass().getResource("/logo.png")).toExternalForm());
+        Image icon = new Image(Objects.requireNonNull(getClass().getResource("/loggo.png")).toExternalForm());
         stage.getIcons().add(icon);
         stage.setTitle("Librarium");
         StageService.setStage(stage);

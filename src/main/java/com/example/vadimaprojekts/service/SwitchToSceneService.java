@@ -1,6 +1,7 @@
 package com.example.vadimaprojekts.service;
 
 import com.example.vadimaprojekts.controllers.BookPageController;
+import com.example.vadimaprojekts.controllers.ProfileController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -45,10 +46,24 @@ public class SwitchToSceneService {
         stage = StageService.getStage();
 
         BookPageController controller = loader.getController();
-        controller.loadBook(bookTitle); // pass the book title AFTER loading
+        controller.loadBook(bookTitle);
 
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void switchToProfile(ImageCacheService imageCache) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vadimaprojekts/profile.fxml"));
+        Parent root = loader.load();
+        stage = StageService.getStage();
+
+        ProfileController controller = loader.getController();
+        controller.setImageCache(imageCache);
+
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }

@@ -51,7 +51,6 @@ public class BookPageController implements Initializable {
         bookDescription.setText(book.getDescription());
         bookAuthor.setText(toString().valueOf(book.getAuthors()));
         bookImage.setImage(new Image(book.getImageLinks()));
-//        bookImage.setImage(imageCache.getImage(book.getImageLinks()));
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,7 +70,7 @@ public class BookPageController implements Initializable {
     }
     @FXML
     public void ongoToProfileClick(ActionEvent event) throws IOException {
-        System.out.println("Profile Clicked");
+        switchToSceneService.switchToProfile(imageCache);
     }
     @FXML
     public void onbackToLibraryClick(ActionEvent event) throws IOException {

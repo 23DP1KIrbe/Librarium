@@ -7,11 +7,15 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +50,7 @@ public class LibraryController implements Initializable {
     );
 
     SwitchToSceneService switchToSceneService = new SwitchToSceneService();
+
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ToggleGroup group1 = new ToggleGroup();
@@ -106,6 +111,7 @@ public class LibraryController implements Initializable {
         loadBooksTask.setOnFailed(e -> progressIndicator.setVisible(false));
         new Thread(loadBooksTask).start();
         page1.setStyle("-fx-underline: true");
+
     }
 
 
@@ -117,7 +123,7 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void ongoToProfileClick(ActionEvent event) throws IOException {
-        System.out.println("Profile Clicked");
+        switchToSceneService.switchToProfile(imageCache);
     }
 
     @FXML
