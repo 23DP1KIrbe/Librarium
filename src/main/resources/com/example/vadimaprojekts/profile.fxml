@@ -42,7 +42,7 @@
          <content>
             <AnchorPane fx:id="anchorPane" prefHeight="608.0" prefWidth="1062.0">
                <children>
-                  <Label fx:id="userWelcoming" layoutX="59.0" layoutY="51.0" prefHeight="35.0" prefWidth="298.0" text="Label">
+                  <Label fx:id="userWelcoming" layoutX="60.0" layoutY="60.0" prefHeight="35.0" prefWidth="300.0" text="Label">
                      <font>
                         <Font size="24.0" />
                      </font>

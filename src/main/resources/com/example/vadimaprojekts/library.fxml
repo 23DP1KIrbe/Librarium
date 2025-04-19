@@ -24,9 +24,9 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <ScrollPane layoutX="-2.0" layoutY="103.0" prefHeight="619.0" prefWidth="1280.0">
+      <ScrollPane fx:id="scrollPane" layoutX="-2.0" layoutY="103.0" prefHeight="619.0" prefWidth="1280.0">
          <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1321.0" prefWidth="1280.0">
+          <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="1321.0" prefWidth="1280.0">
                <children>
                   <Label fx:id="bookText2" alignment="CENTER" layoutX="400.0" layoutY="345.0" prefHeight="58.0" prefWidth="204.0" textAlignment="CENTER">
                      <font>

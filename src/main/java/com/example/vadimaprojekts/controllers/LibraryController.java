@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +23,8 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LibraryController implements Initializable {
     @FXML
@@ -36,6 +39,10 @@ public class LibraryController implements Initializable {
     private Label bookText1, bookText2, bookText3, bookText4, bookText5, bookText6, bookText7, bookText8, bookText9, totalBooks;
     @FXML
     private Button page1, page2, page3;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private AnchorPane anchorPane;
 
 
     private Session session = Session.getInstance();
@@ -109,7 +116,7 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onsearchButtonClick(ActionEvent event) throws IOException {
-        System.out.println("Search Clicked");
+        bookService.showSearchBooks(searchField.getText(), anchorPane);
     }
 
     @FXML

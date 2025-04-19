@@ -2,12 +2,20 @@ package com.example.vadimaprojekts.service;
 
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
+import com.example.vadimaprojekts.module.User;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BookService {
     private String book1Text;
@@ -30,6 +38,7 @@ public class BookService {
     private String bookImage8;
     private String bookImage9;
     private ImageCacheService imageCache;
+    private SwitchToSceneService switchToSceneService;
 
 
     public void setImageCache(ImageCacheService imageCache) {
@@ -227,5 +236,86 @@ public class BookService {
         } else {
             updateBookDisplay(apiService.booksFromFile(), 3, labellist, imagelist);
         }
+    }
+
+    public List<Book> searchBooks(String searchField) {
+        List<Book> allBooks = new ArrayList<>();
+        for(int i = 0; i < apiService.booksFromFile().size(); i++){
+            Pattern pattern = Pattern.compile(searchField, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(apiService.booksFromFile().get(i).getTitle());
+            boolean matchFound = matcher.find();
+            if(matchFound) {
+                allBooks.add(apiService.booksFromFile().get(i));
+            } else {
+
+            }
+        }
+        return allBooks;
+    }
+
+    public void showSearchBooks(String searchField, AnchorPane anchorPane) {
+        List<Book> result = searchBooks(searchField);
+        Session session = Session.getInstance();
+        User user = session.getUser();
+
+        anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
+        anchorPane.getChildren().removeIf(node -> node instanceof Label);
+        int rows = (int) Math.ceil(result.size() / 3.0);
+        anchorPane.setPrefHeight(608 + (rows - 1) * 400);
+        if(result.size() == 0) {
+            Label label = new Label();
+            label.setText("No matches for your search!");
+            label.setLayoutX(60);
+            label.setLayoutY(60);
+            label.setStyle("-fx-font-size: 24");
+            anchorPane.getChildren().add(label);
+        }else{
+            ImageView[] books = new ImageView[result.size()];
+            Label[] labels = new Label[result.size()];
+            for (int i = 0; i < result.size(); i++) {
+                ImageView imageView = new ImageView();
+                Label label = new Label(result.get(i).getTitle());
+                imageView.setFitWidth(180);
+                imageView.setFitHeight(255);
+                label.setWrapText(true);
+                label.setStyle("-fx-font-size: 16; -fx-text-alignment: center;");
+                label.setAlignment(Pos.CENTER);
+                label.setPrefWidth(180);
+                label.setPrefHeight(50);
+
+                int row = i / 3;
+                int col = i % 3;
+
+                double x = 85 + col * 350;
+                double y = 70 + row * 400;
+
+                imageView.setX(x);
+                imageView.setY(y);
+                label.setLayoutX(x);
+                label.setLayoutY(y + 270);
+
+                try {
+                    imageView.setImage(imageCache.getImage(result.get(i).getImageLinks()));
+                } catch (Exception e) {
+                    System.out.println("Nesanaca");
+                }
+
+                label.setCursor(Cursor.HAND);
+                label.setOnMouseClicked(events -> {
+                    try {
+                        session.setBook(getBookDataByTitle(label.getText()));
+                        switchToSceneService.switchToBookPage(label.getText());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                books[i] = imageView;
+                labels[i] = label;
+                anchorPane.getChildren().add(imageView);
+                anchorPane.getChildren().add(label);
+            }
+        }
+
     }
 }
