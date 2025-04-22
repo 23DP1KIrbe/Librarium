@@ -116,7 +116,16 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onsearchButtonClick(ActionEvent event) throws IOException {
-        bookService.showSearchBooks(searchField.getText(), anchorPane);
+        String query = searchField.getText();
+        if (query == null || query.trim().isEmpty()) {
+            bookService.showSearchBooks(query, anchorPane, labellist, imagelist);
+            return;
+        }
+        SearchController controller = switchToSceneService.switchToSearch(event);
+        controller.setImageCache(imageCache);
+        controller.datainit(query);
+        controller.bookService.setImageCache(imageCache);
+        controller.bookService.showSearchBooks(query, controller.anchorPane, controller.labellist, controller.imagelist); // Show the results in SearchController
     }
 
     @FXML

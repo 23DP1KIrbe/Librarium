@@ -2,7 +2,10 @@ package com.example.vadimaprojekts.service;
 
 import com.example.vadimaprojekts.controllers.BookPageController;
 import com.example.vadimaprojekts.controllers.ProfileController;
+import com.example.vadimaprojekts.controllers.SearchController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -64,6 +67,22 @@ public class SwitchToSceneService {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
+
+    public SearchController switchToSearch(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vadimaprojekts/search.fxml"));
+        Parent root = loader.load();
+
+        // Get controller
+        SearchController controller = loader.getController();
+
+        // Get stage from event
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        return controller;
+    }
+
+
 }
