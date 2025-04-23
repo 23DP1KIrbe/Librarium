@@ -1,5 +1,7 @@
 package com.example.vadimaprojekts.service;
 
+import com.example.vadimaprojekts.exceptions.EnterYourOldPassword;
+import com.example.vadimaprojekts.exceptions.IncorrectOldPassword;
 import com.example.vadimaprojekts.module.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,7 +46,7 @@ public class UserService {
 
     }
 
-    public void editUserToJson(String username) throws UserExistsException {
+    public void editUsernameToJson(String username) throws UserExistsException {
         User sessionUser = Session.getInstance().getUser();
         if (sessionUser == null) return;
         if(checkForUsername(username)){
@@ -55,6 +57,29 @@ public class UserService {
         for (User user : users) {
             if (user.getUsername().equals(sessionUser.getUsername())) {
                 user.setUsername(username);
+                break;
+            }
+        }
+        try (FileWriter writer = new FileWriter(File)) {
+            gson.toJson(users, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editPasswordToJson(String password, String oldPassword) throws EnterYourOldPassword, IncorrectOldPassword {
+        User sessionUser = Session.getInstance().getUser();
+        if (sessionUser == null) return;
+        if(oldPassword.isEmpty() || password.isEmpty()){
+            throw new EnterYourOldPassword("Old or New password is required!");
+        }else if(!sessionUser.getPassword().equals(oldPassword)){
+            throw new IncorrectOldPassword("Incorrect old password!");
+        }
+        List<User> users = usersFromFile();
+
+        for (User user : users) {
+            if (user.getPassword().equals(sessionUser.getPassword())) {
+                user.setPassword(password);
                 break;
             }
         }

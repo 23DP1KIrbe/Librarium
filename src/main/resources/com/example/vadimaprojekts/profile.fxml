@@ -65,6 +65,19 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <Label fx:id="usernameIsTaken" layoutX="224.0" layoutY="169.0" textFill="RED" />
+                  <Button fx:id="editPasswordBtn" layoutX="479.0" layoutY="203.0" mnemonicParsing="false" onAction="#onEditPasswordBtnClick" text="Edit password">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="enterOldPassword" layoutX="60.0" layoutY="246.0" text="Enter your old password: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="oldPasswordTextField" layoutX="267.0" layoutY="247.0" />
+                  <Label fx:id="error" layoutX="224.0" layoutY="287.0" textFill="RED" />
                </children></AnchorPane>
          </content>
       </ScrollPane>

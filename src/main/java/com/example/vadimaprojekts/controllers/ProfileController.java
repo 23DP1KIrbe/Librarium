@@ -1,5 +1,7 @@
 package com.example.vadimaprojekts.controllers;
 
+import com.example.vadimaprojekts.exceptions.EnterYourOldPassword;
+import com.example.vadimaprojekts.exceptions.IncorrectOldPassword;
 import com.example.vadimaprojekts.exceptions.UserExistsException;
 import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.User;
@@ -28,8 +30,8 @@ public class ProfileController implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    private Label userWelcoming, yourUsernameLabel, yourPasswordLabel;
-    @FXML private TextField usernameTextField, passwordTextField;
+    private Label userWelcoming, yourUsernameLabel, yourPasswordLabel, usernameIsTaken, error, enterOldPassword;
+    @FXML private TextField usernameTextField, passwordTextField, oldPasswordTextField;
     private SwitchToSceneService switchToSceneService = new SwitchToSceneService();
     private Session session = Session.getInstance();
     private User user = session.getUser();
@@ -56,20 +58,77 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    public void onEditUsernameBtnClick(ActionEvent event) throws UserExistsException {
-        if(session.getEditingUsername() == false){
-            session.setEditingUsername(true);
-            yourUsernameLabel.setText("Your Username: ");
+    public void onEditUsernameBtnClick(ActionEvent event) {
+        addAndRemove();
+        usernameIsTaken.setText("");
+        usernameTextField.setVisible(false);
+        usernameTextField.setEditable(false);
+        if(!session.getEditingUsername()){
             usernameTextField.setVisible(true);
+            usernameTextField.setEditable(true);
+            usernameTextField.requestFocus();
+            session.setEditingUsername(true);
+            usernameTextField.setText(user.getUsername());
+            yourUsernameLabel.setText("Your username: ");
         }else {
-            userService.editUserToJson(usernameTextField.getText());
-            user.setUsername(usernameTextField.getText());
-            session.setEditingUsername(false);
-            usernameTextField.setVisible(false);
-            yourUsernameLabel.setText("Your Username: " + user.getUsername());
-            userWelcoming.setText("Hello, " + user.getUsername());
+            try {
+                userService.editUsernameToJson(usernameTextField.getText());
+                user.setUsername(usernameTextField.getText());
+                usernameTextField.setVisible(false);
+                userWelcoming.setText("Hello, " + user.getUsername());
+            } catch (UserExistsException e) {
+                usernameIsTaken.setText(e.getMessage());
+            }
+            yourUsernameLabel.setText("Your username: " + user.getUsername());
             session.setEditingUsername(false);
         }
+    }
+
+    @FXML
+    private void onEditPasswordBtnClick(ActionEvent event) {
+        addAndRemove();
+        error.setText("");
+        passwordTextField.setVisible(false);
+        passwordTextField.setEditable(false);
+        oldPasswordTextField.setVisible(false);
+        oldPasswordTextField.setEditable(false);
+        if(!session.getEditingPassword()){
+            oldPasswordTextField.setVisible(true);
+            oldPasswordTextField.setEditable(true);
+            oldPasswordTextField.requestFocus();
+            passwordTextField.setVisible(true);
+            passwordTextField.setEditable(true);
+            passwordTextField.requestFocus();
+            session.setEditingPassword(true);
+            yourPasswordLabel.setText("New password: ");
+        }else {
+            try {
+                userService.editPasswordToJson(passwordTextField.getText(), oldPasswordTextField.getText());
+                user.setPassword(passwordTextField.getText());
+                passwordTextField.setVisible(false);
+            } catch (EnterYourOldPassword | IncorrectOldPassword e) {
+                error.setText(e.getMessage());
+            }
+            yourPasswordLabel.setText("Your Username: ********" );
+            session.setEditingPassword(false);
+        }
+    }
+
+    private void addAndRemove() {
+        anchorPane.getChildren().remove(enterOldPassword);
+        anchorPane.getChildren().remove(error);
+        anchorPane.getChildren().remove(oldPasswordTextField);
+        anchorPane.getChildren().remove(userWelcoming);
+        anchorPane.getChildren().remove(usernameTextField);
+        anchorPane.getChildren().remove(usernameIsTaken);
+        anchorPane.getChildren().remove(passwordTextField);
+        anchorPane.getChildren().add(usernameTextField);
+        anchorPane.getChildren().add(passwordTextField);
+        anchorPane.getChildren().add(usernameIsTaken);
+        anchorPane.getChildren().add(userWelcoming);
+        anchorPane.getChildren().add(oldPasswordTextField);
+        anchorPane.getChildren().add(enterOldPassword);
+        anchorPane.getChildren().add(error);
     }
 
     @FXML
@@ -78,6 +137,7 @@ public class ProfileController implements Initializable {
         List<String> bookId = new ArrayList<>(user.getReadList());
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
         anchorPane.getChildren().removeIf(node -> node instanceof Label);
+        anchorPane.getChildren().removeIf(node -> node instanceof TextField);
         int rows = (int) Math.ceil(bookCount / 3.0);
         anchorPane.setPrefHeight(608 + (rows - 1) * 400);
         if(bookCount == 0) {
@@ -147,6 +207,7 @@ public class ProfileController implements Initializable {
         List<String> bookId = new ArrayList<>(user.getBuyList());
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
         anchorPane.getChildren().removeIf(node -> node instanceof Label);
+        anchorPane.getChildren().removeIf(node -> node instanceof TextField);
         int rows = (int) Math.ceil(bookCount / 3.0);
         anchorPane.setPrefHeight(608 + (rows - 1) * 400);
         if(bookCount == 0) {
@@ -210,18 +271,16 @@ public class ProfileController implements Initializable {
 
     @FXML
     private void onprofileBtnClick(ActionEvent event) {
+        anchorPane.setPrefHeight(608);
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
         anchorPane.getChildren().removeIf(node -> node instanceof Label);
-        Label label = new Label();
-        label.setText("Hello, " + user.getUsername());
-        label.setLayoutX(60);
-        label.setLayoutY(60);
-        label.setStyle("-fx-font-size: 24");
+        userWelcoming.setText("Hello, " + user.getUsername());
         yourUsernameLabel.setText("Your Username: " + user.getUsername());
         yourPasswordLabel.setText("Your Password: ********");
+        usernameTextField.setEditable(true);
         anchorPane.getChildren().add(yourUsernameLabel);
         anchorPane.getChildren().add(yourPasswordLabel);
-        anchorPane.getChildren().add(label);
+        anchorPane.getChildren().add(userWelcoming);
         buyListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
         readListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
         profileBtn.setStyle("-fx-underline: true; -fx-background-color: transparent");
