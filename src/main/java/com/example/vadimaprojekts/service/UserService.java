@@ -44,6 +44,28 @@ public class UserService {
 
     }
 
+    public void editUserToJson(String username) throws UserExistsException {
+        User sessionUser = Session.getInstance().getUser();
+        if (sessionUser == null) return;
+        if(checkForUsername(username)){
+            throw new UserExistsException("Username is already taken!");
+        }
+        List<User> users = usersFromFile();
+
+        for (User user : users) {
+            if (user.getUsername().equals(sessionUser.getUsername())) {
+                user.setUsername(username);
+                break;
+            }
+        }
+        try (FileWriter writer = new FileWriter(File)) {
+            gson.toJson(users, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void saveUserToJson(User user) throws UserExistsException {
         List<User> users = new ArrayList<>();
         try (FileReader reader = new FileReader("./users.json")) {
@@ -117,6 +139,4 @@ public class UserService {
             e.printStackTrace();
         }
     }
-
-
 }

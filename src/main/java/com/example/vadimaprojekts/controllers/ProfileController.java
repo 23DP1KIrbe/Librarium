@@ -1,5 +1,7 @@
 package com.example.vadimaprojekts.controllers;
 
+import com.example.vadimaprojekts.exceptions.UserExistsException;
+import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.User;
 import com.example.vadimaprojekts.service.*;
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +28,8 @@ public class ProfileController implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    private Label userWelcoming;
+    private Label userWelcoming, yourUsernameLabel, yourPasswordLabel;
+    @FXML private TextField usernameTextField, passwordTextField;
     private SwitchToSceneService switchToSceneService = new SwitchToSceneService();
     private Session session = Session.getInstance();
     private User user = session.getUser();
@@ -34,6 +38,7 @@ public class ProfileController implements Initializable {
     private ImageView[] books = new ImageView[user.getReadList().size()];
     private Label[] labels = new Label[user.getReadList().size()];
     private ImageCacheService imageCache;
+    private UserService userService = new UserService();
 
 
     public void setImageCache(ImageCacheService imageCache) {
@@ -42,8 +47,29 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        yourUsernameLabel.setText("Your Username: " + user.getUsername());
+        yourPasswordLabel.setText("Your Password: ********");
+        usernameTextField.setVisible(false);
+        passwordTextField.setVisible(false);
         userWelcoming.setText("Hello, " + user.getUsername());
         profileBtn.setStyle("-fx-underline: true; -fx-background-color: transparent");
+    }
+
+    @FXML
+    public void onEditUsernameBtnClick(ActionEvent event) throws UserExistsException {
+        if(session.getEditingUsername() == false){
+            session.setEditingUsername(true);
+            yourUsernameLabel.setText("Your Username: ");
+            usernameTextField.setVisible(true);
+        }else {
+            userService.editUserToJson(usernameTextField.getText());
+            user.setUsername(usernameTextField.getText());
+            session.setEditingUsername(false);
+            usernameTextField.setVisible(false);
+            yourUsernameLabel.setText("Your Username: " + user.getUsername());
+            userWelcoming.setText("Hello, " + user.getUsername());
+            session.setEditingUsername(false);
+        }
     }
 
     @FXML
@@ -191,6 +217,10 @@ public class ProfileController implements Initializable {
         label.setLayoutX(60);
         label.setLayoutY(60);
         label.setStyle("-fx-font-size: 24");
+        yourUsernameLabel.setText("Your Username: " + user.getUsername());
+        yourPasswordLabel.setText("Your Password: ********");
+        anchorPane.getChildren().add(yourUsernameLabel);
+        anchorPane.getChildren().add(yourPasswordLabel);
         anchorPane.getChildren().add(label);
         buyListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
         readListBtn.setStyle("-fx-underline:  false; -fx-background-color: transparent");
