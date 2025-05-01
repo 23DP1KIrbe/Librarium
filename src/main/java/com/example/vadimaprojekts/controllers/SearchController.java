@@ -67,12 +67,11 @@ public class SearchController implements Initializable {
     public void onsortAZClick(ActionEvent event) throws IOException {
         if (labellist.isEmpty() || imagelist.isEmpty()) {
             System.out.println("No books to sort.");
-            return; // Exit if no books are present
+            return;
         }
 
         List<Book> sortedBooks = bookService.sortAZ();
 
-        // Update the list of Labels and ImageViews
         for (int i = 0; i < sortedBooks.size(); i++) {
             if (i < labellist.size()) {
                 labellist.get(i).setText(sortedBooks.get(i).getTitle());
@@ -96,12 +95,11 @@ public class SearchController implements Initializable {
     public void onsortZAClick(ActionEvent event) throws IOException {
         if (labellist.isEmpty() || imagelist.isEmpty()) {
             System.out.println("No books to sort.");
-            return; // Exit if no books are present
+            return;
         }
 
         List<Book> sortedBooks = bookService.sortZA();
 
-        // Update the list of Labels and ImageViews
         for (int i = 0; i < sortedBooks.size(); i++) {
             if (i < labellist.size()) {
                 labellist.get(i).setText(sortedBooks.get(i).getTitle());

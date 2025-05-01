@@ -250,9 +250,13 @@ public class BookService {
     }
 
     public void showSearchBooks(String searchField, AnchorPane anchorPane, List<Label> labellist, List<ImageView> imagelist) throws IOException {
+        if(searchField.isEmpty()) {
+            switchToSceneService.switchToLibrary();
+        }
         Session session = Session.getInstance();
         List<Book> result = searchBooks(searchField);
         setLastSearchResults(result);
+        bookPageController.setImageCache(imageCache);
 
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView || node instanceof Label);
 

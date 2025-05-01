@@ -16,8 +16,13 @@ public class SwitchToSceneService {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private ImageCacheService imageCache;
+    private BookPageController bookPageController;
 
-
+    public void setImageCache(ImageCacheService imageCache) {
+        this.imageCache = imageCache;
+        this.bookPageController = new BookPageController();
+    }
 
     public void switchToLibrary() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/vadimaprojekts/library.fxml"));
@@ -50,7 +55,7 @@ public class SwitchToSceneService {
 
         BookPageController controller = loader.getController();
         controller.loadBook(bookTitle);
-
+        bookPageController.setImageCache(imageCache);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -73,10 +78,8 @@ public class SwitchToSceneService {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vadimaprojekts/search.fxml"));
         Parent root = loader.load();
 
-        // Get controller
         SearchController controller = loader.getController();
 
-        // Get stage from event
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

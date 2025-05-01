@@ -32,11 +32,11 @@ public class BookPageController implements Initializable {
     private Button backToLibrary;
     private String bookVar;
     private Session session = Session.getInstance();
-    APIService apiService = new APIService();
-    UserService userService = new UserService();
-    BookService bookService = new BookService();
-    ImageCacheService imageCache = new ImageCacheService();
-    SwitchToSceneService switchToSceneService = new SwitchToSceneService();
+    private APIService apiService = new APIService();
+    private UserService userService = new UserService();
+    private BookService bookService = new BookService();
+    private ImageCacheService imageCache;
+    private SwitchToSceneService switchToSceneService = new SwitchToSceneService();
 
 
     public void setImageCache(ImageCacheService imageCache) {
@@ -61,6 +61,7 @@ public class BookPageController implements Initializable {
         if(session.getUser().getBuyList().contains(book.getId())){
             buyListBtn.setText("Remove book from buy list");
         }
+        imageCache = session.getImageCache();
     }
 
     @FXML

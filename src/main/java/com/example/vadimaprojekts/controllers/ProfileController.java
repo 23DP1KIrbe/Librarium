@@ -41,6 +41,7 @@ public class ProfileController implements Initializable {
     private Label[] labels = new Label[user.getReadList().size()];
     private ImageCacheService imageCache;
     private UserService userService = new UserService();
+    private BookPageController bookPageController = new BookPageController();
 
 
     public void setImageCache(ImageCacheService imageCache) {
@@ -183,6 +184,7 @@ public class ProfileController implements Initializable {
                     try {
                         session.setBook(bookService.getBookDataByTitle(label.getText()));
                         switchToSceneService.switchToBookPage(label.getText());
+                        bookPageController.setImageCache(imageCache);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -203,6 +205,7 @@ public class ProfileController implements Initializable {
 
     @FXML
     public void onbuyListBtnClick(ActionEvent event) {
+
         int bookCount = user.getBuyList().size();
         List<String> bookId = new ArrayList<>(user.getBuyList());
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
@@ -253,6 +256,7 @@ public class ProfileController implements Initializable {
                     try {
                         session.setBook(bookService.getBookDataByTitle(label.getText()));
                         switchToSceneService.switchToBookPage(label.getText());
+                        bookPageController.setImageCache(imageCache);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

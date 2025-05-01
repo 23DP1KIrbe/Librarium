@@ -6,6 +6,7 @@ import com.example.vadimaprojekts.module.User;
 public class Session {
     private User user;
     private Book book;
+    private ImageCacheService imageCache;
     private boolean loaded;
     private boolean editingUsername;
     private boolean editingPassword;
@@ -63,5 +64,17 @@ public class Session {
     }
     public boolean isLoaded() {
         return loaded;
+    }
+
+    public void setImageCache(ImageCacheService imageCache) {
+        this.imageCache = imageCache;
+    }
+
+    public ImageCacheService getImageCache() {
+        return imageCache;
+    }
+
+    public void clearImageCache() {
+        this.imageCache = null;
     }
 }

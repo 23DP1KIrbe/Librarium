@@ -51,6 +51,7 @@ public class LibraryController implements Initializable {
     private List<ImageView> imagelist;
     private List<Book> originalBooks;
     private ImageCacheService imageCache = new ImageCacheService();
+    private BookPageController bookPageController = new BookPageController();
     private List<String> imageUrls = Arrays.asList(
             "image_url1", "image_url2", "image_url3", "image_url4",
             "image_url5", "image_url6", "image_url7", "image_url8", "image_url9"
@@ -72,13 +73,18 @@ public class LibraryController implements Initializable {
         this.imagelist = List.of(
                 book1, book2, book3, book4, book5, book6, book7, book8, book9
         );
-        BookPageController bookPageController = new BookPageController();
+        APIService apiService = new APIService();
+        this.originalBooks = apiService.booksFromFile();
+        for (Book book : originalBooks) {
+            String imageUrl = book.getImageLinks();
+            imageCache.preloadImage(imageUrl);
+        }
 
         for (Label label : labellist) {
             label.setCursor(Cursor.HAND);
             label.setOnMouseClicked(event -> {
-                bookPageController.setImageCache(imageCache);
                 try {
+                    session.setImageCache(imageCache);
                     session.setBook(bookService.getBookDataByTitle(label.getText()));
                     switchToSceneService.switchToBookPage(label.getText());
                 } catch (IOException e) {
@@ -87,14 +93,9 @@ public class LibraryController implements Initializable {
             });
         }
         this.bookService = new BookService();
-        APIService apiService = new APIService();
-        this.originalBooks = apiService.booksFromFile();
         totalBooks.setText("Total available books: " + originalBooks.size());
         progressIndicator.setVisible(false);
-        for (Book book : originalBooks) {
-            String imageUrl = book.getImageLinks();
-            imageCache.preloadImage(imageUrl);
-        }
+        switchToSceneService.setImageCache(imageCache);
         bookService.setImageCache(imageCache);
         bookService.updateBookDisplay(apiService.booksFromFile(), 1, labellist, imagelist);
 
