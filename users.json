@@ -19,29 +19,5 @@
       "19",
       "7"
     ]
-  },
-  {
-    "username": "b",
-    "password": "b",
-    "ReadList": [
-      "2"
-    ],
-    "BuyList": []
-  },
-  {
-    "username": "Kristaps",
-    "password": "Kristaps",
-    "ReadList": [],
-    "BuyList": []
-  },
-  {
-    "username": "Viktorija",
-    "password": "abece",
-    "ReadList": [
-      "14"
-    ],
-    "BuyList": [
-      "14"
-    ]
   }
 ]

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +11,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vadimaprojekts.controllers.LoginController">
    <children>
       <TextField fx:id="usernameField" layoutX="565.0" layoutY="347.0" />
-      <TextField fx:id="passwordField" layoutX="565.0" layoutY="404.0" />
       <Label layoutX="498.0" layoutY="351.0" text="Username" />
       <Label layoutX="500.0" layoutY="408.0" text="Password" />
       <Button fx:id="loginButton" layoutX="614.0" layoutY="475.0" mnemonicParsing="false" onAction="#onLoginButtonClick" text="Login" />
@@ -21,5 +21,6 @@
             <Image url="@../../../loggo.png" />
          </image>
       </ImageView>
+      <PasswordField fx:id="passwordField" layoutX="565.0" layoutY="404.0" />
    </children>
 </AnchorPane>
