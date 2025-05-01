@@ -52,7 +52,7 @@ public class SearchController implements Initializable {
 
     @FXML
     private void ongoToProfileClick(ActionEvent actionEvent) throws IOException {
-        switchToSceneService.switchToProfile(imageCache);
+        switchToSceneService.switchToProfile(session.getImageCache());
     }
 
     @FXML
@@ -123,6 +123,7 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        imageCache = session.getImageCache();
         if (imageCache == null) {
             System.out.println("ImageCache is not initialized yet.");
         } else {

@@ -79,7 +79,7 @@ public class LibraryController implements Initializable {
             String imageUrl = book.getImageLinks();
             imageCache.preloadImage(imageUrl);
         }
-
+        session.setImageCache(imageCache);
         for (Label label : labellist) {
             label.setCursor(Cursor.HAND);
             label.setOnMouseClicked(event -> {
@@ -95,7 +95,6 @@ public class LibraryController implements Initializable {
         this.bookService = new BookService();
         totalBooks.setText("Total available books: " + originalBooks.size());
         progressIndicator.setVisible(false);
-        switchToSceneService.setImageCache(imageCache);
         bookService.setImageCache(imageCache);
         bookService.updateBookDisplay(apiService.booksFromFile(), 1, labellist, imagelist);
 
@@ -123,10 +122,10 @@ public class LibraryController implements Initializable {
             return;
         }
         SearchController controller = switchToSceneService.switchToSearch(event);
-        controller.setImageCache(imageCache);
+        controller.setImageCache(session.getImageCache());
         controller.datainit(query);
         controller.bookService.setImageCache(imageCache);
-        controller.bookService.showSearchBooks(query, controller.anchorPane, controller.labellist, controller.imagelist); // Show the results in SearchController
+        controller.bookService.showSearchBooks(query, controller.anchorPane, controller.labellist, controller.imagelist);
     }
 
     @FXML
