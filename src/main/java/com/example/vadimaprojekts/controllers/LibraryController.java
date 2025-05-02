@@ -26,25 +26,27 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.Math.ceil;
+
 public class LibraryController implements Initializable {
     @FXML
     private ProgressIndicator progressIndicator;
     @FXML
     private ToggleGroup group1;
     @FXML
-    private RadioButton sortAZ, sortZA, sortRating;
+    private RadioButton sortAZ, sortZA;
     @FXML
     private ImageView book1, book2, book3, book4, book5, book6, book7, book8, book9;
     @FXML
     private Label bookText1, bookText2, bookText3, bookText4, bookText5, bookText6, bookText7, bookText8, bookText9, totalBooks;
     @FXML
-    private Button page1, page2, page3;
+    private Button page1, page2, page3, page4, page5;
     @FXML
     private TextField searchField;
     @FXML
     private AnchorPane anchorPane;
 
-
+    private APIService apiService = new APIService();
     private Session session = Session.getInstance();
     private BookService bookService;
     private List<Label> labellist;
@@ -64,7 +66,7 @@ public class LibraryController implements Initializable {
         ToggleGroup group1 = new ToggleGroup();
         sortAZ.setToggleGroup(group1);
         sortZA.setToggleGroup(group1);
-        sortRating.setToggleGroup(group1);
+
 
         this.labellist = List.of(
                 bookText1, bookText2, bookText3, bookText4, bookText5, bookText6, bookText7, bookText8, bookText9
@@ -73,11 +75,14 @@ public class LibraryController implements Initializable {
         this.imagelist = List.of(
                 book1, book2, book3, book4, book5, book6, book7, book8, book9
         );
-        APIService apiService = new APIService();
         this.originalBooks = apiService.booksFromFile();
         for (Book book : originalBooks) {
             String imageUrl = book.getImageLinks();
-            imageCache.preloadImage(imageUrl);
+            if(imageUrl != null) {
+                imageCache.preloadImage(imageUrl);
+            }else{
+
+            }
         }
         session.setImageCache(imageCache);
         for (Label label : labellist) {
@@ -97,7 +102,7 @@ public class LibraryController implements Initializable {
         progressIndicator.setVisible(false);
         bookService.setImageCache(imageCache);
         bookService.updateBookDisplay(apiService.booksFromFile(), 1, labellist, imagelist);
-
+        page5.setText(toString().valueOf(((apiService.booksFromFile().size()-1) / 9) + 1));
         page1.setStyle("-fx-underline: true");
 
     }
@@ -130,6 +135,8 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onsortAZClick(ActionEvent event) throws IOException {
+        session.setCurrentPage(1);
+        paginate(toString().valueOf(session.getCurrentPage()));
         List<Book> sortedBooks = bookService.sortAZ();
         for (int i = 0; i < labellist.size(); i++) {
             labellist.get(i).setWrapText(true);
@@ -143,14 +150,13 @@ public class LibraryController implements Initializable {
                 imagelist.get(i).setImage(null);
             }
         }
-        page1.setStyle("-fx-underline: true");
-        page2.setStyle("-fx-underline: false");
-        page3.setStyle("-fx-underline: false");
         System.out.println("Sort AZ Clicked");
     }
 
     @FXML
     public void onsortZAClick(ActionEvent event) throws IOException {
+        session.setCurrentPage(1);
+        paginate(toString().valueOf(session.getCurrentPage()));
         List<Book> sortedBooks = bookService.sortZA();
         for (int i = 0; i < labellist.size(); i++) {
             labellist.get(i).setWrapText(true);
@@ -165,38 +171,84 @@ public class LibraryController implements Initializable {
                 imagelist.get(i).setImage(null);
             }
         }
-        page1.setStyle("-fx-underline: true");
-        page2.setStyle("-fx-underline: false");
-        page3.setStyle("-fx-underline: false");
         System.out.println("Sort ZA Clicked");
     }
 
-    @FXML
-    public void onsortRatingClick(ActionEvent event) throws IOException {
-        System.out.println("Sort Rating Clicked");
+    public void paginate(String page) {
+        if(page.equals("1")) {
+            page2.setText("2");
+            page3.setText("3");
+            page4.setText("4");
+            page1.setStyle("-fx-underline: true");
+            page2.setStyle("-fx-underline: false");
+            page3.setStyle("-fx-underline: false");
+            page4.setStyle("-fx-underline: false");
+            page5.setStyle("-fx-underline: false");
+            session.setCurrentPage(Integer.parseInt(page));
+            System.out.println("Current Page: " + session.getCurrentPage());
+        }else if(page.equals("2") || page.equals("3")){
+            if(page.equals("2")){
+                page1.setStyle("-fx-underline: false");
+                page2.setStyle(" -fx-underline: true");
+                page3.setStyle("-fx-underline: false");
+                page4.setStyle("-fx-underline: false");
+                page5.setStyle("-fx-underline: false");
+            }else if(page.equals("3")){
+                page1.setStyle("-fx-underline: false");
+                page2.setStyle("-fx-underline: false");
+                page3.setStyle("-fx-underline: true");
+                page4.setStyle("-fx-underline: false");
+                page5.setStyle("-fx-underline: false");
+            }
+            page2.setText("2");
+            page3.setText("3");
+            page4.setText("4");
+            session.setCurrentPage(Integer.parseInt(page));
+            System.out.println("Current Page: " + session.getCurrentPage());
+        }else{
+            session.setCurrentPage(Integer.parseInt(page));
+            page2.setText(toString().valueOf(session.getCurrentPage()-1));
+            page3.setText(toString().valueOf(session.getCurrentPage()));
+            if(!(session.getCurrentPage()+1 > ((apiService.booksFromFile().size()-1) / 9) + 1)){
+                page4.setText(toString().valueOf(session.getCurrentPage()+1));
+            }else{
+                page4.setText(page5.getText());
+            }
+            page1.setStyle("-fx-underline: false");
+            page2.setStyle("-fx-underline: false");
+            page3.setStyle("-fx-underline: true");
+            page4.setStyle("-fx-underline: false");
+            page5.setStyle("-fx-underline: false");
+        }
     }
 
     @FXML
     public void onPage1Click(ActionEvent event) throws IOException {
-        bookService.page1(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected(), imageCache);
-        page1.setStyle("-fx-underline: true");
-        page2.setStyle("-fx-underline: false");
-        page3.setStyle("-fx-underline: false");
+        paginate(page1.getText());
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
     }
 
     @FXML
     public void onPage2Click(ActionEvent event) throws IOException {
-        bookService.page2(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected(), imageCache);
-        page1.setStyle("-fx-underline: false");
-        page2.setStyle("-fx-underline: true");
-        page3.setStyle("-fx-underline: false");
+        paginate(page2.getText());
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
     }
 
     @FXML
     public void onPage3Click(ActionEvent event) throws IOException {
-        bookService.page3(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), sortRating.isSelected(), imageCache);
-        page1.setStyle("-fx-underline: false");
-        page2.setStyle("-fx-underline: false");
-        page3.setStyle("-fx-underline: true");
+        paginate(page3.getText());
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
+    }
+
+    @FXML
+    public void onPage4Click(ActionEvent event) throws IOException {
+        paginate(page4.getText());
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
+    }
+
+    @FXML
+    public void onPage5Click(ActionEvent event) throws IOException {
+        paginate(page5.getText());
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
     }
 }

@@ -24,7 +24,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <ScrollPane fx:id="scrollPane" layoutX="-2.0" layoutY="103.0" prefHeight="619.0" prefWidth="1280.0">
+      <ScrollPane fx:id="scrollPane" layoutX="-2.0" layoutY="103.0" prefHeight="618.0" prefWidth="1280.0">
          <content>
           <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="1321.0" prefWidth="1280.0">
                <children>
@@ -111,11 +111,6 @@
                         <Font size="16.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="sortRating" layoutX="1000.0" layoutY="190.0" mnemonicParsing="false" onAction="#onsortRatingClick" text="Rating">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </RadioButton>
                   <ProgressIndicator fx:id="progressIndicator" layoutX="566.0" layoutY="314.0" prefHeight="139.0" prefWidth="123.0" progress="0.84" />
                   <Button fx:id="page1" layoutX="450.0" layoutY="1265.0" mnemonicParsing="false" onAction="#onPage1Click" text="1">
                      <font>
@@ -137,6 +132,16 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
+                  <Button fx:id="page4" layoutX="644.0" layoutY="1265.0" mnemonicParsing="false" onAction="#onPage4Click" text="4">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="page5" layoutX="706.0" layoutY="1265.0" mnemonicParsing="false" onAction="#onPage5Click" text="5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </content>

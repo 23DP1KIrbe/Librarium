@@ -10,6 +10,7 @@ public class Session {
     private boolean loaded;
     private boolean editingUsername;
     private boolean editingPassword;
+    private int currentPage;
     private static Session session;
 
     public Session() {
@@ -18,6 +19,7 @@ public class Session {
         loaded = false;
         editingUsername = false;
         editingPassword = false;
+        currentPage = 1;
     }
 
     public static Session getInstance() {
@@ -62,6 +64,7 @@ public class Session {
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
     }
+
     public boolean isLoaded() {
         return loaded;
     }
@@ -76,5 +79,13 @@ public class Session {
 
     public void clearImageCache() {
         this.imageCache = null;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
 }

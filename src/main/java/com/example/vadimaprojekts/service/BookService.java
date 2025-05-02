@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -20,6 +21,7 @@ public class BookService {
     private SwitchToSceneService switchToSceneService;
     private BookPageController bookPageController;
     private List<Book> lastSearchResults = new ArrayList<>();
+    private Session session = Session.getInstance();
 
     public List<Book> getLastSearchResults() {
         return lastSearchResults;
@@ -120,119 +122,6 @@ public class BookService {
         }
     }
 
-    public void page1(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c, ImageCacheService imageCache) {
-        if(a == true) {
-            List<Book> sortedBooks = sortAZ();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setWrapText(true);
-                labellist.get(i).setText(sortedBooks.get(i).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(b == true) {
-            List<Book> sortedBooks = sortZA();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setWrapText(true);
-                labellist.get(i).setText(sortedBooks.get(i).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        } else if (c == true) {
-            System.out.println("Sort Rating Clicked");
-        } else {
-            updateBookDisplay(apiService.booksFromFile(), 1, labellist, imagelist);
-        }
-    }
-
-    public void page2(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c, ImageCacheService imageCache) {
-        if(a == true) {
-            List<Book> sortedBooks = sortAZ();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setWrapText(true);
-                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+9).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+9).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(b == true) {
-            List<Book> sortedBooks = sortZA();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setWrapText(true);
-                labellist.get(i).setText(sortedBooks.get(i+9).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+9).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+9).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        } else if (c == true) {
-            System.out.println("Sort Rating Clicked");
-        } else {
-            updateBookDisplay(apiService.booksFromFile(), 2, labellist, imagelist);
-        }
-    }
-
-    public void page3(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, boolean c, ImageCacheService imageCache) {
-        if(a == true) {
-            List<Book> sortedBooks = sortAZ();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setWrapText(true);
-                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+18).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+18).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        }else if(b == true) {
-            List<Book> sortedBooks = sortZA();
-            for (int i = 0; i < labellist.size(); i++) {
-                labellist.get(i).setWrapText(true);
-                labellist.get(i).setText(sortedBooks.get(i+18).getTitle());
-            }
-
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i+18).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+18).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
-                }
-            }
-        } else if (c == true) {
-            System.out.println("Sort Rating Clicked");
-        } else {
-            updateBookDisplay(apiService.booksFromFile(), 3, labellist, imagelist);
-        }
-    }
 
     public List<Book> searchBooks(String searchField) {
         List<Book> allBooks = new ArrayList<>();
@@ -309,6 +198,90 @@ public class BookService {
 
                 anchorPane.getChildren().add(imageView);
                 anchorPane.getChildren().add(label);
+            }
+        }
+    }
+
+
+    public void showBooks(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b){
+        int currentPage = session.getCurrentPage();
+        if(a == true) {
+            List<Book> sortedBooks = sortAZ();
+            if(sortedBooks.size() % 9 != 0){
+                int aprekins = (sortedBooks.size() % 9)-9;
+                for(int i = 0; i > aprekins; i--) {
+                    sortedBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                }
+            }
+            for (int i = 0; i < labellist.size(); i++) {
+                String title = sortedBooks.get(i+((currentPage-1)*9)).getTitle();
+                if(title != null && !title.isEmpty()) {
+                    labellist.get(i).setWrapText(true);
+                    labellist.get(i).setText(sortedBooks.get(i+((currentPage-1)*9)).getTitle());
+                }else{
+                    labellist.get(i).setText("");
+                }
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else if(b == true) {
+            List<Book> sortedBooks = sortZA();
+            if(sortedBooks.size() % 9 != 0){
+                int aprekins = (sortedBooks.size() % 9)-9;
+                for(int i = 0; i > aprekins; i--) {
+                    sortedBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                }
+            }
+            for (int i = 0; i < labellist.size(); i++) {
+                String title = sortedBooks.get(i+((currentPage-1)*9)).getTitle();
+                if(title != null && !title.isEmpty()) {
+                    labellist.get(i).setWrapText(true);
+                    labellist.get(i).setText(sortedBooks.get(i+((currentPage-1)*9)).getTitle());
+                }else{
+                    labellist.get(i).setText("");
+                }
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = sortedBooks.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
+            }
+        }else{
+            List<Book> allBooks = apiService.booksFromFile();
+            if(allBooks.size() % 9 != 0){
+                int aprekins = (allBooks.size() % 9)-9;
+                for(int i = 0; i > aprekins; i--) {
+                    allBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                }
+            }
+            for (int i = 0; i < labellist.size(); i++) {
+                String title = allBooks.get(i+((currentPage-1)*9)).getTitle();
+                if(title != null && !title.isEmpty()) {
+                    labellist.get(i).setWrapText(true);
+                    labellist.get(i).setText(allBooks.get(i+((currentPage-1)*9)).getTitle());
+                }else{
+                    labellist.get(i).setText("");
+                }
+            }
+
+            for (int i = 0; i < imagelist.size(); i++) {
+                String url = allBooks.get(i).getImageLinks();
+                if (url != null && !url.isEmpty()) {
+                    imagelist.get(i).setImage(imageCache.getImage(allBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                } else {
+                    imagelist.get(i).setImage(null);
+                }
             }
         }
     }
