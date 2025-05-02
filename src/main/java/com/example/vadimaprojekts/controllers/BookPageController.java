@@ -19,11 +19,7 @@ public class BookPageController implements Initializable {
     @FXML
     private ImageView bookImage;
     @FXML
-    private Label bookTitle;
-    @FXML
-    private Label bookDescription;
-    @FXML
-    private Label bookAuthor;
+    private Label bookTitle, bookDescription, bookAuthor, readersLabel, buyersLabel;
     @FXML
     private Button buyListBtn;
     @FXML
@@ -62,6 +58,8 @@ public class BookPageController implements Initializable {
             buyListBtn.setText("Remove book from buy list");
         }
         imageCache = session.getImageCache();
+        readersLabel.setText("Interested readers: " + session.getBook().getTotalReaders().size());
+        buyersLabel.setText("Interested buyers: " + session.getBook().getTotalBuyers().size());
     }
 
     @FXML
@@ -83,8 +81,12 @@ public class BookPageController implements Initializable {
         Book book = session.getBook();
         userService.addBookToReadList(book.getId());
         if(session.getUser().getReadList().contains(book.getId())){
+            apiService.addTotalReadersToBook(session.getUser().getUsername());
+            readersLabel.setText("Interested readers: " + session.getBook().getTotalReaders().size());
             readListBtn.setText("Remove book from read list");
         }else if(!session.getUser().getReadList().contains(book.getId())){
+            apiService.addTotalReadersToBook(session.getUser().getUsername());
+            readersLabel.setText("Interested readers: " + session.getBook().getTotalReaders().size());
             readListBtn.setText("Add to read list");
         }
     }
@@ -93,8 +95,12 @@ public class BookPageController implements Initializable {
         Book book = session.getBook();
         userService.addBookToBuyList(book.getId());
         if(session.getUser().getBuyList().contains(book.getId())){
+            apiService.addTotalBuyersToBook(session.getUser().getUsername());
+            buyersLabel.setText("Interested buyers: " + session.getBook().getTotalBuyers().size());
             buyListBtn.setText("Remove book from buy list");
         }else if(!session.getUser().getBuyList().contains(book.getId())){
+            apiService.addTotalBuyersToBook(session.getUser().getUsername());
+            buyersLabel.setText("Interested buyers: " + session.getBook().getTotalBuyers().size());
             buyListBtn.setText("Add to buy list");
         }
     }

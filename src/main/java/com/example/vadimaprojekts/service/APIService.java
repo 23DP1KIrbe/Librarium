@@ -19,6 +19,59 @@ import java.util.Map;
 public class APIService {
     private static final String File = "./books.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Session session = Session.getInstance();
+
+    public void addTotalReadersToBook(String username) {
+        Book sessionBook = Session.getInstance().getBook();
+        if (sessionBook == null) return;
+
+        List<Book> books = booksFromFile();
+
+        for (Book book : books) {
+            if (book.getTitle().equals(sessionBook.getTitle())) {
+                if(book.getTotalReaders().contains(username)){
+                    book.getTotalReaders().remove(username);
+                    session.setBook(book);
+                }else if (!book.getTotalReaders().contains(username)) {
+                    book.getTotalReaders().add(username);
+                    session.setBook(book);
+                }
+                break;
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(File)) {
+            gson.toJson(books, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addTotalBuyersToBook(String username) {
+        Book sessionBook = Session.getInstance().getBook();
+        if (sessionBook == null) return;
+
+        List<Book> books = booksFromFile();
+
+        for (Book book : books) {
+            if (book.getTitle().equals(sessionBook.getTitle())) {
+                if(book.getTotalBuyers().contains(username)){
+                    book.getTotalBuyers().remove(username);
+                    session.setBook(book);
+                }else if (!book.getTotalBuyers().contains(username)) {
+                    book.getTotalBuyers().add(username);
+                    session.setBook(book);
+                }
+                break;
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(File)) {
+            gson.toJson(books, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Book> booksFromFile(){
         List<Book> books = new ArrayList();
@@ -121,7 +174,10 @@ public class APIService {
 
                 String id = getBookId();
 
-                Book book = new Book(title, description, authors, industryIdentifiers, categories, selectedImageLink, language, id);
+                List<String> totalReaders = new ArrayList<>();
+                List<String> totalBuyers = new ArrayList<>();
+
+                Book book = new Book(title, description, authors, industryIdentifiers, categories, selectedImageLink, language, id, totalReaders, totalBuyers);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 List<Book> bookList = new ArrayList<>();
 

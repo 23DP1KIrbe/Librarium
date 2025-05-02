@@ -16,8 +16,10 @@ public class Book {
     private String imageLinks;
     private String language;
     private String id;
+    private List<String> totalReaders;
+    private List<String> totalBuyers;
 
-    public Book(String title, String description, List<String> authors, List<String> industryIdentifiers, List<String> categories, String imageLinks, String language, String id) {
+    public Book(String title, String description, List<String> authors, List<String> industryIdentifiers, List<String> categories, String imageLinks, String language, String id, List<String> totalReaders, List<String> totalBuyers) {
         this.title = title;
         this.description = description;
         this.authors = authors;
@@ -26,6 +28,8 @@ public class Book {
         this.imageLinks = imageLinks;
         this.language = language;
         this.id = id;
+        this.totalReaders = totalReaders;
+        this.totalBuyers = totalBuyers;
     }
 
     public String getTitle() {
@@ -89,5 +93,21 @@ public class Book {
     }
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setTotalReaders(List<String> totalReaders) {
+        this.totalReaders = totalReaders;
+    }
+
+    public void setTotalBuyers(List<String> totalBuyers) {
+        this.totalBuyers = totalBuyers;
+    }
+
+    public List<String> getTotalReaders() {
+        return totalReaders;
+    }
+
+    public List<String> getTotalBuyers() {
+        return totalBuyers;
     }
 }

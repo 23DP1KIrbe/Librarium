@@ -48,5 +48,15 @@
             <Image url="@../../../loggo.png" />
          </image>
       </ImageView>
+      <Label fx:id="readersLabel" layoutX="570.0" layoutY="634.0" text="Interested readers:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="buyersLabel" layoutX="757.0" layoutY="634.0" text="Interested buyers:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

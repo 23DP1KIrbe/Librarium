@@ -1,21 +1,5 @@
 [
   {
-    "title": "The Silent Forest",
-    "description": "“I’ve still got a real bad feeling,” mumbled Heinbichler. “And I’ll tell you all one thing: This Grimm girl can read the forest like none of us.” Forestry Student Anja Grimm is working on a soil-mapping project in a remote region in Bavaria where her father disappeared when she was just eight years old. A few days into the work, the nightmare of her childhood seems to repeat itself. Deep in the woods she runs into mentally disturbed Xaver with whom she often played when she was a child. Just hours after they meet, he hangs himself. And Xaver’s suicide will not remain the only disturbing event connected to Anja’s reappearance. An emotionally charged thriller about guilt and denial. “The Silent Forest” is set in a present day idyllic German region still haunted by terrible events that transpired there during the last days of the war – a moving story about a young woman who cannot help but read the mute testimony of the horrors of history written in the silent language of nature.",
-    "authors": [
-      "Wolfram Fleischhauer"
-    ],
-    "industryIdentifiers": [
-      "9783957513984"
-    ],
-    "categories": [
-      "Fiction"
-    ],
-    "imageLinks": "http://books.google.com/books/content?id\u003dC8GpEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
-    "language": "en",
-    "id": "1"
-  },
-  {
     "title": "Dictionary of Midnight",
     "description": "The sharp, lyrical verse— personal and political— of a poet that paints a literary window into his contested homeland, Kurdistan.",
     "authors": [
@@ -29,7 +13,14 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dVnKotQEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "2"
+    "id": "1",
+    "totalReaders": [
+      "a",
+      "Kristaps"
+    ],
+    "totalBuyers": [
+      "a"
+    ]
   },
   {
     "title": "Echoes of the Imperium",
@@ -46,7 +37,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dYNTx0AEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "3"
+    "id": "2",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Last Archivist",
@@ -62,7 +55,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dpc0T0QEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "4"
+    "id": "3",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Whispers in the Fog",
@@ -78,7 +73,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003du3mSvyx1ggoC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "5"
+    "id": "4",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Hollow Earth Chronicles",
@@ -94,7 +91,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dI1xGDQAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "6"
+    "id": "5",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Kingdom of Ash",
@@ -110,7 +109,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dMGNMDwAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "7"
+    "id": "6",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Time Weaver",
@@ -126,7 +127,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dI4jlSqTv0bEC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "8"
+    "id": "7",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Little Women",
@@ -142,7 +145,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dSgHkrQEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "9"
+    "id": "8",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Crime and Punishment",
@@ -158,7 +163,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003du7MBDAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "10"
+    "id": "9",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Frankenstein: The 1818 Text",
@@ -174,7 +181,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dWbNDDwAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "11"
+    "id": "10",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Dracula",
@@ -190,7 +199,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003diMk0EAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "12"
+    "id": "11",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Shining",
@@ -206,11 +217,13 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dc2VHVEWUFoQC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "13"
+    "id": "12",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "It Ends with Us",
-    "description": "Instant New York Times Bestseller Combining a captivating romance with a cast of all-too-human characters, Colleen Hoover\u0027s It Ends With Us is an unforgettable tale of love that comes at the ultimate price. Lily hasn\u0027t always had it easy, but that\u0027s never stopped her from working hard for the life she wants. She\u0027s come a long way from the small town in Maine where she grew up--she graduated from college, moved to Boston, and started her own business. So when she feels a spark with a gorgeous neurosurgeon named Ryle Kincaid, everything in Lily\u0027s life suddenly seems almost too good to be true. Ryle is assertive, stubborn, maybe even a little arrogant. He\u0027s also sensitive, brilliant, and has a total soft spot for Lily. And the way he looks in scrubs certainly doesn\u0027t hurt. Lily can\u0027t get him out of her head. But Ryle\u0027s complete aversion to relationships is disturbing. Even as Lily finds herself becoming the exception to his \"no dating\" rule, she can\u0027t help but wonder what made him that way in the first place. As questions about her new relationship overwhelm her, so do thoughts of Atlas Corrigan--her first love and a link to the past she left behind. He was her kindred spirit, her protector. When Atlas suddenly reappears, everything Lily has built with Ryle is threatened.",
+    "description": "After building what should be a perfect life with neurosurgeon Ryle Kincaid, Lily finds herself in a troubled relationship with an abusive husband and must make a decision about her future, as she reencounters Atlas Corrigan, a man with links to her past.",
     "authors": [
       "Colleen Hoover"
     ],
@@ -222,7 +235,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dEka9DAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "14"
+    "id": "13",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Where the Crawdads Sing: Reese\u0027s Book Club",
@@ -238,7 +253,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dneUlEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "15"
+    "id": "14",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Handmaid\u0027s Tale",
@@ -254,7 +271,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003d9ZeFzwEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "16"
+    "id": "15",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "A Game of Thrones (HBO Tie-in Edition)",
@@ -270,7 +289,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dYDzTCwAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "17"
+    "id": "16",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Midnight Library: A GMA Book Club Pick",
@@ -286,7 +307,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dGKVPEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "18"
+    "id": "17",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "CIRCE",
@@ -302,7 +325,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dW6j2swEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "19"
+    "id": "18",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Sapiens",
@@ -318,7 +343,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dibALnwEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "20"
+    "id": "19",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Catcher in the Rye",
@@ -334,7 +361,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dZotvleqZomIC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "21"
+    "id": "20",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Charlotte\u0027s Web",
@@ -351,7 +380,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dtC-ePwAACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "22"
+    "id": "21",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Cat in the Hat",
@@ -367,7 +398,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dXPpZAAAAYAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "23"
+    "id": "22",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Where the Wild Things Are",
@@ -383,11 +416,13 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dUyibVFukeDUC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "24"
+    "id": "23",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "Harry Potter and the Sorcerer\u0027s Stone",
-    "description": "Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School for Witchcraft and Wizardry.",
+    "description": "A winner of England\u0027s National Book Award, the acclaimed debut novel tells the outrageously funny, fantastic adventure story of Harry Potter, who escapes a hideous foster home thanks to a scholarship to The Hogwarts School for Witchcraft and Wizardry. Reprint. PW. AB. SLJ.",
     "authors": [
       "J. K. Rowling"
     ],
@@ -399,7 +434,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dfo4rzdaHDAwC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "25"
+    "id": "24",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Very Hungry Caterpillar",
@@ -415,7 +452,9 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dzW-NEAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "26"
+    "id": "25",
+    "totalReaders": [],
+    "totalBuyers": []
   },
   {
     "title": "The Day the Crayons Quit",
@@ -431,6 +470,8 @@
     ],
     "imageLinks": "http://books.google.com/books/content?id\u003dEC3eDAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
-    "id": "27"
+    "id": "26",
+    "totalReaders": [],
+    "totalBuyers": []
   }
 ]

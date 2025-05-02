@@ -4,20 +4,18 @@
     "password": "a",
     "ReadList": [
       "2",
-      "5",
-      "3",
-      "7",
-      "26",
-      "15",
-      "8",
-      "12",
-      "27",
-      "19"
+      "1"
     ],
     "BuyList": [
-      "5",
-      "19",
-      "7"
+      "1"
     ]
+  },
+  {
+    "username": "Kristaps",
+    "password": "Kristaps!100",
+    "ReadList": [
+      "1"
+    ],
+    "BuyList": []
   }
 ]
