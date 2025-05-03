@@ -1,32 +1,23 @@
 package com.example.vadimaprojekts.controllers;
 
-import com.example.vadimaprojekts.exceptions.UserNotFoundException;
 import com.example.vadimaprojekts.module.Book;
 import com.example.vadimaprojekts.service.*;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
+import javax.swing.event.ChangeEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static java.lang.Math.ceil;
 
 public class LibraryController implements Initializable {
     @FXML
@@ -42,9 +33,11 @@ public class LibraryController implements Initializable {
     @FXML
     private Button page1, page2, page3, page4, page5;
     @FXML
-    private TextField searchField;
+    private TextField searchField, sliderTextField, buyerTextField;
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private Slider sliderLibrary, buyerSlider;
 
     private APIService apiService = new APIService();
     private Session session = Session.getInstance();
@@ -53,12 +46,6 @@ public class LibraryController implements Initializable {
     private List<ImageView> imagelist;
     private List<Book> originalBooks;
     private ImageCacheService imageCache = new ImageCacheService();
-    private BookPageController bookPageController = new BookPageController();
-    private List<String> imageUrls = Arrays.asList(
-            "image_url1", "image_url2", "image_url3", "image_url4",
-            "image_url5", "image_url6", "image_url7", "image_url8", "image_url9"
-    );
-
     SwitchToSceneService switchToSceneService = new SwitchToSceneService();
 
 
@@ -66,8 +53,36 @@ public class LibraryController implements Initializable {
         ToggleGroup group1 = new ToggleGroup();
         sortAZ.setToggleGroup(group1);
         sortZA.setToggleGroup(group1);
+        sliderLibrary.setMax(999);
+        sliderLibrary.setMin(0);
+        sliderTextField.setText("0");
+        buyerSlider.setMax(999);
+        buyerSlider.setMin(0);
+        buyerTextField.setText("0");
 
+        sliderTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                sliderTextField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            if(newValue.isEmpty()) {
+                sliderTextField.setText("0");
+            }
+            session.setCurrentPage(1);
+            paginate(String.valueOf(session.getCurrentPage()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+            bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+        });
 
+        buyerTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                buyerTextField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            if(newValue.isEmpty()) {
+                buyerTextField.setText("0");
+            }
+            session.setCurrentPage(1);
+            paginate(String.valueOf(session.getCurrentPage()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+            bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+        });
         this.labellist = List.of(
                 bookText1, bookText2, bookText3, bookText4, bookText5, bookText6, bookText7, bookText8, bookText9
         );
@@ -80,8 +95,6 @@ public class LibraryController implements Initializable {
             String imageUrl = book.getImageLinks();
             if(imageUrl != null) {
                 imageCache.preloadImage(imageUrl);
-            }else{
-
             }
         }
         session.setImageCache(imageCache);
@@ -104,7 +117,6 @@ public class LibraryController implements Initializable {
         bookService.updateBookDisplay(apiService.booksFromFile(), 1, labellist, imagelist);
         page5.setText(toString().valueOf(((apiService.booksFromFile().size()-1) / 9) + 1));
         page1.setStyle("-fx-underline: true");
-
     }
 
 
@@ -136,7 +148,7 @@ public class LibraryController implements Initializable {
     @FXML
     public void onsortAZClick(ActionEvent event) throws IOException {
         session.setCurrentPage(1);
-        paginate(toString().valueOf(session.getCurrentPage()));
+        paginate(toString().valueOf(session.getCurrentPage()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
         List<Book> sortedBooks = bookService.sortAZ();
         for (int i = 0; i < labellist.size(); i++) {
             labellist.get(i).setWrapText(true);
@@ -150,13 +162,12 @@ public class LibraryController implements Initializable {
                 imagelist.get(i).setImage(null);
             }
         }
-        System.out.println("Sort AZ Clicked");
     }
 
     @FXML
     public void onsortZAClick(ActionEvent event) throws IOException {
         session.setCurrentPage(1);
-        paginate(toString().valueOf(session.getCurrentPage()));
+        paginate(toString().valueOf(session.getCurrentPage()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
         List<Book> sortedBooks = bookService.sortZA();
         for (int i = 0; i < labellist.size(); i++) {
             labellist.get(i).setWrapText(true);
@@ -171,21 +182,44 @@ public class LibraryController implements Initializable {
                 imagelist.get(i).setImage(null);
             }
         }
-        System.out.println("Sort ZA Clicked");
     }
 
-    public void paginate(String page) {
+    public void paginate(String page, int readerValue, int buyerValue) {
+        if (readerValue > 0 || buyerValue > 0) {
+            List<Book> filteredBooks = bookService.sliderFiltering(readerValue, buyerValue);
+            int totalbooks = filteredBooks.size();
+            int page5text = ((totalbooks-1) / 9) + 1;
+            page5.setText(String.valueOf(page5text));
+            if (totalbooks > 27) {
+                page2.setText("2");
+                page3.setText("3");
+                page4.setText("4");
+            }else if(totalbooks > 18){
+                page2.setText("2");
+                page3.setText("3");
+                page4.setText("3");
+            }else if(totalbooks > 9){
+                page2.setText("2");
+                page3.setText("2");
+                page4.setText("2");
+            }else{
+                page2.setText("1");
+                page3.setText("1");
+                page4.setText("1");
+            }
+        }
         if(page.equals("1")) {
-            page2.setText("2");
-            page3.setText("3");
-            page4.setText("4");
-            page1.setStyle("-fx-underline: true");
+            if(readerValue == 0 && buyerValue == 0){
+                page2.setText("2");
+                page3.setText("3");
+                page4.setText("4");
+                page5.setText(toString().valueOf(((apiService.booksFromFile().size()-1) / 9) + 1));
+            }
             page2.setStyle("-fx-underline: false");
             page3.setStyle("-fx-underline: false");
             page4.setStyle("-fx-underline: false");
             page5.setStyle("-fx-underline: false");
             session.setCurrentPage(Integer.parseInt(page));
-            System.out.println("Current Page: " + session.getCurrentPage());
         }else if(page.equals("2") || page.equals("3")){
             if(page.equals("2")){
                 page1.setStyle("-fx-underline: false");
@@ -193,26 +227,37 @@ public class LibraryController implements Initializable {
                 page3.setStyle("-fx-underline: false");
                 page4.setStyle("-fx-underline: false");
                 page5.setStyle("-fx-underline: false");
-            }else if(page.equals("3")){
+            }else {
                 page1.setStyle("-fx-underline: false");
                 page2.setStyle("-fx-underline: false");
                 page3.setStyle("-fx-underline: true");
                 page4.setStyle("-fx-underline: false");
                 page5.setStyle("-fx-underline: false");
             }
-            page2.setText("2");
-            page3.setText("3");
-            page4.setText("4");
+            if(readerValue == 0 && buyerValue == 0){
+                page2.setText("2");
+                page3.setText("3");
+                page4.setText("4");
+            }
             session.setCurrentPage(Integer.parseInt(page));
-            System.out.println("Current Page: " + session.getCurrentPage());
         }else{
             session.setCurrentPage(Integer.parseInt(page));
             page2.setText(toString().valueOf(session.getCurrentPage()-1));
             page3.setText(toString().valueOf(session.getCurrentPage()));
-            if(!(session.getCurrentPage()+1 > ((apiService.booksFromFile().size()-1) / 9) + 1)){
-                page4.setText(toString().valueOf(session.getCurrentPage()+1));
+            if(!(readerValue == 0) || !(buyerValue == 0)){
+                List<Book> filteredBooks = bookService.sliderFiltering(readerValue, buyerValue);
+                int totalbooks = filteredBooks.size();
+                if(!(session.getCurrentPage()+1 > ((totalbooks-1) / 9) + 1)){
+                    page4.setText(toString().valueOf(session.getCurrentPage()+1));
+                }else{
+                    page4.setText(page5.getText());
+                }
             }else{
-                page4.setText(page5.getText());
+                if(!(session.getCurrentPage()+1 > ((apiService.booksFromFile().size()-1) / 9) + 1)){
+                    page4.setText(toString().valueOf(session.getCurrentPage()+1));
+                }else{
+                    page4.setText(page5.getText());
+                }
             }
             page1.setStyle("-fx-underline: false");
             page2.setStyle("-fx-underline: false");
@@ -224,31 +269,52 @@ public class LibraryController implements Initializable {
 
     @FXML
     public void onPage1Click(ActionEvent event) throws IOException {
-        paginate(page1.getText());
-        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
+        paginate(toString().valueOf(page1.getText()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
     }
 
     @FXML
     public void onPage2Click(ActionEvent event) throws IOException {
-        paginate(page2.getText());
-        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
+        paginate(toString().valueOf(page2.getText()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
     }
 
     @FXML
     public void onPage3Click(ActionEvent event) throws IOException {
-        paginate(page3.getText());
-        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
+        paginate(toString().valueOf(page3.getText()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
     }
 
     @FXML
     public void onPage4Click(ActionEvent event) throws IOException {
-        paginate(page4.getText());
-        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
+        paginate(toString().valueOf(page4.getText()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
     }
+
 
     @FXML
     public void onPage5Click(ActionEvent event) throws IOException {
-        paginate(page5.getText());
-        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected());
+        paginate(toString().valueOf(page5.getText()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+        bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
+    }
+
+    @FXML
+    public void onSliderDrag(MouseEvent event) {
+        sliderTextField.setText(String.valueOf((int)Math.ceil(sliderLibrary.getValue())));
+    }
+
+    @FXML
+    public void onSliderDrag1(MouseEvent event) {
+        sliderTextField.setText(String.valueOf((int)Math.ceil(sliderLibrary.getValue())));
+    }
+
+    @FXML
+    public void onBuyerDrag(MouseEvent event) {
+        buyerTextField.setText(String.valueOf((int)Math.ceil(buyerSlider.getValue())));
+    }
+
+    @FXML
+    public void onBuyerDrag1(MouseEvent event) {
+        buyerTextField.setText(String.valueOf((int)Math.ceil(buyerSlider.getValue())));
     }
 }

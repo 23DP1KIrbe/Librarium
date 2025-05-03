@@ -202,85 +202,214 @@ public class BookService {
         }
     }
 
+    public List<Book> sliderFiltering(int readerValue, int buyerValue) {
+        List<Book> allBooks = apiService.booksFromFile();
+        List<Book> filteredBooks = new ArrayList<>();
+        if(readerValue > 0 && buyerValue == 0) {
+            for (Book book : allBooks) {
+                if(book.getTotalReaders().size() >= readerValue) {
+                    filteredBooks.add(book);
+                }
+            }
+        }else if(readerValue == 0 && buyerValue > 0) {
+            for (Book book : allBooks) {
+                if(book.getTotalBuyers().size() >= buyerValue) {
+                    filteredBooks.add(book);
+                }
+            }
+        }else if(readerValue > 0 && buyerValue > 0) {
+            for (Book book : allBooks) {
+                if(book.getTotalBuyers().size() >= buyerValue && book.getTotalReaders().size() >= readerValue) {
+                    filteredBooks.add(book);
+                }
+            }
+        }
+        return filteredBooks;
+    }
 
-    public void showBooks(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b){
+    public void showBooks(List<Label> labellist, List<ImageView> imagelist, boolean a, boolean b, int readerValue, int buyerValue) {
         int currentPage = session.getCurrentPage();
-        if(a == true) {
-            List<Book> sortedBooks = sortAZ();
-            if(sortedBooks.size() % 9 != 0){
-                int aprekins = (sortedBooks.size() % 9)-9;
-                for(int i = 0; i > aprekins; i--) {
-                    sortedBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
-                }
+        List<Book> FilteredBooks = sliderFiltering(readerValue, buyerValue);
+        if ((FilteredBooks == null || FilteredBooks.isEmpty()) && (readerValue > 0 || buyerValue > 0)) {
+            for (int i = 0; i < labellist.size(); i++) {
+                FilteredBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""), "", "", "", Collections.singletonList(""), Collections.singletonList("")));
+
             }
             for (int i = 0; i < labellist.size(); i++) {
-                String title = sortedBooks.get(i+((currentPage-1)*9)).getTitle();
-                if(title != null && !title.isEmpty()) {
+                String title = FilteredBooks.get(i + ((currentPage - 1) * 9)).getTitle();
+                if (title != null && !title.isEmpty()) {
                     labellist.get(i).setWrapText(true);
-                    labellist.get(i).setText(sortedBooks.get(i+((currentPage-1)*9)).getTitle());
-                }else{
+                    labellist.get(i).setText(FilteredBooks.get(i + ((currentPage - 1) * 9)).getTitle());
+                } else {
                     labellist.get(i).setText("");
                 }
             }
 
             for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i).getImageLinks();
+                String url = FilteredBooks.get(i).getImageLinks();
                 if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                    imagelist.get(i).setImage(imageCache.getImage(FilteredBooks.get(i + ((currentPage - 1) * 9)).getImageLinks()));
                 } else {
                     imagelist.get(i).setImage(null);
                 }
             }
-        }else if(b == true) {
-            List<Book> sortedBooks = sortZA();
-            if(sortedBooks.size() % 9 != 0){
-                int aprekins = (sortedBooks.size() % 9)-9;
-                for(int i = 0; i > aprekins; i--) {
-                    sortedBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+        }else if(readerValue == 0 && buyerValue == 0) {
+            if(a == true) {
+                List<Book> sortedBooks = sortAZ();
+                if(sortedBooks.size() % 9 != 0){
+                    int aprekins = (sortedBooks.size() % 9)-9;
+                    for(int i = 0; i > aprekins; i--) {
+                        sortedBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                    }
                 }
-            }
-            for (int i = 0; i < labellist.size(); i++) {
-                String title = sortedBooks.get(i+((currentPage-1)*9)).getTitle();
-                if(title != null && !title.isEmpty()) {
-                    labellist.get(i).setWrapText(true);
-                    labellist.get(i).setText(sortedBooks.get(i+((currentPage-1)*9)).getTitle());
-                }else{
-                    labellist.get(i).setText("");
+                for (int i = 0; i < labellist.size(); i++) {
+                    String title = sortedBooks.get(i+((currentPage-1)*9)).getTitle();
+                    if(title != null && !title.isEmpty()) {
+                        labellist.get(i).setWrapText(true);
+                        labellist.get(i).setText(sortedBooks.get(i+((currentPage-1)*9)).getTitle());
+                    }else{
+                        labellist.get(i).setText("");
+                    }
                 }
-            }
 
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = sortedBooks.get(i).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+((currentPage-1)*9)).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
+                for (int i = 0; i < imagelist.size(); i++) {
+                    String url = sortedBooks.get(i).getImageLinks();
+                    if (url != null && !url.isEmpty()) {
+                        imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                    } else {
+                        imagelist.get(i).setImage(null);
+                    }
+                }
+            }else if(b == true) {
+                List<Book> sortedBooks = sortZA();
+                if(sortedBooks.size() % 9 != 0){
+                    int aprekins = (sortedBooks.size() % 9)-9;
+                    for(int i = 0; i > aprekins; i--) {
+                        sortedBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                    }
+                }
+                for (int i = 0; i < labellist.size(); i++) {
+                    String title = sortedBooks.get(i+((currentPage-1)*9)).getTitle();
+                    if(title != null && !title.isEmpty()) {
+                        labellist.get(i).setWrapText(true);
+                        labellist.get(i).setText(sortedBooks.get(i+((currentPage-1)*9)).getTitle());
+                    }else{
+                        labellist.get(i).setText("");
+                    }
+                }
+
+                for (int i = 0; i < imagelist.size(); i++) {
+                    String url = sortedBooks.get(i).getImageLinks();
+                    if (url != null && !url.isEmpty()) {
+                        imagelist.get(i).setImage(imageCache.getImage(sortedBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                    } else {
+                        imagelist.get(i).setImage(null);
+                    }
+                }
+            }else{
+                List<Book> allBooks = apiService.booksFromFile();
+                if(allBooks.size() % 9 != 0){
+                    int aprekins = (allBooks.size() % 9)-9;
+                    for(int i = 0; i > aprekins; i--) {
+                        allBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                    }
+                }
+                for (int i = 0; i < labellist.size(); i++) {
+                    String title = allBooks.get(i+((currentPage-1)*9)).getTitle();
+                    if(title != null && !title.isEmpty()) {
+                        labellist.get(i).setWrapText(true);
+                        labellist.get(i).setText(allBooks.get(i+((currentPage-1)*9)).getTitle());
+                    }else{
+                        labellist.get(i).setText("");
+                    }
+                }
+
+                for (int i = 0; i < imagelist.size(); i++) {
+                    String url = allBooks.get(i).getImageLinks();
+                    if (url != null && !url.isEmpty()) {
+                        imagelist.get(i).setImage(imageCache.getImage(allBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                    } else {
+                        imagelist.get(i).setImage(null);
+                    }
                 }
             }
         }else{
-            List<Book> allBooks = apiService.booksFromFile();
-            if(allBooks.size() % 9 != 0){
-                int aprekins = (allBooks.size() % 9)-9;
-                for(int i = 0; i > aprekins; i--) {
-                    allBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+            if(a == true) {
+                FilteredBooks.sort(Comparator.comparing(Book::getTitle));
+                if(FilteredBooks.size() % 9 != 0){
+                    int aprekins = (FilteredBooks.size() % 9)-9;
+                    for(int i = 0; i > aprekins; i--) {
+                        FilteredBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                    }
                 }
-            }
-            for (int i = 0; i < labellist.size(); i++) {
-                String title = allBooks.get(i+((currentPage-1)*9)).getTitle();
-                if(title != null && !title.isEmpty()) {
-                    labellist.get(i).setWrapText(true);
-                    labellist.get(i).setText(allBooks.get(i+((currentPage-1)*9)).getTitle());
-                }else{
-                    labellist.get(i).setText("");
+                for (int i = 0; i < labellist.size(); i++) {
+                    String title = FilteredBooks.get(i+((currentPage-1)*9)).getTitle();
+                    if(title != null && !title.isEmpty()) {
+                        labellist.get(i).setWrapText(true);
+                        labellist.get(i).setText(FilteredBooks.get(i+((currentPage-1)*9)).getTitle());
+                    }else{
+                        labellist.get(i).setText("");
+                    }
                 }
-            }
 
-            for (int i = 0; i < imagelist.size(); i++) {
-                String url = allBooks.get(i).getImageLinks();
-                if (url != null && !url.isEmpty()) {
-                    imagelist.get(i).setImage(imageCache.getImage(allBooks.get(i+((currentPage-1)*9)).getImageLinks()));
-                } else {
-                    imagelist.get(i).setImage(null);
+                for (int i = 0; i < imagelist.size(); i++) {
+                    String url = FilteredBooks.get(i).getImageLinks();
+                    if (url != null && !url.isEmpty()) {
+                        imagelist.get(i).setImage(imageCache.getImage(FilteredBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                    } else {
+                        imagelist.get(i).setImage(null);
+                    }
+                }
+            }else if(b == true) {
+                FilteredBooks.sort(Comparator.comparing(Book::getTitle).reversed());
+                if(FilteredBooks.size() % 9 != 0){
+                    int aprekins = (FilteredBooks.size() % 9)-9;
+                    for(int i = 0; i > aprekins; i--) {
+                        FilteredBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                    }
+                }
+                for (int i = 0; i < labellist.size(); i++) {
+                    String title = FilteredBooks.get(i+((currentPage-1)*9)).getTitle();
+                    if(title != null && !title.isEmpty()) {
+                        labellist.get(i).setWrapText(true);
+                        labellist.get(i).setText(FilteredBooks.get(i+((currentPage-1)*9)).getTitle());
+                    }else{
+                        labellist.get(i).setText("");
+                    }
+                }
+
+                for (int i = 0; i < imagelist.size(); i++) {
+                    String url = FilteredBooks.get(i).getImageLinks();
+                    if (url != null && !url.isEmpty()) {
+                        imagelist.get(i).setImage(imageCache.getImage(FilteredBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                    } else {
+                        imagelist.get(i).setImage(null);
+                    }
+                }
+            }else{
+                if(FilteredBooks.size() % 9 != 0){
+                    int aprekins = (FilteredBooks.size() % 9)-9;
+                    for(int i = 0; i > aprekins; i--) {
+                        FilteredBooks.add(new Book("", "", Collections.singletonList(""), Collections.singletonList(""), Collections.singletonList(""),"","","", Collections.singletonList(""), Collections.singletonList("")));
+                    }
+                }
+                for (int i = 0; i < labellist.size(); i++) {
+                    String title = FilteredBooks.get(i+((currentPage-1)*9)).getTitle();
+                    if(title != null && !title.isEmpty()) {
+                        labellist.get(i).setWrapText(true);
+                        labellist.get(i).setText(FilteredBooks.get(i+((currentPage-1)*9)).getTitle());
+                    }else{
+                        labellist.get(i).setText("");
+                    }
+                }
+
+                for (int i = 0; i < imagelist.size(); i++) {
+                    String url = FilteredBooks.get(i).getImageLinks();
+                    if (url != null && !url.isEmpty()) {
+                        imagelist.get(i).setImage(imageCache.getImage(FilteredBooks.get(i+((currentPage-1)*9)).getImageLinks()));
+                    } else {
+                        imagelist.get(i).setImage(null);
+                    }
                 }
             }
         }

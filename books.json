@@ -15,8 +15,8 @@
     "language": "en",
     "id": "1",
     "totalReaders": [
-      "a",
-      "Kristaps"
+      "Kristaps",
+      "a"
     ],
     "totalBuyers": [
       "a"
@@ -38,7 +38,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003dYNTx0AEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
     "id": "2",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
@@ -56,8 +58,12 @@
     "imageLinks": "http://books.google.com/books/content?id\u003dpc0T0QEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
     "id": "3",
-    "totalReaders": [],
-    "totalBuyers": []
+    "totalReaders": [
+      "a"
+    ],
+    "totalBuyers": [
+      "a"
+    ]
   },
   {
     "title": "Whispers in the Fog",
@@ -74,7 +80,10 @@
     "imageLinks": "http://books.google.com/books/content?id\u003du3mSvyx1ggoC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
     "id": "4",
-    "totalReaders": [],
+    "totalReaders": [
+      "a",
+      "Kristaps"
+    ],
     "totalBuyers": []
   },
   {
@@ -110,7 +119,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003dMGNMDwAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
     "id": "6",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
@@ -128,7 +139,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003dI4jlSqTv0bEC\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026edge\u003dcurl\u0026source\u003dgbs_api",
     "language": "en",
     "id": "7",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
@@ -164,7 +177,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003du7MBDAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
     "id": "9",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
@@ -471,7 +486,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003dEC3eDAAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
     "id": "26",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
@@ -651,7 +668,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003dP2SqoAEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
     "id": "36",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
@@ -741,7 +760,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003dkX3HDwAAQBAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
     "id": "42",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
@@ -759,7 +780,9 @@
     "imageLinks": "http://books.google.com/books/content?id\u003d54uXswEACAAJ\u0026printsec\u003dfrontcover\u0026img\u003d1\u0026zoom\u003d1\u0026source\u003dgbs_api",
     "language": "en",
     "id": "43",
-    "totalReaders": [],
+    "totalReaders": [
+      "a"
+    ],
     "totalBuyers": []
   },
   {
