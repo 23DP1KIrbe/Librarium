@@ -28,5 +28,11 @@
       "4"
     ],
     "BuyList": []
+  },
+  {
+    "username": "existinguser",
+    "password": "newpassword123",
+    "ReadList": [],
+    "BuyList": []
   }
 ]

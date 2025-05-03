@@ -11,7 +11,7 @@ public class Session {
     private boolean editingUsername;
     private boolean editingPassword;
     private int currentPage;
-    private static Session session;
+    public static Session session;
 
     public Session() {
         user = null;

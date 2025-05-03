@@ -67,6 +67,7 @@ public class LibraryController implements Initializable {
             if(newValue.isEmpty()) {
                 sliderTextField.setText("0");
             }
+            sliderLibrary.setValue(Integer.parseInt(sliderTextField.getText()));
             session.setCurrentPage(1);
             paginate(String.valueOf(session.getCurrentPage()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
             bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
@@ -79,6 +80,7 @@ public class LibraryController implements Initializable {
             if(newValue.isEmpty()) {
                 buyerTextField.setText("0");
             }
+            buyerSlider.setValue(Integer.parseInt(buyerTextField.getText()));
             session.setCurrentPage(1);
             paginate(String.valueOf(session.getCurrentPage()), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
             bookService.showBooks(labellist, imagelist, sortAZ.isSelected(), sortZA.isSelected(), Integer.parseInt(sliderTextField.getText()), Integer.parseInt(buyerTextField.getText()));
