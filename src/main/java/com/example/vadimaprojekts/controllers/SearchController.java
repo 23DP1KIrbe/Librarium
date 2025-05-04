@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
     @FXML AnchorPane anchorPane;
-    @FXML private RadioButton sortAZ, sortZA, sortRating;
+    @FXML private RadioButton sortAZ, sortZA;
     @FXML private TextField searchField;
     @FXML private ToggleGroup group1;
     List<Label> labellist = new ArrayList<>();
@@ -80,15 +80,12 @@ public class SearchController implements Initializable {
                 String url = sortedBooks.get(i).getImageLinks();
 
                 if (url != null && !url.isEmpty()) {
-
                     imagelist.get(i).setImage(imageCache.getImage(url));
-                    System.out.println(imageCache.getImage(url));
                 } else {
-//                    imagelist.get(i).setImage(null);
+                    imagelist.get(i).setImage(null);
                 }
             }
         }
-        System.out.println("Sort AZ Clicked");
     }
 
     @FXML
@@ -113,12 +110,7 @@ public class SearchController implements Initializable {
                 }
             }
         }
-        System.out.println("Sort ZA Clicked");
-    }
 
-    @FXML
-    public void onsortRatingClick(ActionEvent event) throws IOException {
-        System.out.println("Sort Rating Clicked");
     }
 
     @Override
