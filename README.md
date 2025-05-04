@@ -2,15 +2,15 @@
 
 ---
 
-## Navigācija
-1. [Ievads](##ievads)
-2. [Funkcijas](##funkcijas)
-3. [Funkciju izskats lietotnē](##funkciju-izskats-lietotnē)
-4. [Soli pa solim instrukcija kā lietot lietotni](##soli-pa-solim-instrukcija-kā-lietot-lietotni)
+## ![](screenshots/compass.png)Navigācija
+1. [Ievads](#ievads)
+2. [Funkcijas](#funkcijas)
+3. [Funkciju izskats lietotnē](#funkciju-izskats-lietotnē)
+4. [Soli pa solim instrukcija kā lietot lietotni](#soli-pa-solim-instrukcija-kā-lietot-lietotni)
 
 ---
 
-## ![Ievads](https://www.freeiconspng.com/img/13572)
+## Ievads
 
 Librarium ir bibliotēka uz jūsu datora lietotnes veidā. Veidota izmantojot JavaFX.
 Tas ir veids apskatīt un iepazīties ar visādām grāmatām. Ja kāda iepatīkas un vēlies atzīmēt to,
