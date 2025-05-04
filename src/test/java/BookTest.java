@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BookTest {
     private APIService apiService;
-    private final String TEST_BOOKS_FILE = "./books.json";  // use a test copy if needed
+    private final String TEST_BOOKS_FILE = "./booksTest.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private Book book;
