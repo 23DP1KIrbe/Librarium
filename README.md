@@ -3,14 +3,14 @@
 ---
 
 ## Navigācija
-1. Ievads
-2. Funkcijas
-3. Funkciju izskats lietotnē
-4. Soli pa solim instrukcija kā lietot aplikāciju
+1. [Ievads](##ievads)
+2. [Funkcijas](##funkcijas)
+3. [Funkciju izskats lietotnē](##funkciju-izskats-lietotnē)
+4. [Soli pa solim instrukcija kā lietot lietotni](##soli-pa-solim-instrukcija-kā-lietot-lietotni)
 
 ---
 
-## Ievads
+## ![Ievads](https://www.freeiconspng.com/img/13572)
 
 Librarium ir bibliotēka uz jūsu datora lietotnes veidā. Veidota izmantojot JavaFX.
 Tas ir veids apskatīt un iepazīties ar visādām grāmatām. Ja kāda iepatīkas un vēlies atzīmēt to,
@@ -34,29 +34,49 @@ tad šo grāmatu vari pielikt pie "Read List" jeb vēlos izlasīt vai "Buy List"
 ## Funkciju izskats lietotnē
 * Izveidot savu kontu. Tikko atverot lietotni Jūs sagaidīs ieiešanas lapa,
 bet spiežot uz poga "I don't have an account" Jūs varat izveidot kontu.
+
+![](screenshots/loginPage.png)
+![](screenshots/realRegisterPage.png)
 * Kad esat iegājuši, jums ir pieejamas visas grāmatas apskatei.
+
+![](screenshots/mainPage.png)
 * Spiežot uz grāmatas nosaukumu Jūs tiksiet pārnesti uz šīs grāmatas lapu,
 kur tur varat pievienot pie "Read List" ("Vēlos lasīt") vai "Buy List" ("Vēlos nopirkt").
+
+![](screenshots/bookPage.png)
 * Izmantojot meklētāju var atrast grāmatu pēc nosaukuma.
+
+![](screenshots/searchPage.png)
 * Var atrast grāmatas, kuras interesē citiem. Pēc cik daudz lietotāju un pievienojuši grāmatu
 "Read List" ("Vēlos lasīt") vai "Buy List" ("Vēlos nopirkt").
+
+![](screenshots/filterSS.png)
 * Profilā nomainīt paroli vai lietotājvārdu.
+
+![](screenshots/profile1.png)
 * Apskatīt, kuras grāmatas Jūs atzīmējāt, ka vēlaties izlasīt vai nopirkt.
+
+![](screenshots/profile2.png)
+![](screenshots/profile3.png)
 
 ---
 
-## Soli pa solim instrukcija kā lietot aplikāciju
+## Soli pa solim instrukcija kā lietot lietotni
 
-1. * Atverot lietotni jūs sagaida ieiešanas lapa.
+_Pirmo reizi atvēruši lietotni:_
+1. Atverot lietotni jūs sagaida ieiešanas lapa.
    * Spiežot uz "I don't have an account" Jūs varēsiet reģistrēties lietonē ievadot savu lietotāj vārdu un paroli.
    * Tad spiežot pogu "Register" jūsu konts tiks izveidots un jūs varēsiet ieiet lietotnē.
-   
+     ![](screenshots/realRegisterPage.png)
 
-2. * Jau kontu izveidojāt laiks ieiet iekša.
+
+_Kad konts ir izveidots:_
+2. Jau kontu izveidojāt laiks ieiet iekša.
    * Ievadiet lietotājvārdu un Jūsu paroli laukos un spiežat "Login" pogu.
+     ![](screenshots/realLoginPage.png)
 
-
-3. * Tagad jūs esat galvenajā lapā. 
+_Esat iegājuši kontā un jūs sagaida galvenā lapa:_
+3. Tagad jūs esat galvenajā lapā. 
    * Šeit jūs varat apskatīt grāmatas. Izmantojot lapas lejā lapu pogas pārvietoties secīgi pa lapām.
    * Spiest uz grāmatu nosaukumiem, lai iepazītu grāmatu dziļāk un atzīmēt vai vēlos izlasīt, vai noprikt.
    * Ievadīt tekstu meklētāja lodziņā un meklēt grāmatas pēc nosaukuma.
@@ -64,6 +84,7 @@ kur tur varat pievienot pie "Read List" ("Vēlos lasīt") vai "Buy List" ("Vēlo
    * Filtrēt grāmatas pēc cik daudz lietotāju atzīmējuši sev, ka vēlas izlasīt vai nopirkt šo grāmatu.
    * Aiziet uz profilu un apskatīt kādas grāmatas Jūs esat atzīmējuši. Mainīt paroli un lietotājvārdu.
    * Un iziet no konta.
+   ![](screenshots/mainPageWithArrows.png)
 
 
 _Ja Jūs nospiedāt uz grāmatas nosaukuma:_
@@ -86,11 +107,14 @@ _Ja Jūs vēlaties izmantot filtrēšanu pēc lietotāju atzīmēto grāmatu dau
 * Var filtrēt pēc cik daudz atzīmējuši "Vēlas lasīt" un pēc cik daudz "Vēlas nopirkt", vai kopā.
 * Var izmantot slīdni kā arī ierakstīt lodziņa vēlamo skaitli un grāmatas uzreiz attēlosies.
 
-
-4. * Katrā lapā ir iespējams aiziet uz profilu.
+_Ja vēlaties aiziet uz profilu un veikt darbības tur:_
+4. Katrā lapā ir iespējams aiziet uz profilu.
    * Aizejot uz profilu Jūs varat nomainīt savu lietotājvārdu vai paroli spiežot uz atbilstošajām pogām.
    * Kā arī kreisajā pusē izvēlēties no pogām, spiežot uz tām varat apskatīt kādas grāmatas Jūs esat atzīmējuši, ka vēlaties izlasīt vai nopirkt.
+   ![](screenshots/profile1.png)
+   ![](screenshots/profile2.png)
 
-
-5. * Katrā lapā Jums ir iespēja iziet no sava konta.
+_Ja vēlaties iziet no konta:_
+5. Katrā lapā Jums ir iespēja iziet no sava konta.
    * Augšējā labajā stūrī poga "Logout" to izdarīs. 
+   ![](screenshots/readListSS.png)

@@ -33,5 +33,15 @@
     "password": "newpassword123",
     "ReadList": [],
     "BuyList": []
+  },
+  {
+    "username": "EchoMike",
+    "password": "a",
+    "ReadList": [
+      "2"
+    ],
+    "BuyList": [
+      "6"
+    ]
   }
 ]

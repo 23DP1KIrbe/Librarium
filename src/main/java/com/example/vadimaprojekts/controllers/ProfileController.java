@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
     @FXML
-    private Button logoutBtn, profileBtn, buyListBtn, readListBtn;
+    private Button logoutBtn, profileBtn, buyListBtn, readListBtn, editPasswordBtn, editUsernameBtn;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -54,6 +54,9 @@ public class ProfileController implements Initializable {
         yourPasswordLabel.setText("Your Password: ********");
         usernameTextField.setVisible(false);
         passwordTextField.setVisible(false);
+        oldPasswordTextField.setVisible(false);
+        oldPasswordTextField.setEditable(false);
+        enterOldPassword.setVisible(false);
         userWelcoming.setText("Hello, " + user.getUsername());
         profileBtn.setStyle("-fx-underline: true; -fx-background-color: transparent");
     }
@@ -93,10 +96,12 @@ public class ProfileController implements Initializable {
         passwordTextField.setEditable(false);
         oldPasswordTextField.setVisible(false);
         oldPasswordTextField.setEditable(false);
+        enterOldPassword.setVisible(false);
         if(!session.getEditingPassword()){
             oldPasswordTextField.setVisible(true);
             oldPasswordTextField.setEditable(true);
             oldPasswordTextField.requestFocus();
+            enterOldPassword.setVisible(true);
             passwordTextField.setVisible(true);
             passwordTextField.setEditable(true);
             passwordTextField.requestFocus();
@@ -134,6 +139,8 @@ public class ProfileController implements Initializable {
 
     @FXML
     public void onreadListBtnClick(ActionEvent event) {
+        editPasswordBtn.setVisible(false);
+        editUsernameBtn.setVisible(false);
         int bookCount = user.getReadList().size();
         List<String> bookId = new ArrayList<>(user.getReadList());
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
@@ -205,7 +212,8 @@ public class ProfileController implements Initializable {
 
     @FXML
     public void onbuyListBtnClick(ActionEvent event) {
-
+        editPasswordBtn.setVisible(false);
+        editUsernameBtn.setVisible(false);
         int bookCount = user.getBuyList().size();
         List<String> bookId = new ArrayList<>(user.getBuyList());
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
@@ -275,6 +283,10 @@ public class ProfileController implements Initializable {
 
     @FXML
     private void onprofileBtnClick(ActionEvent event) {
+        editPasswordBtn.setVisible(false);
+        editUsernameBtn.setVisible(false);
+        editPasswordBtn.setVisible(true);
+        editUsernameBtn.setVisible(true);
         anchorPane.setPrefHeight(608);
         anchorPane.getChildren().removeIf(node -> node instanceof ImageView);
         anchorPane.getChildren().removeIf(node -> node instanceof Label);

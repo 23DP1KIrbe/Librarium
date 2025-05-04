@@ -39,7 +39,8 @@
     "language": "en",
     "id": "2",
     "totalReaders": [
-      "a"
+      "a",
+      "EchoMike"
     ],
     "totalBuyers": []
   },
@@ -120,7 +121,9 @@
     "totalReaders": [
       "a"
     ],
-    "totalBuyers": []
+    "totalBuyers": [
+      "EchoMike"
+    ]
   },
   {
     "title": "The Time Weaver",
