@@ -7,6 +7,7 @@
 2. [Funkcijas](#funkcijas)
 3. [Funkciju izskats lietotnē](#funkciju-izskats-lietotnē)
 4. [Soli pa solim instrukcija kā lietot lietotni](#soli-pa-solim-instrukcija-kā-lietot-lietotni)
+5. [Instalācijas process](#instalācijas-process)
 
 ---
 
@@ -63,6 +64,8 @@ kur tur varat pievienot pie "Read List" ("Vēlos lasīt") vai "Buy List" ("Vēlo
 
 ## Soli pa solim instrukcija kā lietot lietotni
 
+0. Apskatīties instalācijas procesu zemāk.
+
 _Pirmo reizi atvēruši lietotni:_
 1. Atverot lietotni jūs sagaida ieiešanas lapa.
    * Spiežot uz "I don't have an account" Jūs varēsiet reģistrēties lietonē ievadot savu lietotāj vārdu un paroli.
@@ -118,3 +121,15 @@ _Ja vēlaties iziet no konta:_
 5. Katrā lapā Jums ir iespēja iziet no sava konta.
    * Augšējā labajā stūrī poga "Logout" to izdarīs. 
    ![](screenshots/readListSS.png)
+
+
+---
+
+## Instalācijas process
+
+1. Jums uz datora ir jābūt Maven un JDK, lai palaistu projektu
+2. No github lejuppielādēt zip failu.
+3. Unzippot zip failu.
+4. To mapi atvērt ar jebkādu IDE (IntelliJ, Visual Studio code).
+5. Palaist src/main/com/example/vadimaprojekts/HelloApplication
+6. Un tālāk seko soli pa solim instrukcija.
